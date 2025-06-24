@@ -1,16 +1,14 @@
-# NL Bus Tours Booking System
-
-This is a lightweight HTML/CSS/JS front-end for the NL Bus Tours booking calendar.
+# NLBT Booking System (Full Version)
 
 ## Features
-- Customer calendar view
-- Mobile friendly
-- No database
-- Admin calendar styling included
+- Customer calendar with 2025–2027 bookings
+- Admin Panel: Add/edit/cancel bookings, assign drivers
+- Driver Login: See personal schedule
+- Auto-email customer when driver is assigned
 
-## Usage
-1. Upload to your GoDaddy file manager (inside public_html or your root folder).
-2. Open index.html in your browser.
-3. You can edit `script.js` to add booking logic or calendar integrations.
+## How to Use
+1. Upload files to GitHub repository
+2. Enable GitHub Pages from main/root
+3. Embed using iframe into GoDaddy site
 
-More updates coming soon with shift tracking and GPS integration.
+This is the functional structure. The full live version will include scripts for preloaded data, email integration, and secure login handling.

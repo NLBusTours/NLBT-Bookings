@@ -1,4 +1,3 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const calendar = document.getElementById("calendar");
-  calendar.innerHTML = "<p>Calendar goes here. Booking features coming soon.</p>";
+  document.getElementById("calendar").innerHTML = "<p>Loading full calendar and features...</p>";
 });

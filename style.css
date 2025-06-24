@@ -1,21 +1,23 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background: #eef1f5;
   margin: 0;
   padding: 0;
 }
-#app {
+#app, #admin-app, #driver-app {
   max-width: 800px;
-  margin: auto;
+  margin: 40px auto;
   padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-h1 {
+nav {
+  margin-bottom: 20px;
   text-align: center;
 }
-#calendar {
-  margin-top: 20px;
-  min-height: 400px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+nav a {
+  margin: 0 10px;
+  color: #0073e6;
+  text-decoration: none;
 }
