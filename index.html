@@ -1,74 +1,178 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NL Bus Tours Booking</title>
+  <title>NLBT Booking - Customer View</title>
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css' rel='stylesheet' />
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js'></script>
   <style>
-    body { font-family: Arial, sans-serif; background: #e6f2f2; color: #333; padding: 20px; }
-    h1 { color: #4B0082; }
-    .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 20px; }
-    .calendar div { background: #fff; padding: 10px; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
-    form { margin-top: 30px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    input, select, textarea { width: 100%; padding: 8px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; }
-    button { background: #4B0082; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-    .bus-gallery { display: flex; gap: 10px; margin-top: 20px; }
-    .bus-gallery img { width: 100px; height: auto; border-radius: 6px; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e0f7fa;
+      color: #333;
+    }
+    header, footer {
+      background: linear-gradient(to right, #8e24aa, #26c6da);
+      color: #fff;
+      text-align: center;
+      padding: 1.5em;
+    }
+    header h1 {
+      font-size: 2em;
+      margin: 0;
+    }
+    #calendar {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    #booking-form {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 30px;
+      background: linear-gradient(to bottom right, #e1bee7, #b2ebf2);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #4a148c;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #26c6da;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      display: block;
+      width: 100%;
+    }
+    button:hover {
+      background: #0097a7;
+    }
+
+    .bus-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+    }
+    .bus-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      width: 220px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .bus-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+    }
+    .bus-card h4 {
+      margin: 0.5em 0 0 0;
+      font-size: 1.1em;
+      color: #333;
+    }
+    .bus-card p {
+      padding: 0 10px 15px;
+      font-size: 0.9em;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-  <h1>Book Your NL Bus Tour</h1>
+  <header>
+    <h1>NL Bus Tours - Book Your Ride</h1>
+  </header>
 
-  <div class="calendar">
-    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-    <!-- Placeholder days -->
-    <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
-    <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+  <div class="bus-info">
+    <div class="bus-card">
+      <img src="https://via.placeholder.com/220x130/000000/ffffff?text=Artie" alt="Artie">
+      <h4>🖤 Artie (RT) – The Adventure Bus</h4>
+      <p>Bold, thrilling & iconic. Perfect for party nights, coastal rides, and unforgettable outings.</p>
+    </div>
+    <div class="bus-card">
+      <img src="https://via.placeholder.com/220x130/0000FF/ffffff?text=Archie" alt="Archie">
+      <h4>💙 Archie (RX) – The Nature Bus</h4>
+      <p>Peaceful and scenic. Great for sightseeing, puffin spotting, and family tours.</p>
+    </div>
+    <div class="bus-card">
+      <img src="https://via.placeholder.com/220x130/800080/ffffff?text=Arbie" alt="Arbie">
+      <h4>💜 Arbie (RB) – The Nightlife Bus</h4>
+      <p>Vibrant and lively. Tailored for George Street runs, birthdays and bachelorette parties.</p>
+    </div>
+    <div class="bus-card">
+      <img src="https://via.placeholder.com/220x130/DDDDDD/000000?text=R3" alt="R3">
+      <h4>🤍 Arthree (R3) – The Mini Coach</h4>
+      <p>Sleek and simple. Ideal for weddings, airport shuttles and tourist excursions.</p>
+    </div>
   </div>
 
-  <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="name" required />
+  <div id='calendar'></div>
 
-    <label for="email">Email</label>
-    <input type="email" name="email" required />
-
-    <label for="bus">Select a Bus</label>
-    <select name="bus" required>
-      <option value="Artie - RT">Artie - RT</option>
-      <option value="Archie - RX">Archie - RX</option>
-      <option value="Arbie - RB">Arbie - RB</option>
-      <option value="Arthree - R3">Arthree - R3</option>
+  <div id="booking-form">
+    <h3>Booking Form</h3>
+    <label>Name</label><input type="text" placeholder="Your name" />
+    <label>Email</label><input type="email" placeholder="your@email.com" />
+    <label>Phone</label><input type="tel" placeholder="709-555-1234" />
+    <label>Bus</label>
+    <select>
+      <option>Artie (RT)</option>
+      <option>Archie (RX)</option>
+      <option>Arbie (RB)</option>
+      <option>Arthree (R3)</option>
     </select>
-
-    <label for="pickup">Pickup Location</label>
-    <input type="text" name="pickup" required />
-
-    <label for="stops">Stops (if any)</label>
-    <input type="text" name="stops" />
-
-    <label for="dropoff">Drop-off Location</label>
-    <input type="text" name="dropoff" required />
-
-    <label for="date">Date</label>
-    <input type="date" name="date" required />
-
-    <label for="time">Time</label>
-    <input type="time" name="time" required />
-
-    <label for="duration">Duration (in hours)</label>
-    <input type="number" name="duration" step="0.5" required />
-
-    <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thankyou.html">
-    <button type="submit">Submit Booking Request</button>
-  </form>
-
-  <div class="bus-gallery">
-    <img src="Artie.jpg" alt="Artie">
-    <img src="Archie.jpg" alt="Archie">
-    <img src="NLBT-5.jpeg" alt="Arbie">
-    <img src="ChatGPT Image Jun 24, 2025, 08_21_31 PM.png" alt="Arthree">
+    <label>Date</label><input type="date" />
+    <label>Time</label><input type="time" />
+    <label>Duration (hours)</label><input type="number" min="1" max="12" />
+    <label>Additional Notes</label>
+    <textarea placeholder="Let us know anything special..."></textarea>
+    <button>Submit Request</button>
   </div>
+
+  <footer>© 2025 NL Bus Tours</footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        selectable: false,
+        events: [
+          { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
+          { title: 'Booked: Archie', date: '2025-07-11', color: 'blue' },
+          { title: 'Booked: Arbie', date: '2025-07-12', color: 'purple' },
+          { title: 'Booked: R3', date: '2025-07-13', color: 'gray' }
+        ]
+      });
+      calendar.render();
+    });
+  </script>
 </body>
 </html>
