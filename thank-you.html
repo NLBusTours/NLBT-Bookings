@@ -12,7 +12,6 @@
   background: radial-gradient(circle at top, #d1c4e9, #9575cd, #512da8);
   color: #fff;
 }
-
 }
     header, footer {
       background: linear-gradient(to right, #8e24aa, #26c6da);
@@ -21,7 +20,6 @@
       padding: 1.5em;
 }
     }
-
     header h1 {
   font-size: 2.5em;
   font-family: 'Segoe UI', sans-serif;
@@ -29,7 +27,6 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
     }
-
     .thank-you-content {
       max-width: 700px;
       margin: 60px auto 40px;
@@ -38,18 +35,15 @@
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-
     .thank-you-content h2 {
       font-size: 2em;
       color: #4a148c;
       margin-bottom: 20px;
     }
-
     .thank-you-content p {
       font-size: 1.2em;
       margin-bottom: 30px;
     }
-
     .thank-you-content a {
       display: inline-block;
       margin-top: 15px;
@@ -60,17 +54,14 @@
       border-radius: 8px;
       font-size: 1em;
     }
-
     .thank-you-content a:hover {
       background: #0097a7;
     }
-
     .dancing-bus {
       width: 180px;
       margin: 30px auto 10px;
       animation: bounce 1.2s infinite;
     }
-
     /* Shared bounce animation */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
@@ -85,7 +76,6 @@
   50% { transform: translateY(-5px) rotate(-2deg); }
   75% { transform: translateY(10px) rotate(2deg); }
 }
-
 /* Original dancing bus (Arbie) */
 .dancing-bus {
   filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
@@ -93,7 +83,6 @@
   animation: bounce 1.2s infinite;
   margin: 30px auto 10px;
 }
-
 /* Mirrored bounce for Artie */
 .dancing-bus.artie {
   animation: bounce-mirror 1.2s infinite;
@@ -134,19 +123,22 @@
   from { transform: translateX(-50%) rotate(0deg); }
   to { transform: translateX(-50%) rotate(360deg); }
 }
-
     .bus-dance-floor {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 30px;
-  margin-top: 20px;
+  margin-top: 0px; /* was 20px */
+  position: relative;
+  z-index: 1;
 }
 
 .music-notes {
   position: relative;
-  height: 80px;
-  margin-bottom: -20px;
+  height: 100px; /* was 80px */
+  margin-top: 30px; /* add this */
+  margin-bottom: 0;
+  z-index: 2;
 }
 
 .music-notes span {
