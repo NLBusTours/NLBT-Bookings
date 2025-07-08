@@ -113,6 +113,24 @@
   animation: rotateBeams 6s linear infinite;
   z-index: 0;
 }
+.disco-rays {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  background: conic-gradient(from 0deg, rgba(255,255,255,0.3), transparent 90%);
+  border-radius: 50%;
+  filter: blur(30px);
+  z-index: 0;
+  animation: spinRays 8s linear infinite;
+}
+
+@keyframes spinRays {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
 
 @keyframes rotateBeams {
   from { transform: translateX(-50%) rotate(0deg); }
@@ -223,6 +241,7 @@
 <p>We'll contact you shortly to confirm your ride details.</p>
 
     <!-- 🪩 Disco Ball -->
+    <div class="disco-rays"></div>
     <div class="light-beams"></div>
 <div class="disco-ball"></div>
 
