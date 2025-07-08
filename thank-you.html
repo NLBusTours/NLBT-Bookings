@@ -92,6 +92,62 @@
 .dancing-bus.artie {
   animation: bounce-mirror 1.2s infinite;
 }
+    
+    .bus-dance-floor {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.music-notes {
+  position: relative;
+  height: 80px;
+  margin-bottom: -20px;
+}
+
+.music-notes span {
+  position: absolute;
+  font-size: 24px;
+  opacity: 0;
+  animation: floatNotes 6s ease-in-out infinite;
+}
+
+.music-notes span:nth-child(1) {
+  left: 35%;
+  animation-delay: 0s;
+}
+
+.music-notes span:nth-child(2) {
+  left: 50%;
+  animation-delay: 1.5s;
+}
+
+.music-notes span:nth-child(3) {
+  left: 65%;
+  animation-delay: 3s;
+}
+
+@keyframes floatNotes {
+  0% {
+    bottom: 0;
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-40px) scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    bottom: 80px;
+    transform: translateY(-80px) scale(1);
+    opacity: 0;
+  }
+}
   </style>
 </head>
 <body>
@@ -102,21 +158,25 @@
 
   <div class="thank-you-content">
     <h2>Thank You for Booking!</h2>
-    <p>Your request has been submitted. 
-      <p>We'll contact you shortly to confirm your ride details.</p>
+    <p>Your request has been submitted.</p>
+<p>We'll contact you shortly to confirm your ride details.</p>
 
     <!-- 🪩 Disco Ball -->
 <img src="DiscoBall.gif" alt="Disco Ball" width="60" style="display: block; margin: 0 auto 10px;" />
+
+<!-- 🎶 Floating Music Notes -->
+<div class="music-notes">
+  <span>🎵</span>
+  <span>🎶</span>
+  <span>🎵</span>
+</div>
 
 <!-- 🚌 Dancing Arbie Bus Mascot -->
 <div class="bus-dance-floor">
   <img src="RBC.png" alt="Dancing Arbie Bus" class="dancing-bus" />
   <img src="RTC.png" alt="Dancing Artie Bus" class="dancing-bus artie" />
 </div>
-
-
-
-
+    
     <a href="https://nlbustours.github.io/NLBT-Bookings/">← Return to Booking Page</a>
   </div>
 
