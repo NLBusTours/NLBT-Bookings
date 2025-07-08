@@ -31,6 +31,64 @@
       background: #ffffff;
       padding: 40px;
       border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .thank-you-content h2 {
+      font-size: 2em;
+      color: #4a148c;
+      margin-bottom: 20px;
+    }
+
+    .thank-you-content p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .thank-you-content a {
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: none;
+      background: #26c6da;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .thank-you-content a:hover {
+      background: #0097a7;
+    }
+
+    .dancing-bus {
+      width: 180px;
+      margin: 30px auto 10px;
+      animation: bounce 1.2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(-10px) rotate(-2deg); }
+      50% { transform: translateY(5px) rotate(2deg); }
+      75% { transform: translateY(-6px) rotate(-1.5deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>NL Bus Tours</h1>
+  </header>
+
+  <div class="thank-you-content">
+    <h2>Thank You for Booking!</h2>
+    <p>Your request has been submitted. We'll contact you shortly to confirm your ride details.</p>
+
+    <!-- 🚌 Dancing Arbie Bus Mascot -->
+    <img src="arbie-dancing.png" alt="Dancing Arbie Bus" class="dancing-bus" />
+
+    <a href="https://nlbustours.github.io/NLBT-Bookings/">← Return to Booking Page</a>
+  </div>
 
   <footer>© 2025 NL Bus Tours</footer>
 
