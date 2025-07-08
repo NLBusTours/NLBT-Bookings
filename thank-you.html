@@ -66,39 +66,31 @@
       animation: bounce 1.2s infinite;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      25% { transform: translateY(-10px) rotate(-2deg); }
-      50% { transform: translateY(5px) rotate(2deg); }
-      75% { transform: translateY(-6px) rotate(-1.5deg); }
-    }
-    .disco-ball {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 10px;
-  background: radial-gradient(#ccc, #999);
-  border-radius: 50%;
-  box-shadow:
-    0 -2px 8px rgba(255,255,255,0.6),
-    inset 0 0 10px rgba(0,0,0,0.2);
-  animation: spin 4s linear infinite;
-  position: relative;
+    /* Shared bounce animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-10px) rotate(-2deg); }
+  50% { transform: translateY(5px) rotate(2deg); }
+  75% { transform: translateY(-6px) rotate(-1.5deg); }
 }
 
-.disco-ball::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 2px;
-  height: 20px;
-  background: #999;
-  transform: translateX(-50%);
+@keyframes bounce-mirror {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(6px) rotate(1.5deg); }
+  50% { transform: translateY(-5px) rotate(-2deg); }
+  75% { transform: translateY(10px) rotate(2deg); }
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Original dancing bus (Arbie) */
+.dancing-bus {
+  width: 180px;
+  animation: bounce 1.2s infinite;
+  margin: 30px auto 10px;
+}
+
+/* Mirrored bounce for Artie */
+.dancing-bus.artie {
+  animation: bounce-mirror 1.2s infinite;
 }
   </style>
 </head>
@@ -114,10 +106,15 @@
       <p>We'll contact you shortly to confirm your ride details.</p>
 
     <!-- 🪩 Disco Ball -->
-<img src="DiscoBall.gif" alt="Disco Ball" class="disco-ball" />
+<img src="DiscoBall.gif" alt="Disco Ball" width="60" style="display: block; margin: 0 auto 10px;" />
 
 <!-- 🚌 Dancing Arbie Bus Mascot -->
-<img src="RBC.png" alt="Dancing Arbie Bus" class="dancing-bus" />
+<div class="bus-dance-floor">
+  <img src="RBC.png" alt="Dancing Arbie Bus" class="dancing-bus" />
+  <img src="RTC.png" alt="Dancing Artie Bus" class="dancing-bus artie" />
+</div>
+
+
 
 
     <a href="https://nlbustours.github.io/NLBT-Bookings/">← Return to Booking Page</a>
