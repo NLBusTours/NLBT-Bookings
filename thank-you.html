@@ -155,7 +155,18 @@
   position: relative;
   z-index: 1;
 }
-
+.disco-ball {
+  width: 120px;
+  height: 120px;
+  margin: 40px auto 60px;
+  border-radius: 50%;
+  background: url('DiscoBallSparkle.png') center/cover no-repeat;
+  animation: sparkle 2.5s infinite ease-in-out;
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.6),
+    0 0 25px rgba(255, 255, 255, 0.4),
+    0 0 35px rgba(255, 255, 255, 0.2);
+}
 .music-notes {
   position: relative;
   height: 100px; /* was 80px */
@@ -191,10 +202,19 @@
   opacity: 0.7;
   animation: twinkle 1s infinite;
 }
-
     .confirmation-message p {
-  color: #512da8; /* Or choose another color */
+  color: #512da8;
+  font-size:2.2em;
   font-weight: bold;
+      margin: 10px 0;
+}
+.confirmation-message {
+  margin: 60px auto 30px;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
 }
 
 @keyframes softPulse {
@@ -226,18 +246,6 @@
     transform: translateY(-80px) scale(1);
     opacity: 0;
   }
-}
-    .disco-ball {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 50px;
-  border-radius: 50%;
-  background: url('DiscoBallSparkle.png') center/cover no-repeat;
-  animation: sparkle 2.5s infinite ease-in-out;
-  box-shadow:
-    0 0 15px rgba(255, 255, 255, 0.6),
-    0 0 25px rgba(255, 255, 255, 0.4),
-    0 0 35px rgba(255, 255, 255, 0.2);
 }
 
 @keyframes sparkle {
