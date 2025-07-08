@@ -41,7 +41,7 @@
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: linear-gradient(120deg, rgba(255,255,255,0.12), transparent, rgba(255,255,255,0.12));
-  animation: shimmer 5s linear infinite;
+  animation: softPulse 12s ease-in-out infinite;
   z-index: 0;
   pointer-events: none;
   border-radius: 12px;
@@ -192,6 +192,16 @@
   animation: twinkle 1s infinite;
 }
 
+    .confirmation-message p {
+  color: #ffd54f; /* Or choose another color */
+  font-weight: bold;
+}
+
+@keyframes softPulse {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.3; }
+}
+
 @keyframes twinkle {
   0% { opacity: 0.5; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.2); }
@@ -258,10 +268,10 @@
     <h1>NL Bus Tours</h1>
   </header>
 
-  <div class="thank-you-content">
-    <h2>Thank You for Booking!</h2>
-    <p>Your request has been submitted.</p>
-<p>We'll contact you shortly to confirm your ride details.</p>
+  <div class="confirmation-message">
+  <p>Your request has been submitted.</p>
+  <p>We'll contact you shortly to confirm your ride details.</p>
+</div>
 
     <!-- 🪩 Disco Ball -->
     <div class="disco-rays"></div>
