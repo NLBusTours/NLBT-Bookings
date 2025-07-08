@@ -72,6 +72,34 @@
       50% { transform: translateY(5px) rotate(2deg); }
       75% { transform: translateY(-6px) rotate(-1.5deg); }
     }
+    .disco-ball {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 10px;
+  background: radial-gradient(#ccc, #999);
+  border-radius: 50%;
+  box-shadow:
+    0 -2px 8px rgba(255,255,255,0.6),
+    inset 0 0 10px rgba(0,0,0,0.2);
+  animation: spin 4s linear infinite;
+  position: relative;
+}
+
+.disco-ball::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: #999;
+  transform: translateX(-50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   </style>
 </head>
 <body>
@@ -84,8 +112,12 @@
     <h2>Thank You for Booking!</h2>
     <p>Your request has been submitted. We'll contact you shortly to confirm your ride details.</p>
 
-    <!-- 🚌 Dancing Arbie Bus Mascot -->
-    <img src="arbie-dancing.png" alt="Dancing Arbie Bus" class="dancing-bus" />
+    <!-- 🪩 Disco Ball -->
+<div class="disco-ball"></div>
+
+<!-- 🚌 Dancing Arbie Bus Mascot -->
+<img src="arbie-dancing.png" alt="Dancing Arbie Bus" class="dancing-bus" />
+
 
     <a href="https://nlbustours.github.io/NLBT-Bookings/">← Return to Booking Page</a>
   </div>
