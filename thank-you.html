@@ -148,6 +148,29 @@
     opacity: 0;
   }
 }
+    .disco-ball {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: url('DiscoBallSparkle.png') center/cover no-repeat;
+  animation: sparkle 2.5s infinite ease-in-out;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.03);
+    filter: brightness(1.25);
+  }
+}
   </style>
 </head>
 <body>
@@ -162,7 +185,7 @@
 <p>We'll contact you shortly to confirm your ride details.</p>
 
     <!-- 🪩 Disco Ball -->
-<img src="DiscoBall.gif" alt="Disco Ball" width="60" style="display: block; margin: 0 auto 10px;" />
+<div class="disco-ball"></div>
 
 <!-- 🎶 Floating Music Notes -->
 <div class="music-notes">
