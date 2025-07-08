@@ -5,13 +5,15 @@
   <title>Thank You - NL Bus Tours</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #e0f7fa;
-      color: #333;
-      text-align: center;
-    }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: radial-gradient(circle at top, #d1c4e9, #9575cd, #512da8);
+  color: #fff;
+}
+
+}
 
     header, footer {
       background: linear-gradient(to right, #8e24aa, #26c6da);
@@ -21,8 +23,11 @@
     }
 
     header h1 {
-      font-size: 2.2em;
-      margin: 0;
+  font-size: 2.5em;
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
     }
 
     .thank-you-content {
@@ -83,6 +88,7 @@
 
 /* Original dancing bus (Arbie) */
 .dancing-bus {
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
   width: 180px;
   animation: bounce 1.2s infinite;
   margin: 30px auto 10px;
@@ -92,7 +98,25 @@
 .dancing-bus.artie {
   animation: bounce-mirror 1.2s infinite;
 }
-    
+    .light-beams {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  background: conic-gradient(rgba(255,255,255,0.2), transparent 40%, rgba(255,255,255,0.2));
+  border-radius: 50%;
+  filter: blur(10px);
+  animation: rotateBeams 6s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotateBeams {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
     .bus-dance-floor {
   display: flex;
   justify-content: center;
@@ -127,6 +151,18 @@
 .music-notes span:nth-child(3) {
   left: 65%;
   animation-delay: 3s;
+}
+.music-notes span::after {
+  content: '✨';
+  margin-left: 4px;
+  opacity: 0.7;
+  animation: twinkle 1s infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.5; transform: scale(1); }
 }
 
 @keyframes floatNotes {
@@ -185,6 +221,7 @@
 <p>We'll contact you shortly to confirm your ride details.</p>
 
     <!-- 🪩 Disco Ball -->
+    <div class="light-beams"></div>
 <div class="disco-ball"></div>
 
 <!-- 🎶 Floating Music Notes -->
