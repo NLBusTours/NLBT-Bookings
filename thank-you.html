@@ -73,20 +73,7 @@
     .thank-you-content a:hover {
       background: #0097a7;
     }
-    /* Shared bounce animation */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  25% { transform: translateY(-10px) rotate(-2deg); }
-  50% { transform: translateY(5px) rotate(2deg); }
-  75% { transform: translateY(-6px) rotate(-1.5deg); }
-}
-
-@keyframes bounce-mirror {
-  0%, 100% { transform: translateY(0); }
-  25% { transform: translateY(6px) rotate(1.5deg); }
-  50% { transform: translateY(-5px) rotate(-2deg); }
-  75% { transform: translateY(10px) rotate(2deg); }
-}
+    
 /* Original dancing bus (Arbie) */
 .dancing-bus {
   filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
@@ -137,28 +124,20 @@
   position: relative;
   z-index: 1;
 }
-@keyframes spinRays {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(360deg); }
-}
 
-@keyframes rotateBeams {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(360deg); }
-}
     .bus-dance-floor {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 30px;
-  margin-top: -40px; /* was 20px */
+  margin-top: -80px; /* was 20px */
   position: relative;
   z-index: 1;
 }
 .disco-ball {
   width: 120px;
   height: 120px;
-  margin: 40px auto 60px;
+  margin: 80px auto 60px;
   border-radius: 50%;
   background: url('DiscoBallSparkle.png') center/cover no-repeat;
   animation: sparkle 2.5s infinite ease-in-out;
@@ -174,24 +153,20 @@
   margin-bottom: 0;
   z-index: 2;
 }
-
 .music-notes span {
   position: absolute;
   font-size: 24px;
   opacity: 0;
   animation: floatNotes 6s ease-in-out infinite;
 }
-
 .music-notes span:nth-child(1) {
   left: 35%;
   animation-delay: 0s;
 }
-
 .music-notes span:nth-child(2) {
   left: 50%;
   animation-delay: 1.5s;
 }
-
 .music-notes span:nth-child(3) {
   left: 65%;
   animation-delay: 3s;
@@ -216,7 +191,20 @@
   border-radius: 12px;
   backdrop-filter: blur(4px);
 }
+/* Shared bounce animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-10px) rotate(-2deg); }
+  50% { transform: translateY(5px) rotate(2deg); }
+  75% { transform: translateY(-6px) rotate(-1.5deg); }
+}
 
+@keyframes bounce-mirror {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(6px) rotate(1.5deg); }
+  50% { transform: translateY(-5px) rotate(-2deg); }
+  75% { transform: translateY(10px) rotate(2deg); }
+}
 @keyframes softPulse {
   0%, 100% { opacity: 0.15; }
   50% { opacity: 0.3; }
@@ -227,7 +215,15 @@
   50% { opacity: 1; transform: scale(1.2); }
   100% { opacity: 0.5; transform: scale(1); }
 }
+@keyframes spinRays {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
 
+@keyframes rotateBeams {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
 @keyframes floatNotes {
   0% {
     bottom: 0;
