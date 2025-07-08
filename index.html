@@ -137,27 +137,52 @@
   <div id='calendar'></div>
 
   <div id="booking-form">
+  <form action="https://formsubmit.co/f/1d55009c0ba24f21bd0f46929bb1c6c5" method="POST">
+
     <h3>Booking Form</h3>
-    <label>Name</label><input type="text" placeholder="Your name" />
-    <label>Email</label><input type="email" placeholder="your@email.com" />
-    <label>Phone</label><input type="tel" placeholder="709-555-1234" />
+
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Your name" required />
+
+    <label>Email</label>
+    <input type="email" name="email" placeholder="your@email.com" required />
+
+    <label>Phone</label>
+    <input type="tel" name="phone" placeholder="709-555-1234" required />
+
     <label>Bus</label>
-    <select>
+    <select name="bus" required>
       <option>Artie (RT)</option>
-      <option>Archie (RX)</option>
       <option>Arbie (RB)</option>
       <option>Arthree (R3)</option>
     </select>
-    <label>Date</label><input type="date" />
-    <label>Time</label><input type="time" />
-    <label>Duration (hours)</label><input type="number" min="1" max="12" />
+
+    <label>Date</label>
+    <input type="date" name="date" required />
+
+    <label>Time</label>
+    <input type="time" name="time" required />
+
+    <label>Duration (hours)</label>
+    <input type="number" name="duration" min="1" max="12" required />
+
     <label>Additional Notes</label>
-    <textarea placeholder="Let us know anything special..."></textarea>
-    <button>Submit Request</button>
-  </div>
+    <textarea name="notes" placeholder="Let us know anything special..."></textarea>
 
+    <!-- Hidden fields -->
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_subject" value="New NLBT Booking Request!">
+<input type="hidden" name="_redirect" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html" />
+
+
+<!-- Submit button -->
+<button type="submit">Submit Request</button>
+
+  </form>
+     </div>
   <footer>© 2025 NL Bus Tours</footer>
-
+ 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var calendarEl = document.getElementById('calendar');
