@@ -125,50 +125,36 @@
     <div class="bus-card">
       <img src="https://via.placeholder.com/220x130/800080/ffffff?text=Arbie" alt="Arbie">
       <h4>💜 Arbie (RB) – The Nightlife Bus</h4>
-      <p>Vibrant and lively. Tailored for George Street runs, birthdays, and bachelorette parties.</p>
+      <p>Vibrant and lively. Tailored for George Street runs, birthdays and bachelorette parties.</p>
     </div>
     <div class="bus-card">
       <img src="https://via.placeholder.com/220x130/DDDDDD/000000?text=R3" alt="R3">
       <h4>🤍 Arthree (R3) – The Mini Coach</h4>
-      <p>Sleek and simple. Ideal for weddings, airport shuttles, and tourist excursions.</p>
+      <p>Sleek and simple. Ideal for weddings, airport shuttles and tourist excursions.</p>
     </div>
   </div>
 
   <div id='calendar'></div>
 
-  <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_template" value="box">
-  <input type="hidden" name="_autoresponse" value="Thanks for your booking request! We'll be in touch shortly.">
-  <input type="hidden" name="_next" value="https://nlbustours.ca/thank-you.html"> <!-- change to your real redirect if needed -->
-
-  <label>Name: <input type="text" name="name" required></label><br>
-  <label>Email: <input type="email" name="email" required></label><br>
-  <label>Date: <input type="date" name="date" required></label><br>
-  <label>Time: <input type="time" name="time" required></label><br>
-  <label>Duration:
-    <select name="duration" required>
-      <option value="1 Hour">1 Hour</option>
-      <option value="1.5 Hours">1.5 Hours</option>
-      <option value="2 Hours">2 Hours</option>
-      <option value="2.5 Hours">2.5 Hours</option>
-      <option value="3 Hours">3 Hours</option>
+  <div id="booking-form">
+    <h3>Booking Form</h3>
+    <label>Name</label><input type="text" placeholder="Your name" />
+    <label>Email</label><input type="email" placeholder="your@email.com" />
+    <label>Phone</label><input type="tel" placeholder="709-555-1234" />
+    <label>Bus</label>
+    <select>
+      <option>Artie (RT)</option>
+      <option>Archie (RX)</option>
+      <option>Arbie (RB)</option>
+      <option>Arthree (R3)</option>
     </select>
-  </label><br>
-  <label>Bus:
-    <select name="bus" required>
-      <option value="Artie (RT)">Artie (RT)</option>
-      <option value="Arbie (RB)">Arbie (RB)</option>
-      <option value="Arthree (R3)">Arthree (R3)</option>
-    </select>
-  </label><br>
-  <label>Pickup Location: <input type="text" name="pickup" required></label><br>
-  <label>Drop-off Location: <input type="text" name="dropoff" required></label><br>
-  <label>Extra Notes: <textarea name="notes"></textarea></label><br>
-
-  <button type="submit">Submit Booking</button>
-</form>
-
+    <label>Date</label><input type="date" />
+    <label>Time</label><input type="time" />
+    <label>Duration (hours)</label><input type="number" min="1" max="12" />
+    <label>Additional Notes</label>
+    <textarea placeholder="Let us know anything special..."></textarea>
+    <button>Submit Request</button>
+  </div>
 
   <footer>© 2025 NL Bus Tours</footer>
 
