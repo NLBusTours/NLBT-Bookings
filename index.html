@@ -155,6 +155,12 @@
   <div id="booking-form">
   <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
 
+    <!-- Hidden fields -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="New NLBT Booking Request!">
+    <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
+
     <h3>Booking Form</h3>
 
     <label>Name</label>
@@ -185,18 +191,12 @@
     <label>Additional Notes</label>
     <textarea name="notes" placeholder="Let us know anything special..."></textarea>
 
-    <!-- Hidden fields -->
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_subject" value="New NLBT Booking Request!">
-<input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
-<form action="https://formsubmit.co/f/1d55009c0ba24f21bd0f46929bb1c6c5" method="POST">
-
-<!-- Submit button -->
-<button type="submit">Submit Request</button>
+    <button type="submit">Submit Request</button>
 
   </form>
-     </div>
+</div>
+
+  
   <footer>© 2025 NL Bus Tours</footer>
  
   <script>
