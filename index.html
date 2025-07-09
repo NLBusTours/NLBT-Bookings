@@ -104,90 +104,214 @@
     <h1>NL Bus Tours - Book Your Ride</h1>
   </header>
 
-  <div class="bus-info-wrapper">
-    <div class="bus-info">
-      <div class="bus-card" data-popup="popup-artie">
-        <img src="RTV.png" alt="Artie">
-        <h4>🖤 Artie (RT)</h4>
-        <p>Bold, thrilling & iconic.</p>
-      </div>
-      <div class="bus-card" data-popup="popup-archie">
-        <img src="RXV.png" alt="Archie">
-        <h4>💙 Archie (RX)</h4>
-        <p>Peaceful and scenic.</p>
-      </div>
-      <div class="bus-card" data-popup="popup-arbie">
-        <img src="RBV.png" alt="Arbie">
-        <h4>💜 Arbie (RB)</h4>
-        <p>Vibrant and lively.</p>
-      </div>
-      <div class="bus-card" data-popup="popup-r3">
-        <img src="R3V.png" alt="R3">
-        <h4>🤍 Arthree (R3)</h4>
-        <p>Sleek and simple.</p>
-      </div>
+  <div class="intro-highlighted-box">
+    <p>Explore our Unique Fleet - Tap each Photo for More Info!</p>
+    <p>Each Bus is equipped with Powerful Bluetooth Speakers, Party & Glow Lights, Coolers, and More!</p>
+  </div>
+
+  <div class="bus-info">
+    <!-- Artie -->
+    <div class="bus-card" data-bus="artie">
+      <img src="RTV.png" alt="Artie">
+      <h4>🖤 Artie (RT) – The Adventure Bus</h4>
+      <p>Bold, thrilling & iconic. Perfect for party nights, coastal rides, and unforgettable outings.</p>
     </div>
 
-    <div class="bus-hover-popup" id="popup-artie">
+    <!-- Archie -->
+    <div class="bus-card" data-bus="archie">
+      <img src="RXV.png" alt="Archie">
+      <h4>💙 Archie (RX) – The Nature Bus</h4>
+      <p>Peaceful and scenic. Great for sightseeing, puffin spotting, and family tours.</p>
+    </div>
+
+    <!-- Arbie -->
+    <div class="bus-card" data-bus="arbie">
+      <img src="RBV.png" alt="Arbie">
+      <h4>💜 Arbie (RB) – The Nightlife Bus</h4>
+      <p>Vibrant and lively. Tailored for George Street runs, birthdays and bachelorette parties.</p>
+    </div>
+
+    <!-- Arthree -->
+    <div class="bus-card" data-bus="arthree">
+      <img src="R3V.png" alt="Arthree">
+      <h4>🤍 Arthree (R3) – The Mini Coach</h4>
+      <p>Sleek and simple. Ideal for weddings, airport shuttles and tourist excursions.</p>
+    </div>
+
+    <!-- All pop-ups go here -->
+    <div class="bus-hover-popup" data-popup="artie">
       <img src="FRT.png" alt="Artie Interior">
       <div class="popup-text">
         <h5>Artie Highlights:</h5>
-        <ul><li>💺 40+ Lounge Seats</li></ul>
+        <ul>
+          <li>💺 Full Lounge Seating (40+ppl)</li>
+          <li>🕺 Dance Area & Cooler</li>
+          <li>🔊 2 Premium Bluetooth Speakers</li>
+          <li>🪩 LED, Strobe, Laser, and Glow Lighting</li>
+          <li>🍻 Great for Pub Crawls & Socials</li>
+        </ul>
       </div>
     </div>
-    <div class="bus-hover-popup" id="popup-archie">
+
+    <div class="bus-hover-popup" data-popup="archie">
       <img src="FRX.png" alt="Archie Interior">
       <div class="popup-text">
         <h5>Archie Highlights:</h5>
-        <ul><li>💺 36+ Half Lounge Seats</li></ul>
+        <ul>
+          <li>💺 Half Lounge Seating (36+ppl)</li>
+          <li>🕺 Dance Area & Cooler</li>
+          <li>🔊 2 Premium Bluetooth Speakers</li>
+          <li>🪩 LED, Strobe, and Laser Lighting</li>
+          <li>🍻 Great for Weddings or Scenic Tours</li>
+        </ul>
       </div>
     </div>
-    <div class="bus-hover-popup" id="popup-arbie">
+
+    <div class="bus-hover-popup" data-popup="arbie">
       <img src="FRB.png" alt="Arbie Interior">
       <div class="popup-text">
         <h5>Arbie Highlights:</h5>
-        <ul><li>💺 38+ Front-Facing Seats</li></ul>
+        <ul>
+          <li>💺 Secure Front-Facing Seating (38+ppl)</li>
+          <li>🕺 Rear Lounge Area & Cooler</li>
+          <li>🔊 2 Premium Bluetooth Speakers</li>
+          <li>🪩 LED, Strobe, and Laser Lighting</li>
+          <li>🍻 Great for Pub Crawls or Work Outings</li>
+        </ul>
       </div>
     </div>
-    <div class="bus-hover-popup" id="popup-r3">
-      <img src="FR3.png" alt="R3 Interior">
+
+    <div class="bus-hover-popup" data-popup="arthree">
+      <img src="FR3.png" alt="Arthree Interior">
       <div class="popup-text">
-        <h5>R3 Highlights:</h5>
-        <ul><li>💺 17 Individual Seats</li></ul>
+        <h5>Arthree Highlights:</h5>
+        <ul>
+          <li>💺 Individual Seats with Belts (17ppl)</li>
+          <li>❄️ Air Conditioning & Cooler</li>
+          <li>🔊 1 Premium Bluetooth Speaker</li>
+          <li>🪩 LED, Strobe, and Laser Lighting</li>
+          <li>🥂 Great for Weddings, Shuttles, and Tours</li>
+        </ul>
       </div>
     </div>
   </div>
 
+  <div class="below-bus-text">
+    🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐
+  </div>
+
+  <!-- Form remains unchanged -->
+  <div id="booking-form">
+    <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_subject" value="New NLBT Booking Request!">
+      <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
+
+      <h3>Booking Form</h3>
+      <label>Name</label><input type="text" name="name" required>
+      <label>Email</label><input type="email" name="email" required>
+      <label>Phone</label><input type="tel" name="phone" required>
+      <label>Bus</label>
+      <select name="bus" required>
+        <option disabled selected>Select a Bus</option>
+        <option>Artie (RT)</option>
+        <option>Arbie (RB)</option>
+        <option>Arthree (R3)</option>
+      </select>
+      <label>Date</label><input type="date" name="date" required>
+      <label>Time</label><input type="time" name="time" required>
+      <label>Duration (hours)</label><input type="number" name="duration" min="1" max="12" required>
+      <label>Additional Notes</label><textarea name="notes"></textarea>
+      <button type="submit">Submit Request</button>
+    </form>
+  </div>
+
+  <footer>© 2025 NL Bus Tours</footer>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const busCards = document.querySelectorAll(".bus-card");
+      const cards = document.querySelectorAll(".bus-card");
       const popups = document.querySelectorAll(".bus-hover-popup");
 
-      busCards.forEach(card => {
-        const popupId = card.getAttribute("data-popup");
-        const popup = document.getElementById(popupId);
+      function closeAllPopups() {
+        popups.forEach(p => p.classList.remove("active"));
+      }
 
-        card.addEventListener("click", function (e) {
+      cards.forEach(card => {
+        const bus = card.dataset.bus;
+
+        card.addEventListener("mouseenter", () => {
+          if (window.innerWidth > 768) {
+            closeAllPopups();
+            document.querySelector(`[data-popup="${bus}"]`).classList.add("active");
+          }
+        });
+
+        card.addEventListener("click", (e) => {
           if (window.innerWidth <= 768) {
             e.stopPropagation();
-            popups.forEach(p => p.classList.remove("active"));
-            popup.classList.add("active");
+            closeAllPopups();
+            document.querySelector(`[data-popup="${bus}"]`).classList.add("active");
           }
         });
       });
 
-      document.addEventListener("click", function () {
-        popups.forEach(p => p.classList.remove("active"));
+      document.addEventListener("click", () => {
+        if (window.innerWidth <= 768) closeAllPopups();
       });
 
-      popups.forEach(popup => {
-        popup.addEventListener("click", function (e) {
-          e.stopPropagation();
-        });
-      });
+      popups.forEach(p => p.addEventListener("click", e => e.stopPropagation()));
     });
   </script>
 
-  <footer>© 2025 NL Bus Tours</footer>
+  <style>
+    .bus-hover-popup {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.97);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      width: 90vw;
+      max-width: 900px;
+      z-index: 999;
+      transition: opacity 0.3s ease;
+    }
+
+    .bus-hover-popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .popup-text {
+      flex: 1;
+      min-width: 200px;
+      text-align: left;
+    }
+
+    .popup-text h5 {
+      margin-bottom: 0.5em;
+      color: #4a148c;
+    }
+
+    .popup-text ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    @media (min-width: 769px) {
+      .bus-card:hover {
+        cursor: pointer;
+      }
+    }
+  </style>
 </body>
-</html>
