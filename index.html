@@ -117,6 +117,60 @@
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 1px #fff, 0 0 5px rgba(142,36,170,0.4), 0 0 10px rgba(38,198,218,0.4);
 }
+    .bus-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.bus-card:hover {
+  transform: scale(1.03);
+}
+
+.bus-hover-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.bus-card:hover .bus-hover-popup {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bus-hover-popup img {
+  width: 90%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.bus-hover-popup h5 {
+  margin: 0.5em 0 0.3em;
+  font-size: 1em;
+  color: #4a148c;
+}
+
+.bus-hover-popup ul {
+  list-style: none;
+  padding: 0;
+  font-size: 0.9em;
+}
+
   </style>
 </head>
 <body>
@@ -129,10 +183,23 @@
 
   <div class="bus-info">
     <div class="bus-card">
-      <img src="RTV.png" alt="Artie">
-      <h4>🖤 Artie (RT) – The Adventure Bus</h4>
-      <p>Bold, thrilling & iconic. Perfect for party nights, coastal rides, and unforgettable outings.</p>
-    </div>
+  <img src="RTV.png" alt="Artie">
+  <h4>🖤 Artie (RT) – The Adventure Bus</h4>
+  <p>Bold, thrilling & iconic. Perfect for party nights, coastal rides, and unforgettable outings.</p>
+
+  <div class="bus-hover-popup">
+    <img src="FRT.png" alt="Artie Interior">
+    <h5>Artie Highlights:</h5>
+    <ul>
+      <li>✨ Full Lounge Seating</li>
+      <li>🕺 Dance Area & Cooler</li>
+      <li>🔊 2 Premium Bluetooth Speakers</li>
+      <li>🪩 LED, Strobe, Laser, and Glow Lighting</li>
+      <li>🍻 Great for Pub Crawls & Socials</li>
+    </ul>
+  </div>
+</div>
+
     <div class="bus-card">
       <img src="RXV.png" alt="Archie">
       <h4>💙 Archie (RX) – The Nature Bus</h4>
