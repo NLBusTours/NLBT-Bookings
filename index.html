@@ -228,31 +228,50 @@
 
 <div class="bus-info">
   <!-- Artie -->
-  <div class="bus-card">
-    <img src="RTV.png" alt="Artie">
-    <h4>🖤 Artie (RT) – The Adventure Bus</h4>
-    <p>Bold, thrilling & iconic. Perfect for party nights, coastal rides, and unforgettable outings.</p>
-    <div class="bus-hover-popup">
-      <img src="FRT.png" alt="Artie Interior">
-      <div class="popup-text">
-        <h5>Artie Highlights:</h5>
-        <ul>
-          <li>💺 Full Lounge Seating (40+ppl)</li>
-          <li>🕺 Dance Area & Cooler</li>
-          <li>🔊 2 Premium Bluetooth Speakers</li>
-          <li>🪩 LED, Strobe, Laser, and Glow Lighting</li>
-          <li>🍻 Great for Pub Crawls & Socials</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <div class="bus-card" data-popup="popup-artie">
+  <img src="RTV.png" alt="Artie">
+  <h4>🖤 Artie (RT) – The Adventure Bus</h4>
+  <p>Bold, thrilling & iconic. Perfect for party nights, coastal rides, and unforgettable outings.</p>
+</div>
+
 
   <!-- Archie -->
-  <div class="bus-card">
+  <div class="bus-card" data-popup="popup-archie">
     <img src="RXV.png" alt="Archie">
     <h4>💙 Archie (RX) – The Nature Bus</h4>
     <p>Peaceful and scenic. Great for sightseeing, puffin spotting, and family tours.</p>
-    <div class="bus-hover-popup">
+  </div>
+
+  <!-- Arbie -->
+  <div class="bus-card" data-popup="popup-arbie">
+    <img src="RBV.png" alt="Arbie">
+    <h4>💜 Arbie (RB) – The Nightlife Bus</h4>
+    <p>Vibrant and lively. Tailored for George Street runs, birthdays and bachelorette parties.</p>
+  </div>
+
+  <!-- Arthree -->
+  <div class="bus-card" data-popup="popup-arthree">
+    <img src="R3V.png" alt="R3">
+    <h4>🤍 Arthree (R3) – The Mini Coach</h4>
+    <p>Sleek and simple. Ideal for weddings, airport shuttles and tourist excursions.</p>
+  </div>
+</div>
+  
+<div class="bus-hover-popup" id="popup-artie">
+  <img src="FRT.png" alt="Artie Interior">
+  <div class="popup-text">
+    <h5>Artie Highlights:</h5>
+    <ul>
+      <li>💺 Full Lounge Seating (40+ppl)</li>
+      <li>🕺 Dance Area & Cooler</li>
+      <li>🔊 2 Premium Bluetooth Speakers</li>
+      <li>🪩 LED, Strobe, Laser, and Glow Lighting</li>
+      <li>🍻 Great for Pub Crawls & Socials</li>
+    </ul>
+  </div>
+</div>
+
+  <div class="bus-hover-popup" id="popup-archie" >
       <img src="FRX.png" alt="Archie Interior">
       <div class="popup-text">
         <h5>Archie Highlights:</h5>
@@ -265,14 +284,8 @@
         </ul>
       </div>
     </div>
-  </div>
 
-  <!-- Arbie -->
-  <div class="bus-card">
-    <img src="RBV.png" alt="Arbie">
-    <h4>💜 Arbie (RB) – The Nightlife Bus</h4>
-    <p>Vibrant and lively. Tailored for George Street runs, birthdays and bachelorette parties.</p>
-    <div class="bus-hover-popup">
+  <div class="bus-hover-popup" id="popup-arbie">
       <img src="FRB.png" alt="Arbie Interior">
       <div class="popup-text">
         <h5>Arbie Highlights:</h5>
@@ -285,14 +298,8 @@
         </ul>
       </div>
     </div>
-  </div>
-
-  <!-- Arthree -->
-  <div class="bus-card">
-    <img src="R3V.png" alt="R3">
-    <h4>🤍 Arthree (R3) – The Mini Coach</h4>
-    <p>Sleek and simple. Ideal for weddings, airport shuttles and tourist excursions.</p>
-    <div class="bus-hover-popup">
+  
+<div class="bus-hover-popup" id="popup-arthree">
       <img src="FR3.png" alt="Arthree Interior">
       <div class="popup-text">
         <h5>Arthree Highlights:</h5>
@@ -305,9 +312,7 @@
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
+  
 <!-- This now sits outside .bus-info -->
 <div class="below-bus-text">
   🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐
@@ -363,34 +368,44 @@
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     const busCards = document.querySelectorAll(".bus-card");
+    const allPopups = document.querySelectorAll(".bus-hover-popup");
 
+    // Handle click on bus cards
     busCards.forEach(card => {
-      const popup = card.querySelector(".bus-hover-popup");
-
-      // Toggle popup on click (mobile only)
       card.addEventListener("click", function (e) {
+        const targetPopupId = card.getAttribute("data-popup");
+
+        // Only apply click behavior for mobile
         if (window.innerWidth <= 768) {
           e.stopPropagation();
-          // Close any other open popups
-          document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
-          // Open this one
-          popup.classList.add("active");
+
+          // Close all popups first
+          allPopups.forEach(p => p.classList.remove("active"));
+
+          // Open the one that matches this card
+          const targetPopup = document.getElementById(targetPopupId);
+          if (targetPopup) {
+            targetPopup.classList.add("active");
+          }
         }
       });
+    });
 
-      // Close all popups if clicking outside
-      document.addEventListener("click", function () {
-        if (window.innerWidth <= 768) {
-          document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
-        }
-      });
+    // Close popups when clicking outside
+    document.addEventListener("click", function () {
+      if (window.innerWidth <= 768) {
+        allPopups.forEach(p => p.classList.remove("active"));
+      }
+    });
 
-      // Prevent closing when clicking inside the popup
+    // Prevent click-inside from closing it
+    allPopups.forEach(popup => {
       popup.addEventListener("click", function (e) {
         e.stopPropagation();
       });
     });
   });
 </script>
+
 
   <footer>© 2025 NL Bus Tours</footer>
