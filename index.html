@@ -370,40 +370,51 @@
     const busCards = document.querySelectorAll(".bus-card");
     const allPopups = document.querySelectorAll(".bus-hover-popup");
 
-    // Handle click on bus cards
-    busCards.forEach(card => {
-      card.addEventListener("click", function (e) {
-        const targetPopupId = card.getAttribute("data-popup");
+    // For desktop (hover)
+    if (window.innerWidth > 768) {
+      busCards.forEach(card => {
+        const popupId = card.getAttribute("data-popup");
+        const popup = document.getElementById(popupId);
 
-        // Only apply click behavior for mobile
-        if (window.innerWidth <= 768) {
+        card.addEventListener("mouseenter", () => {
+          allPopups.forEach(p => p.classList.remove("active"));
+          popup.classList.add("active");
+        });
+
+        card.addEventListener("mouseleave", () => {
+          popup.classList.remove("active");
+        });
+      });
+    }
+
+    // For mobile (click)
+    if (window.innerWidth <= 768) {
+      busCards.forEach(card => {
+        card.addEventListener("click", function (e) {
+          const targetPopupId = card.getAttribute("data-popup");
           e.stopPropagation();
 
-          // Close all popups first
+          // Close all
           allPopups.forEach(p => p.classList.remove("active"));
 
-          // Open the one that matches this card
+          // Open this
           const targetPopup = document.getElementById(targetPopupId);
           if (targetPopup) {
             targetPopup.classList.add("active");
           }
-        }
-      });
-    });
+        });
 
-    // Close popups when clicking outside
-    document.addEventListener("click", function () {
-      if (window.innerWidth <= 768) {
-        allPopups.forEach(p => p.classList.remove("active"));
-      }
-    });
+        document.addEventListener("click", function () {
+          allPopups.forEach(p => p.classList.remove("active"));
+        });
 
-    // Prevent click-inside from closing it
-    allPopups.forEach(popup => {
-      popup.addEventListener("click", function (e) {
-        e.stopPropagation();
+        allPopups.forEach(popup => {
+          popup.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+        });
       });
-    });
+    }
   });
 </script>
 
