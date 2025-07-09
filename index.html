@@ -160,7 +160,10 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   backdrop-filter: blur(2px);
 }
-
+.bus-hover-popup img {
+  max-height: 140px;
+  object-fit: contain;
+}
 .bus-card:hover .bus-hover-popup {
   opacity: 1;
   pointer-events: auto;
@@ -298,6 +301,7 @@
 
     <label>Bus</label>
     <select name="bus" required>
+      <option disabled selected>Select a Bus</option>
       <option>Artie (RT)</option>
       <option>Arbie (RB)</option>
       <option>Arthree (R3)</option>
