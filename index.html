@@ -295,53 +295,6 @@
 <div class="below-bus-text">
   🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐
 </div>
-  
-<h3 style="text-align: center;">📅 Availability Calendar</h3>
-  <div id='calendar'></div>
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      selectable: false,
-      events: [
-        { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
-        { title: 'Booked: Arbie', date: '2025-07-11', color: 'purple' },
-        { title: 'Booked: R3', date: '2025-07-12', color: 'gray' }
-      ]
-    });
-    calendar.render();
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const busCards = document.querySelectorAll(".bus-card");
-
-    busCards.forEach(card => {
-      const popup = card.querySelector(".bus-hover-popup");
-
-      // For mobile: toggle popup on click
-      card.addEventListener("click", function (e) {
-        if (window.innerWidth <= 768) {
-          e.stopPropagation();
-          popup.classList.toggle("active");
-        }
-      });
-
-      // Close others if one is clicked
-      document.addEventListener("click", function () {
-        if (window.innerWidth <= 768) {
-          popup.classList.remove("active");
-        }
-      });
-
-      // Prevent inner clicks from bubbling
-      popup.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-    });
-  });
-</script>
 
   <div id="booking-form">
   <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
@@ -388,5 +341,50 @@
   </form>
 </div>
 
-  
+ <h3 style="text-align: center;">📅 Availability Calendar</h3>
+  <div id='calendar'></div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      selectable: false,
+      events: [
+        { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
+        { title: 'Booked: Arbie', date: '2025-07-11', color: 'purple' },
+        { title: 'Booked: R3', date: '2025-07-12', color: 'gray' }
+      ]
+    });
+    calendar.render();
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const busCards = document.querySelectorAll(".bus-card");
+
+    busCards.forEach(card => {
+      const popup = card.querySelector(".bus-hover-popup");
+
+      // For mobile: toggle popup on click
+      card.addEventListener("click", function (e) {
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          popup.classList.toggle("active");
+        }
+      });
+
+      // Close others if one is clicked
+      document.addEventListener("click", function () {
+        if (window.innerWidth <= 768) {
+          popup.classList.remove("active");
+        }
+      });
+
+      // Prevent inner clicks from bubbling
+      popup.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    });
+  });
+</script> 
   <footer>© 2025 NL Bus Tours</footer>
