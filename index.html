@@ -89,7 +89,7 @@
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(142, 36, 170, 0.4), 0 0 25px rgba(38, 198, 218, 0.3);
 }
-    .bus-info {
+ .bus-info {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -97,20 +97,7 @@
   max-width: 1000px;
   margin: 40px auto;
   position: relative;
-  z-index: 0; /* Ensures bus cards can rise above */
-}
-
-.below-bus-text {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(142, 36, 170, 0.4), 0 0 25px rgba(38, 198, 218, 0.3);
-  margin: 40px auto;
-  max-width: 900px;
-  padding: 20px;
-  font-size: 1.7em;
-  font-weight: 600;
-  text-align: center;
-  color: #333;
+  z-index: 1;
 }
 
 .bus-card {
@@ -122,32 +109,19 @@
   text-align: center;
   position: relative;
   transition: transform 0.3s ease;
-  z-index: 1;
+  z-index: 2;
 }
 
 @media (min-width: 769px) {
   .bus-card:hover {
     transform: scale(1.03);
-    z-index: 9999;
   }
-}
 
-.bus-card img {
-  width: 100%;
-  height: 130px;
-  object-fit: cover;
-}
-
-.bus-card h4 {
-  margin: 0.5em 0 0 0;
-  font-size: 1.1em;
-  color: #333;
-}
-
-.bus-card p {
-  padding: 0 10px 15px;
-  font-size: 0.9em;
-  color: #555;
+  .bus-card:hover .bus-hover-popup {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 .bus-hover-popup {
@@ -155,7 +129,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 30px;
@@ -172,20 +146,14 @@
   transition: opacity 0.3s ease;
 }
 
-/* ✅ Desktop hover interaction */
-@media (min-width: 769px) {
-  .bus-card:hover .bus-hover-popup {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-/* ✅ Mobile click interaction */
+/* Mobile click behavior */
 .bus-hover-popup.active {
+  display: flex;
   opacity: 1;
   pointer-events: auto;
 }
 
+/* Popup contents */
 .bus-hover-popup img {
   width: 100%;
   max-width: 350px;
@@ -214,6 +182,18 @@
 }
 
 
+.below-bus-text {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(142, 36, 170, 0.4), 0 0 25px rgba(38, 198, 218, 0.3);
+  margin: 40px auto;
+  max-width: 900px;
+  padding: 20px;
+  font-size: 1.7em;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+}
   </style>
   
 </head>
