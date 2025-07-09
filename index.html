@@ -5,7 +5,23 @@
   <title>NLBT Booking - Customer View</title>
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css' rel='stylesheet' />
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js'></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      selectable: false,
+      events: [
+        { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
+        { title: 'Booked: Arbie', date: '2025-07-11', color: 'purple' },
+        { title: 'Booked: R3', date: '2025-07-12', color: 'gray' }
+      ]
+    });
+    calendar.render();
+  });
+</script>
   <style>
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -144,11 +160,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
-
-.bus-hover-popup img {
-  max-height: 140px;
-  object-fit: contain;
-}
+    
 .bus-card:hover .bus-hover-popup {
   opacity: 1;
   pointer-events: auto;
@@ -262,7 +274,8 @@
 <div class="below-bus-text">
   🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐
 </div>
-
+  
+<h3 style="text-align: center;">📅 Availability Calendar</h3>
   <div id='calendar'></div>
 
   <div id="booking-form">
