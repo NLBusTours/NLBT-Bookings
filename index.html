@@ -93,7 +93,8 @@
   gap: 20px;
   max-width: 1000px;
   margin: 40px auto;
-  position: relative; /* Add this so pop-up anchors properly */
+  position: relative;
+  z-index: 0; /* Ensures bus cards can rise above */
 }
 
 .below-bus-text {
@@ -121,8 +122,11 @@
   z-index: 1;
 }
 
-.bus-card:hover {
-  transform: scale(1.03);
+@media (min-width: 769px) {
+  .bus-card:hover {
+    transform: scale(1.03);
+    z-index: 9999;
+  }
 }
 
 .bus-card img {
@@ -165,7 +169,7 @@
   transition: opacity 0.3s ease;
 }
 
-/* Show on hover for desktop */
+/* ✅ Desktop hover interaction */
 @media (min-width: 769px) {
   .bus-card:hover .bus-hover-popup {
     opacity: 1;
@@ -173,14 +177,8 @@
   }
 }
 
-/* Show on click for mobile */
+/* ✅ Mobile click interaction */
 .bus-hover-popup.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-.bus-card:hover .bus-hover-popup {
   opacity: 1;
   pointer-events: auto;
 }
@@ -211,6 +209,7 @@
   padding-left: 0;
   font-size: 1em;
 }
+
 
   </style>
   
