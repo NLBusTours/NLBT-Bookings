@@ -144,24 +144,24 @@
 }
 
 .bus-hover-popup {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 20px);
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: flex-start;
   gap: 30px;
   width: 1000px;
-  max-width: 90vw;
+  max-width: 95vw;
   background: rgba(255, 255, 255, 0.97);
   color: #333;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
-  z-index: 100;
+  z-index: 9999;
 }
 
 .bus-card:hover .bus-hover-popup {
