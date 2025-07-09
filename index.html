@@ -160,10 +160,25 @@
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   opacity: 0;
-  transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 9999;
+  transition: opacity 0.3s ease;
 }
+
+/* Show on hover for desktop */
+@media (min-width: 769px) {
+  .bus-card:hover .bus-hover-popup {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Show on click for mobile */
+.bus-hover-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 .bus-card:hover .bus-hover-popup {
   opacity: 1;
@@ -314,6 +329,35 @@
       ]
     });
     calendar.render();
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const busCards = document.querySelectorAll(".bus-card");
+
+    busCards.forEach(card => {
+      const popup = card.querySelector(".bus-hover-popup");
+
+      // For mobile: toggle popup on click
+      card.addEventListener("click", function (e) {
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          popup.classList.toggle("active");
+        }
+      });
+
+      // Close others if one is clicked
+      document.addEventListener("click", function () {
+        if (window.innerWidth <= 768) {
+          popup.classList.remove("active");
+        }
+      });
+
+      // Prevent inner clicks from bubbling
+      popup.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    });
   });
 </script>
 
