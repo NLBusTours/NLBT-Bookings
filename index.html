@@ -339,22 +339,3 @@
 
   
   <footer>© 2025 NL Bus Tours</footer>
- 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        selectable: false,
-        events: [
-          { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
-          { title: 'Booked: Archie', date: '2025-07-11', color: 'blue' },
-          { title: 'Booked: Arbie', date: '2025-07-12', color: 'purple' },
-          { title: 'Booked: R3', date: '2025-07-13', color: 'gray' }
-        ]
-      });
-      calendar.render();
-    });
-  </script>
-</body>
-</html>
