@@ -5,21 +5,7 @@
   <title>NLBT Booking - Customer View</title>
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css' rel='stylesheet' />
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js'></script>
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      selectable: false,
-      events: [
-        { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
-        { title: 'Booked: Arbie', date: '2025-07-11', color: 'purple' },
-        { title: 'Booked: R3', date: '2025-07-12', color: 'gray' }
-      ]
-    });
-    calendar.render();
-  });
-</script>
+
   <style>
 
     body {
@@ -200,6 +186,7 @@
 
   </style>
 </head>
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css' rel='stylesheet' />
 <body>
   <header>
     <h1>NL Bus Tours - Book Your Ride</h1>
@@ -290,6 +277,21 @@
   
 <h3 style="text-align: center;">📅 Availability Calendar</h3>
   <div id='calendar'></div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      selectable: false,
+      events: [
+        { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
+        { title: 'Booked: Arbie', date: '2025-07-11', color: 'purple' },
+        { title: 'Booked: R3', date: '2025-07-12', color: 'gray' }
+      ]
+    });
+    calendar.render();
+  });
+</script>
 
   <div id="booking-form">
   <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
