@@ -361,48 +361,36 @@
  <h3 style="text-align: center;">📅 Availability Calendar</h3>
   <div id='calendar'></div>
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      selectable: false,
-      events: [
-        { title: 'Booked: Artie', date: '2025-07-10', color: 'black' },
-        { title: 'Booked: Arbie', date: '2025-07-11', color: 'purple' },
-        { title: 'Booked: R3', date: '2025-07-12', color: 'gray' }
-      ]
+  document.addEventListener("DOMContentLoaded", function () {
+    const busCards = document.querySelectorAll(".bus-card");
+
+    busCards.forEach(card => {
+      const popup = card.querySelector(".bus-hover-popup");
+
+      // Toggle popup on click (mobile only)
+      card.addEventListener("click", function (e) {
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          // Close any other open popups
+          document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
+          // Open this one
+          popup.classList.add("active");
+        }
+      });
+
+      // Close all popups if clicking outside
+      document.addEventListener("click", function () {
+        if (window.innerWidth <= 768) {
+          document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
+        }
+      });
+
+      // Prevent closing when clicking inside the popup
+      popup.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
     });
-    calendar.render();
   });
 </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-  const busCards = document.querySelectorAll(".bus-card");
 
-  busCards.forEach(card => {
-    const popup = card.querySelector(".bus-hover-popup");
-
-    // Toggle popup on click (mobile only)
-    card.addEventListener("click", function (e) {
-      if (window.innerWidth <= 768) {
-        e.stopPropagation();
-        popup.classList.toggle("active");
-      }
-    });
-
-    // Close all popups if clicked elsewhere
-    document.addEventListener("click", function () {
-      if (window.innerWidth <= 768) {
-        popup.classList.remove("active");
-      }
-    });
-
-    // Prevent closing when clicking inside the popup
-    popup.addEventListener("click", function (e) {
-      e.stopPropagation();
-    });
-  });
-});
-
-</script> 
   <footer>© 2025 NL Bus Tours</footer>
