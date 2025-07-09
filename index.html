@@ -101,27 +101,38 @@
 }
 
 .bus-card {
+  position: relative;
+  width: 220px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  width: 220px;
-  overflow: visible;
   text-align: center;
-  position: relative;
+  overflow: visible;
   transition: transform 0.3s ease;
   z-index: 2;
 }
 
-@media (min-width: 769px) {
-  .bus-card:hover {
-    transform: scale(1.03);
-  }
+.bus-card:hover {
+  transform: scale(1.03);
+  z-index: 3;
+}
 
-  .bus-card:hover .bus-hover-popup {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
-  }
+.bus-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.bus-card h4 {
+  margin: 0.5em 0 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.bus-card p {
+  padding: 0 10px 15px;
+  font-size: 0.9em;
+  color: #555;
 }
 
 .bus-hover-popup {
@@ -129,14 +140,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: center;
   gap: 30px;
   width: 90vw;
   max-width: 900px;
   background: rgba(255, 255, 255, 0.97);
-  color: #333;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
@@ -146,14 +157,20 @@
   transition: opacity 0.3s ease;
 }
 
-/* Mobile click behavior */
+/* Show popup on hover (desktop) */
+@media (min-width: 769px) {
+  .bus-card:hover .bus-hover-popup {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Show on click (mobile) */
 .bus-hover-popup.active {
-  display: flex;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Popup contents */
 .bus-hover-popup img {
   width: 100%;
   max-width: 350px;
@@ -163,22 +180,24 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.bus-hover-popup .popup-text {
+.popup-text {
   flex: 1;
   min-width: 200px;
   text-align: left;
 }
 
-.bus-hover-popup h5 {
+.popup-text h5 {
   margin: 0 0 0.5em;
   font-size: 1.2em;
   color: #4a148c;
 }
 
-.bus-hover-popup ul {
+.popup-text ul {
   list-style: none;
   padding-left: 0;
   font-size: 1em;
+}
+
 }
 
 
@@ -360,31 +379,32 @@
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const busCards = document.querySelectorAll(".bus-card");
+  const busCards = document.querySelectorAll(".bus-card");
 
-    busCards.forEach(card => {
-      const popup = card.querySelector(".bus-hover-popup");
+  busCards.forEach(card => {
+    const popup = card.querySelector(".bus-hover-popup");
 
-      // For mobile: toggle popup on click
-      card.addEventListener("click", function (e) {
-        if (window.innerWidth <= 768) {
-          e.stopPropagation();
-          popup.classList.toggle("active");
-        }
-      });
-
-      // Close others if one is clicked
-      document.addEventListener("click", function () {
-        if (window.innerWidth <= 768) {
-          popup.classList.remove("active");
-        }
-      });
-
-      // Prevent inner clicks from bubbling
-      popup.addEventListener("click", function (e) {
+    // Toggle popup on click (mobile only)
+    card.addEventListener("click", function (e) {
+      if (window.innerWidth <= 768) {
         e.stopPropagation();
-      });
+        popup.classList.toggle("active");
+      }
+    });
+
+    // Close all popups if clicked elsewhere
+    document.addEventListener("click", function () {
+      if (window.innerWidth <= 768) {
+        popup.classList.remove("active");
+      }
+    });
+
+    // Prevent closing when clicking inside the popup
+    popup.addEventListener("click", function (e) {
+      e.stopPropagation();
     });
   });
+});
+
 </script> 
   <footer>© 2025 NL Bus Tours</footer>
