@@ -340,14 +340,6 @@
     <label>Phone</label>
     <input type="tel" name="phone" placeholder="709-555-1234" required />
 
-    <label>Bus</label>
-    <select name="bus" required>
-      <option disabled selected>Select a Bus</option>
-      <option>Artie (RT)</option>
-      <option>Arbie (RB)</option>
-      <option>Arthree (R3)</option>
-    </select>
-
     <label>Date</label>
     <input type="date" name="date" required />
 
@@ -356,6 +348,23 @@
 
     <label>Duration (hours)</label>
     <input type="number" name="duration" min="1" max="12" required />
+
+    <label>Pickup Location</label>
+    <input type="location" name="pickup" required />
+
+    <label>Stop Location(s)</label>
+    <input type="location" name="stops" required />
+
+    <label>Dropoff Location</label>
+    <input type="location" name="dropoff" required />
+
+    <label>Bus</label>
+    <select name="bus" required>
+      <option disabled selected>Select a Bus</option>
+      <option>Artie (RT)</option>
+      <option>Arbie (RB)</option>
+      <option>Arthree (R3)</option>
+    </select>
 
     <label>Additional Notes</label>
     <textarea name="notes" placeholder="Let us know anything special..."></textarea>
