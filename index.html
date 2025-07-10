@@ -342,6 +342,7 @@
 
     <label>Date</label>
     <input type="date" name="date" required />
+    <input type="hidden" name="Formatted Date" id="formatted-date">
 
     <label>Time</label>
     <input type="time" name="time" required />
@@ -426,6 +427,26 @@
         });
       });
     }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const rawDateInput = document.querySelector("input[name='date']");
+    const formattedDateInput = document.getElementById("formatted-date");
+
+    function formatDate(dateStr) {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', options);
+    }
+
+    rawDateInput.addEventListener("input", function () {
+      if (rawDateInput.value) {
+        formattedDateInput.value = formatDate(rawDateInput.value);
+      } else {
+        formattedDateInput.value = '';
+      }
+    });
   });
 </script>
 
