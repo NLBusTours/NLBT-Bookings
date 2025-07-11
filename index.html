@@ -230,6 +230,67 @@
   <header>
     <h1>NL Bus Tours - Book Your Ride</h1>
   </header>
+
+  
+<!-- This now sits outside .bus-info -->
+<div class="below-bus-text">
+  🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐
+</div>
+
+  <div id="booking-form">
+  <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
+
+    <!-- Hidden fields -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="New NLBT Booking Request!">
+    <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
+
+    <h3>Booking Form</h3>
+
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Your name" required />
+
+    <label>Email</label>
+    <input type="email" name="email" placeholder="your@email.com" required />
+
+    <label>Phone</label>
+    <input type="tel" name="phone" placeholder="709-555-1234" required />
+
+    <label>Date</label>
+    <input type="date" name="date" required />
+    <input type="hidden" name="Formatted Date" id="formatted-date">
+
+    <label>Time</label>
+    <input type="time" name="time" required />
+
+    <label>Duration (hours)</label>
+    <input type="number" name="duration" min="1" max="12" required />
+
+    <label>Pickup Location</label>
+    <input type="location" name="pickup" required />
+
+    <label>Stop Location(s)</label>
+    <input type="location" name="stops" required />
+
+    <label>Dropoff Location</label>
+    <input type="location" name="dropoff" required />
+
+    <label>Bus</label>
+    <select name="bus" required>
+      <option disabled selected>Select a Bus</option>
+      <option>Artie (RT)</option>
+      <option>Arbie (RB)</option>
+      <option>Arthree (R3)</option>
+    </select>
+
+    <label>Additional Notes</label>
+    <textarea name="notes" placeholder="Let us know anything special..."></textarea>
+
+    <button type="submit">Submit Request</button>
+
+  </form>
+</div>
 <div class="intro-highlighted-box">
   <p><span class="headline-large">Explore our Unique Fleet - Tap each Photo for More Info!</span></p>
   <p>Each Bus is equipped with Powerful Bluetooth Speakers, Party & Glow Lights, Coolers, and More!</p>
@@ -322,67 +383,6 @@
         </ul>
       </div>
     </div>
-  
-<!-- This now sits outside .bus-info -->
-<div class="below-bus-text">
-  🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐
-</div>
-
-  <div id="booking-form">
-  <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
-
-    <!-- Hidden fields -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_subject" value="New NLBT Booking Request!">
-    <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
-
-    <h3>Booking Form</h3>
-
-    <label>Name</label>
-    <input type="text" name="name" placeholder="Your name" required />
-
-    <label>Email</label>
-    <input type="email" name="email" placeholder="your@email.com" required />
-
-    <label>Phone</label>
-    <input type="tel" name="phone" placeholder="709-555-1234" required />
-
-    <label>Date</label>
-    <input type="date" name="date" required />
-    <input type="hidden" name="Formatted Date" id="formatted-date">
-
-    <label>Time</label>
-    <input type="time" name="time" required />
-
-    <label>Duration (hours)</label>
-    <input type="number" name="duration" min="1" max="12" required />
-
-    <label>Pickup Location</label>
-    <input type="location" name="pickup" required />
-
-    <label>Stop Location(s)</label>
-    <input type="location" name="stops" required />
-
-    <label>Dropoff Location</label>
-    <input type="location" name="dropoff" required />
-
-    <label>Bus</label>
-    <select name="bus" required>
-      <option disabled selected>Select a Bus</option>
-      <option>Artie (RT)</option>
-      <option>Arbie (RB)</option>
-      <option>Arthree (R3)</option>
-    </select>
-
-    <label>Additional Notes</label>
-    <textarea name="notes" placeholder="Let us know anything special..."></textarea>
-
-    <button type="submit">Submit Request</button>
-
-  </form>
-</div>
-
   <!-- <h3 style="text-align: center;">📅 Availability Calendar</h3>
   <div id='calendar'></div> -->
   <script>
