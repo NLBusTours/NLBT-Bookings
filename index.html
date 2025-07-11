@@ -146,7 +146,7 @@
 
 .bus-hover-popup {
   position: fixed;
-  top: 33%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -164,18 +164,10 @@
   pointer-events: none;
   z-index: 9999;
   transition: opacity 0.3s ease;
+  overflow: hidden;
+  position: fixed;
 }
 
-
-/* Show popup on hover (desktop) */
-@media (min-width: 769px) {
-  .bus-card:hover .bus-hover-popup {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-/* Show on click (mobile) */
 .bus-hover-popup.active {
   opacity: 1;
   pointer-events: auto;
@@ -183,8 +175,8 @@
 
 .bus-hover-popup img {
   width: 100%;
-  max-width: 650px; /* was 350px */
-  height: center;
+  max-width: 350px;
+  height: auto;
   border-radius: 12px;
   object-fit: contain;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
@@ -193,10 +185,56 @@
 .popup-text {
   flex: 1;
   min-width: 200px;
-  text-align: center;
-  padding-left: 0px;
-  padding-right: 0px;
+  text-align: left;
 }
+
+.popup-text h5 {
+  margin: 0 0 0.5em;
+  font-size: 1.2em;
+  color: #4a148c;
+}
+
+.popup-text ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 1em;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+/* 📱 Mobile view */
+@media (max-width: 768px) {
+  .bus-hover-popup {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95vw;
+    height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .bus-hover-popup img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .popup-text {
+    padding-top: 15px;
+    text-align: center;
+  }
 
 .popup-text h5 {
   margin: 0 0 0.5em;
@@ -329,6 +367,7 @@
 </div>
   
 <div class="bus-hover-popup" id="popup-artie">
+  <span class="popup-close" onclick="closePopups()">×</span>
   <img src="FRT.png" alt="Artie Interior">
   <div class="popup-text">
     <h5>Artie Highlights:</h5>
@@ -343,6 +382,7 @@
 </div>
 
   <div class="bus-hover-popup" id="popup-archie" >
+    <span class="popup-close" onclick="closePopups()">×</span>
       <img src="FRX.png" alt="Archie Interior">
       <div class="popup-text">
         <h5>Archie Highlights:</h5>
@@ -357,6 +397,7 @@
     </div>
 
   <div class="bus-hover-popup" id="popup-arbie">
+    <span class="popup-close" onclick="closePopups()">×</span>
       <img src="FRB.png" alt="Arbie Interior">
       <div class="popup-text">
         <h5>Arbie Highlights:</h5>
@@ -371,6 +412,7 @@
     </div>
   
 <div class="bus-hover-popup" id="popup-arthree">
+  <span class="popup-close" onclick="closePopups()">×</span>
       <img src="FR3.png" alt="Arthree Interior">
       <div class="popup-text">
         <h5>Arthree Highlights:</h5>
@@ -458,5 +500,45 @@
   });
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const busCards = document.querySelectorAll(".bus-card");
+    const allPopups = document.querySelectorAll(".bus-hover-popup");
+
+    // Handle click on bus cards
+    busCards.forEach(card => {
+      card.addEventListener("click", function (e) {
+        const targetPopupId = card.getAttribute("data-popup");
+
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          allPopups.forEach(p => p.classList.remove("active"));
+          const targetPopup = document.getElementById(targetPopupId);
+          if (targetPopup) {
+            targetPopup.classList.add("active");
+          }
+        }
+      });
+    });
+
+    // Close on background click
+    document.addEventListener("click", function () {
+      if (window.innerWidth <= 768) {
+        closePopups();
+      }
+    });
+
+    // Prevent closing when clicking inside the popup
+    allPopups.forEach(popup => {
+      popup.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    });
+  });
+
+  function closePopups() {
+    document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
+  }
+</script>
 
   <footer>© 2025 NL Bus Tours</footer>
