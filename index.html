@@ -542,5 +542,54 @@
     document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
   }
 </script>
+<script>
+  function closePopups() {
+    document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
+  }
+
+  function openPopupWithScroll(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+      closePopups();
+      popup.classList.add("active");
+
+      // Smooth scroll into view (mobile only)
+      if (window.innerWidth <= 768) {
+        setTimeout(() => {
+          popup.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100); // slight delay for visibility
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const busCards = document.querySelectorAll(".bus-card");
+
+    busCards.forEach(card => {
+      const popupId = card.getAttribute("data-popup");
+
+      card.addEventListener("click", function (e) {
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          openPopupWithScroll(popupId);
+        }
+      });
+    });
+
+    // Close when tapping background
+    document.addEventListener("click", function () {
+      if (window.innerWidth <= 768) {
+        closePopups();
+      }
+    });
+
+    // Prevent click-inside from closing
+    document.querySelectorAll(".bus-hover-popup").forEach(popup => {
+      popup.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    });
+  });
+</script>
 
   <footer>© 2025 NL Bus Tours</footer>
