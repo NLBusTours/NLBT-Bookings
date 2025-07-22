@@ -282,8 +282,6 @@ html, body {
 </div>
 
   <div id="booking-form">
-  <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
-
     <!-- Hidden fields -->
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
@@ -602,6 +600,13 @@ html, body {
       });
     });
   });
+</script>
+<script>
+  function handleSubmitRedirect(e) {
+    setTimeout(() => {
+      window.location.href = 'https://nlbustours.github.io/NLBT-Bookings/thank-you.html';
+    }, 1500);
+  }
 </script>
 
   <footer>© 2025 NL Bus Tours</footer>
