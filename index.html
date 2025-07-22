@@ -290,6 +290,7 @@ html, body {
     <input type="hidden" name="_subject" value="New NLBT Booking Request!">
     <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
     <input type="hidden" name="Formatted Date" id="formatted-date">
+    <form action="https://formsubmit.co/redirect.html" method="POST" onsubmit="setTimeout(() => window.location.href='https://nlbustours.github.io/NLBT-Bookings/thank-you.html', 1500)">
 
     <h3>Booking Form</h3>
 
@@ -304,8 +305,7 @@ html, body {
 
     <label>Date</label>
     <input type="date" name="Date" required />
-    <input type="hidden" name="Formatted Date" id="formatted-date">
-
+    
     <label>Time</label>
     <input type="time" name="Time" required />
 
