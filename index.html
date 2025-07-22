@@ -302,7 +302,7 @@ html, body {
     <input type="tel" name="Phone" placeholder="709-555-1234" required />
 
     <label>Date</label>
-    <input type="date" name="RawDate" required />
+    <input type="date" name="data-raw" id="raw-date" required />
     <input type="hidden" name="Date" id="formatted-date">
 
     <label>Time</label>
@@ -488,7 +488,7 @@ html, body {
  
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const rawDateInput = document.querySelector("input[name='RawDate']");
+    const rawDateInput = document.getElementById("raw-date");
     const formattedDateInput = document.getElementById("formatted-date");
 
     function formatDate(dateStr) {
@@ -502,14 +502,13 @@ html, body {
     }
 
     rawDateInput.addEventListener("input", function () {
-      if (rawDateInput.value) {
-        formattedDateInput.value = formatDate(rawDateInput.value);
-      } else {
-        formattedDateInput.value = '';
-      }
+      formattedDateInput.value = rawDateInput.value
+        ? formatDate(rawDateInput.value)
+        : '';
     });
   });
 </script>
+
 
 
 <script>
