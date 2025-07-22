@@ -282,7 +282,11 @@ html, body {
 </div>
 
   <div id="booking-form">
-  <form action="https://formsubmit.co/nlbustour@gmail.com" method="POST" onsubmit="prepareFormattedDate()">
+  <form 
+  action="https://formsubmit.co/nlbustour@gmail.com" 
+  method="POST" 
+  onsubmit="return prepareFormattedDate()"
+>
     <!-- Hidden fields -->
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
@@ -494,7 +498,6 @@ html, body {
 </script>
 
 <script>
-  // 📅 Format Date for Form Submission
   function prepareFormattedDate() {
     const rawDateInput = document.querySelector("input[name='Date']");
     const formattedDateInput = document.getElementById("formatted-date");
@@ -509,8 +512,12 @@ html, body {
       });
       formattedDateInput.value = formatted;
     }
+
+    // ✅ Allow form to continue submitting
+    return true;
   }
 </script>
+
 
 <script>
   // ⏩ Optional Fallback Redirect (if FormSubmit redirect fails)
