@@ -282,13 +282,13 @@ html, body {
 </div>
 
   <div id="booking-form">
+  <form action="https://formsubmit.co/nlbustour@gmail.com" method="POST" onsubmit="prepareFormattedDate()">
     <!-- Hidden fields -->
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_subject" value="New NLBT Booking Request!">
     <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
     <input type="hidden" name="Formatted Date" id="formatted-date">
-    <form action="https://formsubmit.co/redirect.html" method="POST" onsubmit="setTimeout(() => window.location.href='https://nlbustours.github.io/NLBT-Bookings/thank-you.html', 1500)">
 
     <h3>Booking Form</h3>
 
@@ -307,17 +307,17 @@ html, body {
     <label>Time</label>
     <input type="time" name="Time" required />
 
-    <<label>Duration (Hours)</label>
-<input type="number" name="Duration" min="1" step="0.5" required />
+    <label>Duration (Hours)</label>
+    <input type="number" name="Duration" min="1" step="0.5" required />
 
     <label>Pickup Location</label>
-    <input type="location" name="Pickup" required />
+    <input type="text" name="Pickup" required />
 
     <label>Stop Location(s)</label>
-    <input type="location" name="Stops" required />
+    <input type="text" name="Stops" required />
 
     <label>Dropoff Location</label>
-    <input type="location" name="Dropoff" required />
+    <input type="text" name="Dropoff" required />
 
     <label>Bus</label>
     <select name="Bus" required>
@@ -331,9 +331,9 @@ html, body {
     <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
 
     <button type="submit">Submit Request</button>
-
   </form>
 </div>
+
 <div class="intro-highlighted-box">
   <p><span class="headline-large">Explore our Unique Fleet - Tap each Photo for More Info!</span></p>
   <p>Each Bus is equipped with Powerful Bluetooth Speakers, Party & Glow Lights, Coolers, and More!</p>
@@ -390,13 +390,13 @@ html, body {
     <span class="popup-close" onclick="closePopups()">×</span>
       <img src="FRX.png" alt="Archie Interior">
       <div class="popup-text">
-        <h5>Archie Highlights:</h5>
+        <h5>Remembering Archie 2009-2025:</h5>
         <ul>
           <li>💺 Half Lounge Seating (36+ppl)</li>
           <li>🕺 Dance Area & Cooler</li>
           <li>🔊 2 Premium Bluetooth Speakers</li>
           <li>🪩 LED, Strobe, and Laser Lighting</li>
-          <li>🍻 Great for Weddings or Scenic Tours</li>
+          <li>🍻 Our first Lounge Bus - may he Rust In Peace!</li>
         </ul>
       </div>
     </div>
@@ -432,127 +432,8 @@ html, body {
     </div>
   <!-- <h3 style="text-align: center;">📅 Availability Calendar</h3>
   <div id='calendar'></div> -->
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const busCards = document.querySelectorAll(".bus-card");
-    const allPopups = document.querySelectorAll(".bus-hover-popup");
-
-    // For desktop (hover)
-    if (window.innerWidth > 768) {
-      busCards.forEach(card => {
-        const popupId = card.getAttribute("data-popup");
-        const popup = document.getElementById(popupId);
-
-        card.addEventListener("mouseenter", () => {
-          allPopups.forEach(p => p.classList.remove("active"));
-          popup.classList.add("active");
-        });
-
-        card.addEventListener("mouseleave", () => {
-          popup.classList.remove("active");
-        });
-      });
-    }
-
-    // For mobile (click)
-    if (window.innerWidth <= 768) {
-      busCards.forEach(card => {
-        card.addEventListener("click", function (e) {
-          const targetPopupId = card.getAttribute("data-popup");
-          e.stopPropagation();
-
-          // Close all
-          allPopups.forEach(p => p.classList.remove("active"));
-
-          // Open this
-          const targetPopup = document.getElementById(targetPopupId);
-          if (targetPopup) {
-            targetPopup.classList.add("active");
-          }
-        });
-
-        document.addEventListener("click", function () {
-          allPopups.forEach(p => p.classList.remove("active"));
-        });
-
-        allPopups.forEach(popup => {
-          popup.addEventListener("click", function (e) {
-            e.stopPropagation();
-          });
-        });
-      });
-    }
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const rawDateInput = document.querySelector("input[name='Date']");
-    const formattedDateInput = document.getElementById("formatted-date");
-
-    function formatDate(dateStr) {
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const date = new Date(dateStr);
-      return date.toLocaleDateString('en-US', options);
-    }
-
-    // Initial check if a date is prefilled
-    if (rawDateInput.value) {
-      formattedDateInput.value = formatDate(rawDateInput.value);
-    }
-
-    // Update formatted date on user input
-    rawDateInput.addEventListener("input", function () {
-      if (rawDateInput.value) {
-        formattedDateInput.value = formatDate(rawDateInput.value);
-      } else {
-        formattedDateInput.value = '';
-      }
-    });
-  });
-</script>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const busCards = document.querySelectorAll(".bus-card");
-    const allPopups = document.querySelectorAll(".bus-hover-popup");
-
-    // Handle click on bus cards
-    busCards.forEach(card => {
-      card.addEventListener("click", function (e) {
-        const targetPopupId = card.getAttribute("data-popup");
-
-        if (window.innerWidth <= 768) {
-          e.stopPropagation();
-          allPopups.forEach(p => p.classList.remove("active"));
-          const targetPopup = document.getElementById(targetPopupId);
-          if (targetPopup) {
-            targetPopup.classList.add("active");
-          }
-        }
-      });
-    });
-
-    // Close on background click
-    document.addEventListener("click", function () {
-      if (window.innerWidth <= 768) {
-        closePopups();
-      }
-    });
-
-    // Prevent closing when clicking inside the popup
-    allPopups.forEach(popup => {
-      popup.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-    });
-  });
-
-  function closePopups() {
-    document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
-  }
-</script>
-<script>
+ <script>
+  // 🚐 Popup Logic (Mobile + Desktop)
   function closePopups() {
     document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
   }
@@ -567,33 +448,43 @@ html, body {
       if (window.innerWidth <= 768) {
         setTimeout(() => {
           popup.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100); // slight delay for visibility
+        }, 100);
       }
     }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     const busCards = document.querySelectorAll(".bus-card");
+    const allPopups = document.querySelectorAll(".bus-hover-popup");
 
     busCards.forEach(card => {
       const popupId = card.getAttribute("data-popup");
 
-      card.addEventListener("click", function (e) {
-        if (window.innerWidth <= 768) {
+      if (window.innerWidth > 768) {
+        // Desktop hover
+        const popup = document.getElementById(popupId);
+        card.addEventListener("mouseenter", () => {
+          closePopups();
+          popup.classList.add("active");
+        });
+        card.addEventListener("mouseleave", () => {
+          popup.classList.remove("active");
+        });
+      } else {
+        // Mobile click
+        card.addEventListener("click", function (e) {
           e.stopPropagation();
           openPopupWithScroll(popupId);
-        }
-      });
+        });
+      }
     });
 
-    // Close when tapping background
     document.addEventListener("click", function () {
       if (window.innerWidth <= 768) {
         closePopups();
       }
     });
 
-    // Prevent click-inside from closing
     document.querySelectorAll(".bus-hover-popup").forEach(popup => {
       popup.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -601,7 +492,28 @@ html, body {
     });
   });
 </script>
+
 <script>
+  // 📅 Format Date for Form Submission
+  function prepareFormattedDate() {
+    const rawDateInput = document.querySelector("input[name='Date']");
+    const formattedDateInput = document.getElementById("formatted-date");
+
+    if (rawDateInput && rawDateInput.value) {
+      const date = new Date(rawDateInput.value);
+      const formatted = date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+      formattedDateInput.value = formatted;
+    }
+  }
+</script>
+
+<script>
+  // ⏩ Optional Fallback Redirect (if FormSubmit redirect fails)
   function handleSubmitRedirect(e) {
     setTimeout(() => {
       window.location.href = 'https://nlbustours.github.io/NLBT-Bookings/thank-you.html';
