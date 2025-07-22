@@ -266,6 +266,16 @@ html, body {
   padding-left: 0;
   font-size: 1em;
 }
+
+  .archie-card .archie-img {
+  content: url('RXV.png'); /* normal image */
+  transition: 0.3s ease;
+}
+
+.archie-card:hover .archie-img {
+  content: url('RIP-RX.png'); /* grayscale angel image */
+}
+  
   </style>
   
 </head>
@@ -351,11 +361,11 @@ html, body {
 
 
   <!-- Archie -->
-  <div class="bus-card" data-popup="popup-archie">
-    <img src="RXV.png" alt="Archie">
-    <h4>❤️‍🩹 Archie – RX<br><small>The Retired Bus</small></h4>
-    <p>May he Rust in Peace 🕊️<br>2009-2025</p>
-  </div>
+<div class="bus-card archie-card" data-popup="popup-archie">
+  <img src="RXV.png" alt="Archie" class="archie-img">
+  <h4>❤️‍🩹 Archie – RX<br><small>The Retired Bus</small></h4>
+  <p>May he Rust in Peace 🕊️<br>2009–2025</p>
+</div>
 
   <!-- Arbie -->
   <div class="bus-card" data-popup="popup-arbie">
