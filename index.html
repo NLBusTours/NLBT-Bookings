@@ -289,6 +289,7 @@ html, body {
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_subject" value="New NLBT Booking Request!">
     <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
+    <input type="hidden" name="Formatted Date" id="formatted-date">
 
     <h3>Booking Form</h3>
 
@@ -308,8 +309,8 @@ html, body {
     <label>Time</label>
     <input type="time" name="Time" required />
 
-    <label>Duration (Hours)</label>
-    <input type="number" name="Duration" min="1" max="12" required />
+    <<label>Duration (Hours)</label>
+<input type="number" name="Duration" min="1" step="0.5" required />
 
     <label>Pickup Location</label>
     <input type="location" name="Pickup" required />
@@ -487,7 +488,7 @@ html, body {
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const rawDateInput = document.querySelector("input[name='date']");
+    const rawDateInput = document.querySelector("input[name='Date']");
     const formattedDateInput = document.getElementById("formatted-date");
 
     function formatDate(dateStr) {
@@ -496,6 +497,12 @@ html, body {
       return date.toLocaleDateString('en-US', options);
     }
 
+    // Initial check if a date is prefilled
+    if (rawDateInput.value) {
+      formattedDateInput.value = formatDate(rawDateInput.value);
+    }
+
+    // Update formatted date on user input
     rawDateInput.addEventListener("input", function () {
       if (rawDateInput.value) {
         formattedDateInput.value = formatDate(rawDateInput.value);
@@ -505,6 +512,7 @@ html, body {
     });
   });
 </script>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
