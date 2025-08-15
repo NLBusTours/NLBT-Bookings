@@ -122,11 +122,12 @@ button:hover { background: #0097a7; }
       <label>Phone</label>
       <input type="tel" name="Phone" placeholder="709-555-1234" required />
 
-      <label>Date</label>
-      <!-- RENAMED field; submits ISO string exactly as chosen -->
-      <input type="date" id="raw-date" name="Event Date" required />
-      <!-- Pretty, human-readable copy (filled by tiny script below) -->
-      <input type="hidden" id="event-date-pretty" name="Event Date (Pretty)">
+      <label for="raw-date">Event Date</label>
+      <!-- Visible date picker (not submitted) -->
+      <input type="date" id="raw-date" required />
+      <!-- Hidden pretty date that WILL be submitted -->
+      <input type="hidden" id="event-date-pretty" name="Event Date">
+
 
       <label>Time</label>
       <input type="time" name="Time" required />
@@ -301,29 +302,35 @@ button:hover { background: #0097a7; }
   </script>
 
   <!-- ✅ New: timezone-proof, string-only date pretty print -->
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const raw   = document.getElementById('raw-date');            // visible date input
-    const pretty= document.getElementById('event-date-pretty');   // hidden pretty copy
-    const months = ["January","February","March","April","May","June","July",
-                    "August","September","October","November","December"];
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const raw = document.getElementById("raw-date");               // visible picker
+    const prettyHidden = document.getElementById("event-date-pretty"); // submitted field
+
+    // Format in UTC so there's zero chance of a 1-day shift
+    const prettyFmt = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC"
+    });
 
     function sync() {
       const v = raw.value; // "YYYY-MM-DD"
-      if (!v) { pretty.value = ""; return; }
-      const [y,m,d] = v.split("-");
-      // Pure string formatting (no Date(), no TZ math)
-      pretty.value = `${months[+m-1]} ${+d}, ${y}`;
+      if (!v) { prettyHidden.value = ""; return; }
+      const [y, m, d] = v.split("-").map(Number);
+      const utcDate = new Date(Date.UTC(y, m - 1, d));
+      prettyHidden.value = prettyFmt.format(utcDate); // e.g., "Sunday, September 7, 2025"
     }
 
-    if (raw) {
-      raw.addEventListener('change', sync);
-      raw.addEventListener('input',  sync);
-      const form = raw.closest('form'); if (form) form.addEventListener('submit', sync);
-      sync();
-    }
+    raw.addEventListener("change", sync);
+    raw.addEventListener("input",  sync);
+    const form = raw.closest("form");
+    if (form) form.addEventListener("submit", sync);
+    sync();
   });
-  </script>
+</script>
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
