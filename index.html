@@ -122,11 +122,12 @@ button:hover { background: #0097a7; }
       <label>Phone</label>
       <input type="tel" name="Phone" placeholder="709-555-1234" required />
 
-      <label>Date</label>
-      <!-- RENAMED field; submits ISO string exactly as chosen -->
-      <input type="date" id="raw-date" name="Event Date" required />
-      <!-- Pretty, human-readable copy (filled by tiny script below) -->
-      <input type="hidden" id="event-date-pretty" name="Event Date (Pretty)">
+      <label for="raw-date">Event Date</label>
+      <!-- Visible picker (NO name, so it won’t be submitted) -->
+      <input type="date" id="raw-date" required>
+      <!-- The ONLY field submitted to FormSubmit -->
+      <input type="hidden" id="event-date" name="Event Date">
+
 
       <label>Time</label>
       <input type="time" name="Time" required />
@@ -302,28 +303,34 @@ button:hover { background: #0097a7; }
 
   <!-- ✅ New: timezone-proof, string-only date pretty print -->
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const raw   = document.getElementById('raw-date');            // visible date input
-    const pretty= document.getElementById('event-date-pretty');   // hidden pretty copy
-    const months = ["January","February","March","April","May","June","July",
-                    "August","September","October","November","December"];
+  document.addEventListener("DOMContentLoaded", function () {
+    const raw    = document.getElementById("raw-date");   // visible picker
+    const pretty = document.getElementById("event-date"); // hidden field
+
+    const fmt = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC"
+    });
 
     function sync() {
-      const v = raw.value; // "YYYY-MM-DD"
+      const v = raw.value; 
       if (!v) { pretty.value = ""; return; }
-      const [y,m,d] = v.split("-");
-      // Pure string formatting (no Date(), no TZ math)
-      pretty.value = `${months[+m-1]} ${+d}, ${y}`;
+      const [y, m, d] = v.split("-").map(Number);
+      pretty.value = fmt.format(new Date(Date.UTC(y, m - 1, d)));
     }
 
-    if (raw) {
-      raw.addEventListener('change', sync);
-      raw.addEventListener('input',  sync);
-      const form = raw.closest('form'); if (form) form.addEventListener('submit', sync);
-      sync();
-    }
+    raw.addEventListener("input", sync);
+    raw.addEventListener("change", sync);
+
+    const form = raw.closest("form");
+    if (form) form.addEventListener("submit", sync);
+
+    sync(); // initialize on load
   });
-  </script>
+</script>
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
