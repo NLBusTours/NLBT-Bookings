@@ -123,11 +123,10 @@ button:hover { background: #0097a7; }
       <input type="tel" name="Phone" placeholder="709-555-1234" required />
 
       <label for="raw-date">Event Date</label>
-      <!-- Visible picker (NO name, so it won’t be submitted) -->
+      <!-- Visible picker (NOT submitted) -->
       <input type="date" id="raw-date" required>
       <!-- The ONLY field submitted to FormSubmit -->
       <input type="hidden" id="event-date" name="Event Date">
-
 
       <label>Time</label>
       <input type="time" name="Time" required />
@@ -303,34 +302,43 @@ button:hover { background: #0097a7; }
 
   <!-- ✅ New: timezone-proof, string-only date pretty print -->
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const raw    = document.getElementById("raw-date");   // visible picker
-    const pretty = document.getElementById("event-date"); // hidden field
+document.addEventListener("DOMContentLoaded", function () {
+  const form   = document.querySelector("form");          // your booking form
+  const raw    = document.getElementById("raw-date");     // visible picker
+  const pretty = document.getElementById("event-date");   // hidden, submitted
 
-    const fmt = new Intl.DateTimeFormat("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      timeZone: "UTC"
-    });
+  // ---- Pure UTC builder (no Intl quirks, no timezone shifts) ----
+  const WEEK = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const MONTH = ["January","February","March","April","May","June","July","August",
+                 "September","October","November","December"];
 
-    function sync() {
-      const v = raw.value; 
-      if (!v) { pretty.value = ""; return; }
-      const [y, m, d] = v.split("-").map(Number);
-      pretty.value = fmt.format(new Date(Date.UTC(y, m - 1, d)));
-    }
+  function buildPretty(iso) {
+    if (!iso) return "";
+    const [y,m,d] = iso.split("-").map(Number);
+    const dt = new Date(Date.UTC(y, m-1, d));       // anchor at UTC midnight
+    return `${WEEK[dt.getUTCDay()]}, ${MONTH[m-1]} ${d}, ${y}`;
+  }
 
-    raw.addEventListener("input", sync);
-    raw.addEventListener("change", sync);
+  function sync() {
+    const v = raw.value;                 // "YYYY-MM-DD"
+    pretty.value = buildPretty(v);       // "Friday, August 15, 2025"
+  }
 
-    const form = raw.closest("form");
-    if (form) form.addEventListener("submit", sync);
+  // Keep only OUR 'Event Date' on submit (safety belt in case a duplicate sneaks in)
+  function dedupe() {
+    const fields = [...form.querySelectorAll('input[name="Event Date"]')];
+    fields.forEach(el => { if (el !== pretty) el.remove(); });
+  }
 
-    sync(); // initialize on load
-  });
+  raw.addEventListener("input",  sync);
+  raw.addEventListener("change", sync);
+  form.addEventListener("submit", function () { sync(); dedupe(); });
+
+  // Initialize (handles autofill/back nav)
+  sync();
+});
 </script>
+
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
