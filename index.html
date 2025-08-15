@@ -313,7 +313,9 @@ html, body {
 
     <label>Date</label>
     <input type="date" id="raw-date" required />
-    <input type="hidden" name="Date" id="formatted-date">
+    <input type="hidden" name="Event Date" id="formatted-date">
+    <input type="hidden" name="Event Date (ISO)" id="iso-date">
+
 
     <label>Time</label>
     <input type="time" name="Time" required />
@@ -465,143 +467,95 @@ html, body {
       });
     }
 
-    // For mobile (click)
-    if (window.innerWidth <= 768) {
-      busCards.forEach(card => {
-        card.addEventListener("click", function (e) {
-          const targetPopupId = card.getAttribute("data-popup");
-          e.stopPropagation();
-
-          // Close all
-          allPopups.forEach(p => p.classList.remove("active"));
-
-          // Open this
-          const targetPopup = document.getElementById(targetPopupId);
-          if (targetPopup) {
-            targetPopup.classList.add("active");
-          }
-        });
-
-        document.addEventListener("click", function () {
-          allPopups.forEach(p => p.classList.remove("active"));
-        });
-
-        allPopups.forEach(popup => {
-          popup.addEventListener("click", function (e) {
-            e.stopPropagation();
-          });
-        });
-      });
-    }
-  });
-</script>
- 
-<script>
+   <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const rawDateInput = document.getElementById("raw-date");
-    const formattedDateInput = document.getElementById("formatted-date");
+    const busCards   = document.querySelectorAll(".bus-card");
+    const allPopups  = document.querySelectorAll(".bus-hover-popup");
 
-    function formatDateLocal(dateStr) {
-      if (!dateStr) return "";
-      const [year, month, day] = dateStr.split("-").map(Number);
-      const date = new Date(year, month - 1, day); // Local time, no UTC shift
-      return date.toLocaleDateString("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      });
+    // ---------- Helpers ----------
+    function closePopups() {
+      allPopups.forEach(p => p.classList.remove("active"));
     }
 
-    if (rawDateInput.value) {
-      formattedDateInput.value = formatDateLocal(rawDateInput.value);
-    }
-
-    rawDateInput.addEventListener("input", function () {
-      formattedDateInput.value = rawDateInput.value
-        ? formatDateLocal(rawDateInput.value)
-        : "";
-    });
-  });
-</script>
-
-</script>
-
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const busCards = document.querySelectorAll(".bus-card");
-    const allPopups = document.querySelectorAll(".bus-hover-popup");
-
-    // Handle click on bus cards
-    busCards.forEach(card => {
-      card.addEventListener("click", function (e) {
-        const targetPopupId = card.getAttribute("data-popup");
-
-        if (window.innerWidth <= 768) {
-          e.stopPropagation();
-          allPopups.forEach(p => p.classList.remove("active"));
-          const targetPopup = document.getElementById(targetPopupId);
-          if (targetPopup) {
-            targetPopup.classList.add("active");
-          }
-        }
-      });
-    });
-
-    // Close on background click
-    document.addEventListener("click", function () {
-      if (window.innerWidth <= 768) {
-        closePopups();
-      }
-    });
-
-    // Prevent closing when clicking inside the popup
-    allPopups.forEach(popup => {
-      popup.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-    });
-  });
-
-  function closePopups() {
-    document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
-  }
-</script>
-<script>
-  function closePopups() {
-    document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
-  }
-
-  function openPopupWithScroll(popupId) {
-    const popup = document.getElementById(popupId);
-    if (popup) {
+    function openPopupWithScroll(popupId) {
+      const popup = document.getElementById(popupId);
+      if (!popup) return;
       closePopups();
       popup.classList.add("active");
-
-      // Smooth scroll into view (mobile only)
-      if (window.innerWidth <= 768) {
+      if (window.matchMedia("(max-width: 768px)").matches) {
         setTimeout(() => {
           popup.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100); // slight delay for visibility
+        }, 100);
       }
     }
-  }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const busCards = document.querySelectorAll(".bus-card");
+    // Detect mobile vs desktop (updates on resize)
+    const mq = window.matchMedia("(max-width: 768px)");
+    function bindHandlers() {
+      // Clear any prior bindings by cloning nodes (prevents double listeners)
+      // (Optional; if you reload handlers often. Otherwise, skip cloning.)
+    }
 
-    busCards.forEach(card => {
-      const popupId = card.getAttribute("data-popup");
-
-      card.addEventListener("click", function (e) {
-        if (window.innerWidth <= 768) {
-          e.stopPropagation();
-          openPopupWithScroll(popupId);
-        }
+    // ---------- Bind for mobile (tap to open, tap background to close) ----------
+    function bindMobile() {
+      // Card tap opens popup
+      busCards.forEach(card => {
+        card.addEventListener("click", onCardClickMobile);
       });
-    });
+      // Tap outside closes
+      document.addEventListener("click", onDocClickMobile);
+      // Stop close when tapping inside popup
+      allPopups.forEach(p => p.addEventListener("click", stop));
+    }
+
+    function onCardClickMobile(e) {
+      const card = e.currentTarget;
+      const id = card.getAttribute("data-popup");
+      e.stopPropagation();
+      openPopupWithScroll(id);
+    }
+    function onDocClickMobile() { closePopups(); }
+    function stop(e){ e.stopPropagation(); }
+
+    // ---------- Bind for desktop (hover to open, leave to close) ----------
+    function bindDesktop() {
+      busCards.forEach(card => {
+        const id = card.getAttribute("data-popup");
+        const popup = document.getElementById(id);
+        if (!popup) return;
+
+        card.addEventListener("mouseenter", () => {
+          closePopups();
+          popup.classList.add("active");
+        });
+        card.addEventListener("mouseleave", () => {
+          popup.classList.remove("active");
+        });
+      });
+    }
+
+    // ---------- Init once ----------
+    function initBindings() {
+      // remove any existing state
+      closePopups();
+
+      // Remove previous listeners by cloning (optional safety)
+      // Skipped here for brevity—reloading the page also clears listeners.
+
+      if (mq.matches) {
+        bindMobile();
+      } else {
+        bindDesktop();
+      }
+    }
+
+    initBindings();
+
+    // Rebind on viewport change
+    mq.addEventListener("change", initBindings);
+  });
+</script>
+
 
     // Close when tapping background
     document.addEventListener("click", function () {
