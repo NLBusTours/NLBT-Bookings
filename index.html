@@ -501,22 +501,30 @@ html, body {
     const rawDateInput = document.getElementById("raw-date");
     const formattedDateInput = document.getElementById("formatted-date");
 
-    function formatDate(dateStr) {
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const date = new Date(dateStr);
-      return date.toLocaleDateString('en-US', options);
+    function formatDateLocal(dateStr) {
+      if (!dateStr) return "";
+      const [year, month, day] = dateStr.split("-").map(Number);
+      const date = new Date(year, month - 1, day); // Local time, no UTC shift
+      return date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
     }
 
     if (rawDateInput.value) {
-      formattedDateInput.value = formatDate(rawDateInput.value);
+      formattedDateInput.value = formatDateLocal(rawDateInput.value);
     }
 
     rawDateInput.addEventListener("input", function () {
       formattedDateInput.value = rawDateInput.value
-        ? formatDate(rawDateInput.value)
-        : '';
+        ? formatDateLocal(rawDateInput.value)
+        : "";
     });
   });
+</script>
+
 </script>
 
 
