@@ -122,11 +122,13 @@ button:hover { background: #0097a7; }
       <label>Phone</label>
       <input type="tel" name="Phone" placeholder="709-555-1234" required />
 
-      <label for="raw-date">Event Date</label>
-      <!-- Visible picker (NOT submitted) -->
+      <label for="raw-date">Date</label>
+      <!-- Visible picker (NOT submitted directly) -->
       <input type="date" id="raw-date" required>
+
       <!-- The ONLY field submitted to FormSubmit -->
-      <input type="hidden" id="event-date" name="Event Date">
+      <input type="hidden" id="event-date" name="Date">
+
 
       <label>Time</label>
       <input type="time" name="Time" required />
@@ -307,7 +309,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const raw    = document.getElementById("raw-date");     // visible picker
   const pretty = document.getElementById("event-date");   // hidden, submitted
 
-  // ---- Pure UTC builder (no Intl quirks, no timezone shifts) ----
   const WEEK = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const MONTH = ["January","February","March","April","May","June","July","August",
                  "September","October","November","December"];
@@ -315,18 +316,17 @@ document.addEventListener("DOMContentLoaded", function () {
   function buildPretty(iso) {
     if (!iso) return "";
     const [y,m,d] = iso.split("-").map(Number);
-    const dt = new Date(Date.UTC(y, m-1, d));       // anchor at UTC midnight
+    const dt = new Date(Date.UTC(y, m-1, d));       // UTC to prevent timezone shift
     return `${WEEK[dt.getUTCDay()]}, ${MONTH[m-1]} ${d}, ${y}`;
   }
 
   function sync() {
-    const v = raw.value;                 // "YYYY-MM-DD"
-    pretty.value = buildPretty(v);       // "Friday, August 15, 2025"
+    const v = raw.value;
+    pretty.value = buildPretty(v);
   }
 
-  // Keep only OUR 'Event Date' on submit (safety belt in case a duplicate sneaks in)
   function dedupe() {
-    const fields = [...form.querySelectorAll('input[name="Event Date"]')];
+    const fields = [...form.querySelectorAll('input[name="Date"]')];
     fields.forEach(el => { if (el !== pretty) el.remove(); });
   }
 
@@ -334,10 +334,10 @@ document.addEventListener("DOMContentLoaded", function () {
   raw.addEventListener("change", sync);
   form.addEventListener("submit", function () { sync(); dedupe(); });
 
-  // Initialize (handles autofill/back nav)
   sync();
 });
 </script>
+
 
 
   <script>
