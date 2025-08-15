@@ -3,448 +3,254 @@
 <head>
   <meta charset="UTF-8" />
   <title>NLBT Booking - Customer View</title>
-  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css' rel='stylesheet' />
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js'></script>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.4/index.global.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.4/index.global.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.4/index.global.min.js"></script>
 
   <style>
-html, body {
-  overflow-x: hidden;
+html, body { overflow-x: hidden; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0; padding: 0; background: #e0f7fa; color: #333;
 }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #e0f7fa;
-      color: #333;
-    }
-    header, footer {
-      background: linear-gradient(to right, #8e24aa, #26c6da);
-      color: #fff;
-      text-align: center;
-      padding: 1.5em;
-    }
-    header h1 {
-      font-size: 2em;
-      margin: 0;
-    }
-    #calendar {
-      max-width: 1000px;
-      margin: 30px auto;
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    #booking-form {
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 30px;
-      background: linear-gradient(to bottom right, #e1bee7, #b2ebf2);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    h3 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 12px;
-      font-weight: bold;
-      color: #4a148c;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-top: 5px;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #26c6da;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1em;
-      display: block;
-      width: 100%;
-    }
-    button:hover {
-      background: #0097a7;
-      
-    }
+header, footer {
+  background: linear-gradient(to right, #8e24aa, #26c6da);
+  color: #fff; text-align: center; padding: 1.5em;
+}
+header h1 { font-size: 2em; margin: 0; }
+#calendar {
+  max-width: 1000px; margin: 30px auto; background: #fff; border-radius: 12px;
+  padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+#booking-form {
+  max-width: 700px; margin: 30px auto; padding: 30px;
+  background: linear-gradient(to bottom right, #e1bee7, #b2ebf2);
+  border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+h3 { text-align: center; margin-bottom: 20px; }
+label { display: block; margin-top: 12px; font-weight: bold; color: #4a148c; }
+input, select, textarea {
+  width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;
+  margin-top: 5px; box-sizing: border-box;
+}
+button {
+  margin-top: 20px; padding: 12px 25px; background: #26c6da; color: #fff;
+  border: none; border-radius: 6px; cursor: pointer; font-size: 1em; display: block; width: 100%;
+}
+button:hover { background: #0097a7; }
 .intro-highlighted-box {
-  font-size: 1.2em;  text-align: center;
-  font-weight: bold;
-  color: #000; /* Black text */
-  margin: 30px auto;
-  padding: 12px 20px;
-  width: 90%;
-  max-width: 900px;
-  background: #ffffff;
-  border-radius: 12px;
+  font-size: 1.2em; text-align: center; font-weight: bold; color: #000;
+  margin: 30px auto; padding: 12px 20px; width: 90%; max-width: 900px;
+  background: #ffffff; border-radius: 12px;
   box-shadow: 0 0 10px rgba(142, 36, 170, 0.4), 0 0 25px rgba(38, 198, 218, 0.3);
 }
-    .headline-large {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 5px;
-}
-    .below-bus-text {
-  background: #ffffff;
-  border-radius: 12px;
+.headline-large { font-size: 2rem; display: block; margin-bottom: 5px; }
+.below-bus-text {
+  background: #ffffff; border-radius: 12px;
   box-shadow: 0 0 10px rgba(142, 36, 170, 0.4), 0 0 25px rgba(38, 198, 218, 0.3);
-  margin: 40px auto;
-  max-width: 900px;
-  padding: 20px;
-  font-size: 1.7em;
-  font-weight: 600;
-  text-align: center;
-  color: #333;
-  display: block; /* ✅ Ensures it doesn’t collapse */
+  margin: 40px auto; max-width: 900px; padding: 20px; font-size: 1.7em; font-weight: 600;
+  text-align: center; color: #333; display: block;
 }
- .bus-info {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  max-width: 1000px;
-  margin: 40px auto;
-  position: relative;
-  z-index: 1;
-  overflow: visible; /* keep this line */
+.bus-info {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+  max-width: 1000px; margin: 40px auto; position: relative; z-index: 1; overflow: visible;
 }
-
-
 .bus-card {
-  position: relative;
-  width: 220px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  text-align: center;
-  overflow: visible;
-  transition: transform 0.3s ease;
-  z-index: 2;
+  position: relative; width: 220px; background: #fff; border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15); text-align: center; overflow: visible;
+  transition: transform 0.3s ease; z-index: 2;
 }
-
-.bus-card:hover {
-  transform: scale(1.03);
-  z-index: 3;
-}
-
-.bus-card img {
-  width: 100%;
-  height: 130px;
-  object-fit: cover;
-}
-
-.bus-card h4 {
-  margin: 0.5em 0 0;
-  font-size: 1.1em;
-  color: #333;
-}
-
-.bus-card p {
-  padding: 0 10px 15px;
-  font-size: 0.9em;
-  color: #555;
-}
-
+.bus-card:hover { transform: scale(1.03); z-index: 3; }
+.bus-card img { width: 100%; height: 130px; object-fit: cover; }
+.bus-card h4 { margin: 0.5em 0 0; font-size: 1.1em; color: #333; }
+.bus-card p { padding: 0 10px 15px; font-size: 0.9em; color: #555; }
 .bus-hover-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 30px;
-  width: 90vw;
-  max-width: 900px;
-  background: rgba(255, 255, 255, 0.97);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 9999;
-  transition: opacity 0.3s ease;
-  overflow: hidden;
-  position: fixed;
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 30px;
+  width: 90vw; max-width: 900px; background: rgba(255,255,255,0.97); padding: 30px; border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3); opacity: 0; pointer-events: none; z-index: 9999;
+  transition: opacity 0.3s ease; overflow: hidden;
 }
-
-.bus-hover-popup.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
+.bus-hover-popup.active { opacity: 1; pointer-events: auto; }
 .bus-hover-popup img {
-  width: 100%;
-  max-width: 350px;
-  height: auto;
-  border-radius: 12px;
-  object-fit: contain;
+  width: 100%; max-width: 350px; height: auto; border-radius: 12px; object-fit: contain;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
-
-.popup-text {
-  flex: 1;
-  min-width: 200px;
-  text-align: left;
-}
-
-.popup-text h5 {
-  margin: 0 0 0.5em;
-  font-size: 1.2em;
-  color: #4a148c;
-}
-
-.popup-text ul {
-  list-style: none;
-  padding-left: 0;
-  font-size: 1em;
-}
-
-.popup-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #555;
-  cursor: pointer;
-  z-index: 10000;
-}
-
-/* 📱 Mobile view */
+.popup-text { flex: 1; min-width: 200px; text-align: left; }
+.popup-text h5 { margin: 0 0 0.5em; font-size: 1.2em; color: #4a148c; }
+.popup-text ul { list-style: none; padding-left: 0; font-size: 1em; }
+.popup-close { position: absolute; top: 10px; right: 15px; font-size: 1.8em; font-weight: bold; color: #555; cursor: pointer; z-index: 10000; }
 @media (max-width: 768px) {
   .bus-hover-popup {
-    position: absolute; /* was fixed */
-    top: auto;           /* let it appear naturally */
-    left: 0;
-    transform: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 95%;
-    margin: 20px auto;
-    height: auto;
-    overflow-y: auto;
-    padding: 20px;
-    z-index: 9999;
+    position: absolute; top: auto; left: 0; transform: none; flex-direction: column;
+    align-items: center; justify-content: flex-start; width: 95%; margin: 20px auto;
+    height: auto; overflow-y: auto; padding: 20px; z-index: 9999;
   }
 }
-
-
-  .bus-hover-popup img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .popup-text {
-    padding-top: 15px;
-    text-align: center;
-  }
-
-.popup-text h5 {
-  margin: 0 0 0.5em;
-  font-size: 1.2em;
-  color: #4a148c;
-}
-
-.popup-text ul {
-  list-style: none;
-  padding-left: 0;
-  font-size: 1em;
-}
-
-  .archie-card .archie-img {
-  content: url('RXV.png'); /* normal image */
-  transition: 0.3s ease;
-}
-
-.archie-card:hover .archie-img {
-  content: url('RIP-RX.png'); /* grayscale angel image */
-}
-  
+.bus-hover-popup img { max-width: 100%; height: auto; }
+.popup-text { padding-top: 15px; text-align: center; }
+.popup-text h5 { margin: 0 0 0.5em; font-size: 1.2em; color: #4a148c; }
+.popup-text ul { list-style: none; padding-left: 0; font-size: 1em; }
+.archie-card .archie-img { content: url('RXV.png'); transition: 0.3s ease; }
+.archie-card:hover .archie-img { content: url('RIP-RX.png'); }
   </style>
-  
 </head>
-  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css' rel='stylesheet' />
-<body>
-  <header>
-    <h1>Book Your Ride</h1>
-  </header>
 
-  
-<!-- This now sits outside .bus-info -->
-<div class="below-bus-text">
-  🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐
-</div>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet" />
+<body>
+  <header><h1>Book Your Ride</h1></header>
+
+  <div class="below-bus-text">🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐</div>
 
   <div id="booking-form">
-  <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
+    <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
+      <!-- Hidden fields -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_subject" value="New NLBT Booking Request!">
+      <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
 
-    <!-- Hidden fields -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_subject" value="New NLBT Booking Request!">
-    <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
+      <h3>Booking Form</h3>
 
-    <h3>Booking Form</h3>
+      <label>Name</label>
+      <input type="text" name="Name" placeholder="Your Name" required />
 
-    <label>Name</label>
-    <input type="text" name="Name" placeholder="Your Name" required />
+      <label>Email</label>
+      <input type="email" name="Email" placeholder="your@email.com" required />
 
-    <label>Email</label>
-    <input type="email" name="Email" placeholder="your@email.com" required />
+      <label>Phone</label>
+      <input type="tel" name="Phone" placeholder="709-555-1234" required />
 
-    <label>Phone</label>
-    <input type="tel" name="Phone" placeholder="709-555-1234" required />
+      <label>Date</label>
+      <!-- RENAMED field; submits ISO string exactly as chosen -->
+      <input type="date" id="raw-date" name="Event Date" required />
+      <!-- Pretty, human-readable copy (filled by tiny script below) -->
+      <input type="hidden" id="event-date-pretty" name="Event Date (Pretty)">
 
-    <label>Date</label>
-    <input type="date" id="raw-date" required />
-    <input type="hidden" name="Event Date" id="formatted-date">
-    <input type="hidden" name="Event Date (ISO)" id="iso-date">
+      <label>Time</label>
+      <input type="time" name="Time" required />
 
+      <label>Duration (Hours)</label>
+      <input type="number" name="Duration" min="1" max="12" step="0.5" required />
 
-    <label>Time</label>
-    <input type="time" name="Time" required />
+      <label>Pickup Location</label>
+      <input type="location" name="Pickup" required />
 
-    <label>Duration (Hours)</label>
-    <input type="number" name="Duration" min="1" max="12" step="0.5" required />
+      <label>Stop Location(s)</label>
+      <input type="location" name="Stops" required />
 
-    <label>Pickup Location</label>
-    <input type="location" name="Pickup" required />
+      <label>Dropoff Location</label>
+      <input type="location" name="Dropoff" required />
 
-    <label>Stop Location(s)</label>
-    <input type="location" name="Stops" required />
+      <label>Bus</label>
+      <select name="Bus" required>
+        <option disabled selected>Select a Bus</option>
+        <option>Artie (RT)</option>
+        <option>Arbie (RB)</option>
+        <option>Arthree (R3)</option>
+      </select>
 
-    <label>Dropoff Location</label>
-    <input type="location" name="Dropoff" required />
+      <label>Additional Notes</label>
+      <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
 
-    <label>Bus</label>
-    <select name="Bus" required>
-      <option disabled selected>Select a Bus</option>
-      <option>Artie (RT)</option>
-      <option>Arbie (RB)</option>
-      <option>Arthree (R3)</option>
-    </select>
-
-    <label>Additional Notes</label>
-    <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
-
-    <button type="submit">Submit Request</button>
-
-  </form>
-</div>
-<div class="intro-highlighted-box">
-  <p><span class="headline-large">Explore our Unique Fleet - Tap each Photo for More Info!</span></p>
-  <p>Each Bus is equipped with Powerful Bluetooth Speakers, Party & Glow Lights, Coolers, and More!</p>
-</div>
-
-
-<div class="bus-info">
-  <!-- Artie -->
-  <div class="bus-card" data-popup="popup-artie">
-  <img src="RTV.png" alt="Artie">
-  <h4>🖤 Artie – RT<br><small>The Lounge Bus</small></h4>
-  <p>Spacious & Chic. Perfect for Party Nights & Unforgettable Outings.</p>
-</div>
-
-  <!-- Arbie -->
-  <div class="bus-card" data-popup="popup-arbie">
-    <img src="RBV.png" alt="Arbie">
-    <h4>💜 Arbie – RB<br><small>The Nightlife Bus</small></h4>
-    <p>Vibrant and lively. Tailored for Large Group Pub Crawls.</p>
+      <button type="submit">Submit Request</button>
+    </form>
   </div>
 
-  <!-- Arthree -->
-  <div class="bus-card" data-popup="popup-arthree">
-    <img src="R3V.png" alt="R3">
-    <h4>🤍 Arthree – R3<br><small>The Mini Coach</small></h4>
-    <p>Sleek and simple. Ideal for Weddings, Airport Shuttles, and Tourist Excursions.</p>
+  <div class="intro-highlighted-box">
+    <p><span class="headline-large">Explore our Unique Fleet - Tap each Photo for More Info!</span></p>
+    <p>Each Bus is equipped with Powerful Bluetooth Speakers, Party & Glow Lights, Coolers, and More!</p>
   </div>
 
-  <!-- Archie -->
-<div class="bus-card archie-card" data-popup="popup-archie">
-  <img src="RXV.png" alt="Archie" class="archie-img">
-  <h4>❤️‍🩹 Archie – RX<br><small>The Retired Bus</small></h4>
-  <p>May he Rust in Peace 🕊️<br>2009–2025</p>
-</div>
-  
-</div>
-  
-<div class="bus-hover-popup" id="popup-artie">
-  <span class="popup-close" onclick="closePopups()">×</span>
-  <img src="FRT.png" alt="Artie Interior">
-  <div class="popup-text">
-    <h5>Artie Highlights:</h5>
-    <ul>
-      <li>💺 Full Lounge Seating (40+ppl)</li>
-      <li>🕺 Dance Area & Cooler</li>
-      <li>🔊 2 Premium Bluetooth Speakers</li>
-      <li>🪩 LED, Strobe, Laser, and Glow Lighting</li>
-      <li>🍻 Great for Pub Crawls & Socials</li>
-    </ul>
+  <!-- bus cards + popups (unchanged) -->
+  <div class="bus-info">
+    <div class="bus-card" data-popup="popup-artie">
+      <img src="RTV.png" alt="Artie">
+      <h4>🖤 Artie – RT<br><small>The Lounge Bus</small></h4>
+      <p>Spacious & Chic. Perfect for Party Nights & Unforgettable Outings.</p>
+    </div>
+
+    <div class="bus-card" data-popup="popup-arbie">
+      <img src="RBV.png" alt="Arbie">
+      <h4>💜 Arbie – RB<br><small>The Nightlife Bus</small></h4>
+      <p>Vibrant and lively. Tailored for Large Group Pub Crawls.</p>
+    </div>
+
+    <div class="bus-card" data-popup="popup-arthree">
+      <img src="R3V.png" alt="R3">
+      <h4>🤍 Arthree – R3<br><small>The Mini Coach</small></h4>
+      <p>Sleek and simple. Ideal for Weddings, Airport Shuttles, and Tourist Excursions.</p>
+    </div>
+
+    <div class="bus-card archie-card" data-popup="popup-archie">
+      <img src="RXV.png" alt="Archie" class="archie-img">
+      <h4>❤️‍🩹 Archie – RX<br><small>The Retired Bus</small></h4>
+      <p>May he Rust in Peace 🕊️<br>2009–2025</p>
+    </div>
   </div>
-</div>
+
+  <div class="bus-hover-popup" id="popup-artie">
+    <span class="popup-close" onclick="closePopups()">×</span>
+    <img src="FRT.png" alt="Artie Interior">
+    <div class="popup-text">
+      <h5>Artie Highlights:</h5>
+      <ul>
+        <li>💺 Full Lounge Seating (40+ppl)</li>
+        <li>🕺 Dance Area & Cooler</li>
+        <li>🔊 2 Premium Bluetooth Speakers</li>
+        <li>🪩 LED, Strobe, Laser, and Glow Lighting</li>
+        <li>🍻 Great for Pub Crawls & Socials</li>
+      </ul>
+    </div>
+  </div>
 
   <div class="bus-hover-popup" id="popup-arbie">
     <span class="popup-close" onclick="closePopups()">×</span>
-      <img src="FRB.png" alt="Arbie Interior">
-      <div class="popup-text">
-        <h5>Arbie Highlights:</h5>
-        <ul>
-          <li>💺 Secure Front-Facing Seating (38+ppl)</li>
-          <li>🕺 Rear Lounge Area & Cooler</li>
-          <li>🔊 2 Premium Bluetooth Speakers</li>
-          <li>🪩 LED, Strobe, and Laser Lighting</li>
-          <li>🍻 Great for Pub Crawls or Work Outings</li>
-        </ul>
-      </div>
+    <img src="FRB.png" alt="Arbie Interior">
+    <div class="popup-text">
+      <h5>Arbie Highlights:</h5>
+      <ul>
+        <li>💺 Secure Front-Facing Seating (38+ppl)</li>
+        <li>🕺 Rear Lounge Area & Cooler</li>
+        <li>🔊 2 Premium Bluetooth Speakers</li>
+        <li>🪩 LED, Strobe, and Laser Lighting</li>
+        <li>🍻 Great for Pub Crawls or Work Outings</li>
+      </ul>
     </div>
-  
-<div class="bus-hover-popup" id="popup-arthree">
-  <span class="popup-close" onclick="closePopups()">×</span>
-      <img src="FR3.png" alt="Arthree Interior">
-      <div class="popup-text">
-        <h5>Arthree Highlights:</h5>
-        <ul>
-          <li>💺 Individual Seats with Belts (17ppl)</li>
-          <li>❄️ Air Conditioning & Cooler</li>
-          <li>🔊 1 Premium Bluetooth Speaker</li>
-          <li>🪩 LED, Strobe, and Laser Lighting</li>
-          <li>🥂 Great for Weddings, Shuttles, and Tours</li>
-        </ul>
-      </div>
-    </div>
+  </div>
 
-  <div class="bus-hover-popup" id="popup-archie" >
+  <div class="bus-hover-popup" id="popup-arthree">
     <span class="popup-close" onclick="closePopups()">×</span>
-      <img src="FRX.png" alt="Archie Interior">
-      <div class="popup-text">
-        <h5> Remembering Archie:</h5>
-        <ul>
-          <li>💺 Our first Renovated Lounge Bus</li>
-          <li>🕺 Many Danced & Partied on his Dance Floor </li>
-          <li>🔊 Many Sang, Laughed, and yelled "Cheers!"</li>
-          <li>🪩 Many Glowed & Got Lit by his Lights</li>
-          <li>🍻 Thanks for all the Good Times, Archie 🕊️</li>
-        </ul>
-      </div>
+    <img src="FR3.png" alt="Arthree Interior">
+    <div class="popup-text">
+      <h5>Arthree Highlights:</h5>
+      <ul>
+        <li>💺 Individual Seats with Belts (17ppl)</li>
+        <li>❄️ Air Conditioning & Cooler</li>
+        <li>🔊 1 Premium Bluetooth Speaker</li>
+        <li>🪩 LED, Strobe, and Laser Lighting</li>
+        <li>🥂 Great for Weddings, Shuttles, and Tours</li>
+      </ul>
     </div>
-  <!-- <h3 style="text-align: center;">📅 Availability Calendar</h3>
-  <div id='calendar'></div> -->
+  </div>
+
+  <div class="bus-hover-popup" id="popup-archie">
+    <span class="popup-close" onclick="closePopups()">×</span>
+    <img src="FRX.png" alt="Archie Interior">
+    <div class="popup-text">
+      <h5>Remembering Archie:</h5>
+      <ul>
+        <li>💺 Our first Renovated Lounge Bus</li>
+        <li>🕺 Many Danced & Partied on his Dance Floor</li>
+        <li>🔊 Many Sang, Laughed, and yelled "Cheers!"</li>
+        <li>🪩 Many Glowed & Got Lit by his Lights</li>
+        <li>🍻 Thanks for all the Good Times, Archie 🕊️</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- (Your existing popup scripts remain below as-is) -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     const busCards = document.querySelectorAll(".bus-card");
@@ -467,110 +273,133 @@ html, body {
       });
     }
 
-   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const busCards   = document.querySelectorAll(".bus-card");
-    const allPopups  = document.querySelectorAll(".bus-hover-popup");
+    // For mobile (click)
+    if (window.innerWidth <= 768) {
+      busCards.forEach(card => {
+        card.addEventListener("click", function (e) {
+          const targetPopupId = card.getAttribute("data-popup");
+          e.stopPropagation();
 
-    // ---------- Helpers ----------
-    function closePopups() {
-      allPopups.forEach(p => p.classList.remove("active"));
+          allPopups.forEach(p => p.classList.remove("active"));
+
+          const targetPopup = document.getElementById(targetPopupId);
+          if (targetPopup) targetPopup.classList.add("active");
+        });
+
+        document.addEventListener("click", function () {
+          allPopups.forEach(p => p.classList.remove("active"));
+        });
+
+        allPopups.forEach(popup => {
+          popup.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+        });
+      });
+    }
+  });
+  </script>
+
+  <!-- ✅ New: timezone-proof, string-only date pretty print -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const raw   = document.getElementById('raw-date');            // visible date input
+    const pretty= document.getElementById('event-date-pretty');   // hidden pretty copy
+    const months = ["January","February","March","April","May","June","July",
+                    "August","September","October","November","December"];
+
+    function sync() {
+      const v = raw.value; // "YYYY-MM-DD"
+      if (!v) { pretty.value = ""; return; }
+      const [y,m,d] = v.split("-");
+      // Pure string formatting (no Date(), no TZ math)
+      pretty.value = `${months[+m-1]} ${+d}, ${y}`;
     }
 
-    function openPopupWithScroll(popupId) {
-      const popup = document.getElementById(popupId);
-      if (!popup) return;
+    if (raw) {
+      raw.addEventListener('change', sync);
+      raw.addEventListener('input',  sync);
+      const form = raw.closest('form'); if (form) form.addEventListener('submit', sync);
+      sync();
+    }
+  });
+  </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const busCards = document.querySelectorAll(".bus-card");
+    const allPopups = document.querySelectorAll(".bus-hover-popup");
+
+    // Handle click on bus cards
+    busCards.forEach(card => {
+      card.addEventListener("click", function (e) {
+        const targetPopupId = card.getAttribute("data-popup");
+
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          allPopups.forEach(p => p.classList.remove("active"));
+          const targetPopup = document.getElementById(targetPopupId);
+          if (targetPopup) targetPopup.classList.add("active");
+        }
+      });
+    });
+
+    // Close on background click
+    document.addEventListener("click", function () {
+      if (window.innerWidth <= 768) closePopups();
+    });
+
+    // Prevent closing when clicking inside the popup
+    allPopups.forEach(popup => {
+      popup.addEventListener("click", function (e) { e.stopPropagation(); });
+    });
+  });
+
+  function closePopups() {
+    document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
+  }
+  </script>
+
+  <script>
+  function closePopups() {
+    document.querySelectorAll(".bus-hover-popup").forEach(p => p.classList.remove("active"));
+  }
+
+  function openPopupWithScroll(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
       closePopups();
       popup.classList.add("active");
-      if (window.matchMedia("(max-width: 768px)").matches) {
+      if (window.innerWidth <= 768) {
         setTimeout(() => {
           popup.scrollIntoView({ behavior: "smooth", block: "center" });
         }, 100);
       }
     }
+  }
 
-    // Detect mobile vs desktop (updates on resize)
-    const mq = window.matchMedia("(max-width: 768px)");
-    function bindHandlers() {
-      // Clear any prior bindings by cloning nodes (prevents double listeners)
-      // (Optional; if you reload handlers often. Otherwise, skip cloning.)
-    }
-
-    // ---------- Bind for mobile (tap to open, tap background to close) ----------
-    function bindMobile() {
-      // Card tap opens popup
-      busCards.forEach(card => {
-        card.addEventListener("click", onCardClickMobile);
+  document.addEventListener("DOMContentLoaded", function () {
+    const busCards = document.querySelectorAll(".bus-card");
+    busCards.forEach(card => {
+      const popupId = card.getAttribute("data-popup");
+      card.addEventListener("click", function (e) {
+        if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          openPopupWithScroll(popupId);
+        }
       });
-      // Tap outside closes
-      document.addEventListener("click", onDocClickMobile);
-      // Stop close when tapping inside popup
-      allPopups.forEach(p => p.addEventListener("click", stop));
-    }
+    });
 
-    function onCardClickMobile(e) {
-      const card = e.currentTarget;
-      const id = card.getAttribute("data-popup");
-      e.stopPropagation();
-      openPopupWithScroll(id);
-    }
-    function onDocClickMobile() { closePopups(); }
-    function stop(e){ e.stopPropagation(); }
-
-    // ---------- Bind for desktop (hover to open, leave to close) ----------
-    function bindDesktop() {
-      busCards.forEach(card => {
-        const id = card.getAttribute("data-popup");
-        const popup = document.getElementById(id);
-        if (!popup) return;
-
-        card.addEventListener("mouseenter", () => {
-          closePopups();
-          popup.classList.add("active");
-        });
-        card.addEventListener("mouseleave", () => {
-          popup.classList.remove("active");
-        });
-      });
-    }
-
-    // ---------- Init once ----------
-    function initBindings() {
-      // remove any existing state
-      closePopups();
-
-      // Remove previous listeners by cloning (optional safety)
-      // Skipped here for brevity—reloading the page also clears listeners.
-
-      if (mq.matches) {
-        bindMobile();
-      } else {
-        bindDesktop();
-      }
-    }
-
-    initBindings();
-
-    // Rebind on viewport change
-    mq.addEventListener("change", initBindings);
-  });
-</script>
-
-
-    // Close when tapping background
     document.addEventListener("click", function () {
-      if (window.innerWidth <= 768) {
-        closePopups();
-      }
+      if (window.innerWidth <= 768) closePopups();
     });
 
-    // Prevent click-inside from closing
     document.querySelectorAll(".bus-hover-popup").forEach(popup => {
-      popup.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
+      popup.addEventListener("click", function (e) { e.stopPropagation(); });
     });
   });
-</script>
+  </script>
 
   <footer>© 2025 NL Bus Tours</footer>
+</body>
+</html>
