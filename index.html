@@ -414,20 +414,28 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 (function() {
-  emailjs.init("zJ5rs_pW37XfQBy_U"); // replace with your EmailJS public key
+  emailjs.init("zJ5rs_pW37XfQBy_U"); // your public key
 })();
+
 document.getElementById('bookingForm').addEventListener('submit', function(event) {
   event.preventDefault();
+
   emailjs.sendForm('service_e1aa6o9', 'template_mreceg7', this)
     .then(function() {
-  window.location.href = "https://nlbustours.github.io/NLBT-Bookings/thank-you.html";
-}, function(error) {
-  alert('Oops, something went wrong. Please try again later.');
-  console.error('EmailJS error:', error);
-});
-
+      // Show brief success message first
+      alert('Your booking has been sent successfully!');
+      
+      // Redirect after short delay to ensure delivery confirmation
+      setTimeout(function() {
+        window.location.href = "https://nlbustours.github.io/NLBT-Bookings/thank-you.html";
+      }, 800); // 0.8s delay
+    }, function(error) {
+      alert('Oops, something went wrong. Please try again later.');
+      console.error('EmailJS error:', error);
+    });
 });
 </script>
+
   <footer>© 2025 NL Bus Tours</footer>
 </body>
 </html>
