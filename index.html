@@ -414,7 +414,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   </script>
-
+  
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function() {
+  emailjs.init("YOUR_PUBLIC_KEY"); // replace with your EmailJS public key
+})();
+document.getElementById('bookingForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+    .then(function() {
+      alert('Your booking has been sent successfully!');
+    }, function(error) {
+      alert('Oops, something went wrong. Please try again later.');
+      console.error('EmailJS error:', error);
+    });
+});
+</script>
   <footer>© 2025 NL Bus Tours</footer>
 </body>
 </html>
