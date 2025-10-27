@@ -104,61 +104,57 @@ button:hover { background: #0097a7; }
   <div class="below-bus-text">🚐 Fill out the form below to inquire – we'll get back to you asap! 🚐</div>
 
   <div id="booking-form">
-    <form action="https://formsubmit.co/nlbustours@gmail.com" method="POST">
-      <!-- Hidden fields -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_subject" value="New NLBT Booking Request!">
-      <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
+  <form id="bookingForm">
+    <!-- Hidden fields (still fine to keep for consistency) -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New NLBT Booking Request!">
+    <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
 
-      <h3>Booking Form</h3>
+    <h3>Booking Form</h3>
 
-      <label>Name</label>
-      <input type="text" name="Name" placeholder="Your Name" required />
+    <label>Name</label>
+    <input type="text" name="Name" placeholder="Your Name" required />
 
-      <label>Email</label>
-      <input type="email" name="Email" placeholder="your@email.com" required />
+    <label>Email</label>
+    <input type="email" name="Email" placeholder="your@email.com" required />
 
-      <label>Phone</label>
-      <input type="tel" name="Phone" placeholder="709-555-1234" required />
+    <label>Phone</label>
+    <input type="tel" name="Phone" placeholder="709-555-1234" required />
 
-      <label for="raw-date">Date</label>
-      <!-- Visible picker (NOT submitted directly) -->
-      <input type="date" id="raw-date" required>
+    <label for="raw-date">Date</label>
+    <input type="date" id="raw-date" required />
+    <input type="hidden" id="event-date" name="Date" />
 
-      <!-- The ONLY field submitted to FormSubmit -->
-      <input type="hidden" id="event-date" name="Date">
+    <label>Time</label>
+    <input type="time" name="Time" required />
 
+    <label>Duration (Hours)</label>
+    <input type="number" name="Duration" min="1" max="12" step="0.5" required />
 
-      <label>Time</label>
-      <input type="time" name="Time" required />
+    <label>Pickup Location</label>
+    <input type="text" name="Pickup" required />
 
-      <label>Duration (Hours)</label>
-      <input type="number" name="Duration" min="1" max="12" step="0.5" required />
+    <label>Stop Location(s)</label>
+    <input type="text" name="Stops" required />
 
-      <label>Pickup Location</label>
-      <input type="location" name="Pickup" required />
+    <label>Dropoff Location</label>
+    <input type="text" name="Dropoff" required />
 
-      <label>Stop Location(s)</label>
-      <input type="location" name="Stops" required />
+    <label>Bus</label>
+    <select name="Bus" required>
+      <option disabled selected>Select a Bus</option>
+      <option>Artie (RT)</option>
+      <option>Arbie (RB)</option>
+      <option>Arthree (R3)</option>
+    </select>
 
-      <label>Dropoff Location</label>
-      <input type="location" name="Dropoff" required />
+    <label>Additional Notes</label>
+    <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
 
-      <label>Bus</label>
-      <select name="Bus" required>
-        <option disabled selected>Select a Bus</option>
-        <option>Artie (RT)</option>
-        <option>Arbie (RB)</option>
-        <option>Arthree (R3)</option>
-      </select>
+    <button type="submit">Submit Request</button>
+  </form>
+</div>
 
-      <label>Additional Notes</label>
-      <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
-
-      <button type="submit">Submit Request</button>
-    </form>
-  </div>
 
   <div class="intro-highlighted-box">
     <p><span class="headline-large">Explore our Unique Fleet - Tap each Photo for More Info!</span></p>
@@ -418,11 +414,11 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 (function() {
-  emailjs.init("YOUR_PUBLIC_KEY"); // replace with your EmailJS public key
+  emailjs.init("zJ5rs_pW37XfQBy_U"); // replace with your EmailJS public key
 })();
 document.getElementById('bookingForm').addEventListener('submit', function(event) {
   event.preventDefault();
-  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+  emailjs.sendForm('service_e1aa6o9', 'template_a1b2c3d', this)
     .then(function() {
       alert('Your booking has been sent successfully!');
     }, function(error) {
