@@ -124,6 +124,7 @@ button:hover { background: #0097a7; }
     <label for="raw-date">Date</label>
     <input type="date" id="raw-date" required />
     <input type="hidden" id="event-date" name="Date" />
+    <p id="date-error" style="color:#ff5252;font-weight:600;display:none;margin-top:6px;">Please select a future date.</p>
 
     <label>Time</label>
     <input type="time" name="Time" required />
@@ -289,12 +290,22 @@ button:hover { background: #0097a7; }
   });
   </script>
 
-  <!-- DATE PRETTY-PRINT SCRIPT -->
+  <!-- DATE VALIDATION + PRETTY-PRINT SCRIPT -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     const form   = document.querySelector("form");
     const raw    = document.getElementById("raw-date");
     const pretty = document.getElementById("event-date");
+    const dateError = document.getElementById("date-error");
+
+    // Set min to today so past dates are greyed out
+    const today = new Date().toISOString().split("T")[0];
+    raw.setAttribute("min", today);
+
+    // Clear error when user picks a new date
+    raw.addEventListener("change", function () {
+      if (raw.value >= today) dateError.style.display = "none";
+    });
 
     const WEEK = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const MONTH = ["January","February","March","April","May","June","July","August",
@@ -323,6 +334,16 @@ button:hover { background: #0097a7; }
   <script>
   document.getElementById('bookingForm').addEventListener('submit', async function (e) {
     e.preventDefault();
+
+    // Date validation — block past dates
+    const dateInput = document.getElementById("raw-date");
+    const dateError = document.getElementById("date-error");
+    const today = new Date().toISOString().split("T")[0];
+    if (dateInput.value < today) {
+      dateError.style.display = "block";
+      dateInput.focus();
+      return;
+    }
 
     const form = e.target;
     const formData = new FormData(form);
