@@ -1,0 +1,20 @@
+# Security audit 2026-10-01: secrets, keys, AI chat logs, screenshots
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.ovpn
+id_rsa*
+id_ed25519*
+*accessKeys*.csv
+*credentials*.csv
+*backup_code*
+[Cc][Hh][Aa][Tt].[Mm][Dd]
+[Cc][Hh][Aa][Tt]_readable.md
+Screenshot*.png
+Screen Shot*.png
