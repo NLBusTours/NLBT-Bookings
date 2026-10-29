@@ -33,9 +33,9 @@ jobs:
         run: python -m unittest discover -s availability -p "test_*.py" -v
       - name: Fetch and sanitize all three calendars
         env:
-          NLBT_RT2_ICAL_URL: {{ secrets.NLBT_RT2_ICAL_URL }}
-          NLBT_RX2_ICAL_URL: {{ secrets.NLBT_RX2_ICAL_URL }}
-          NLBT_R3_ICAL_URL: {{ secrets.NLBT_R3_ICAL_URL }}
+          NLBT_RT2_ICAL_URL: ${{ secrets.NLBT_RT2_ICAL_URL }}
+          NLBT_RX2_ICAL_URL: ${{ secrets.NLBT_RX2_ICAL_URL }}
+          NLBT_R3_ICAL_URL: ${{ secrets.NLBT_R3_ICAL_URL }}
         run: |
           if [ -z "$NLBT_RT2_ICAL_URL" ] || [ -z "$NLBT_RX2_ICAL_URL" ] || [ -z "$NLBT_R3_ICAL_URL" ]; then
             echo "::notice title=Bus availability not configured::Set all three private calendar secrets to activate."
@@ -44,5 +44,5 @@ jobs:
           python availability/sync.py
       - name: Publish anonymous occupied time ranges
         env:
-          GITHUB_TOKEN: {{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python availability/publish_issue.py
