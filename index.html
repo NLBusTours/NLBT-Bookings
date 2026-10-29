@@ -329,21 +329,59 @@ button:hover { background: #0097a7; }
   </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.bus-card'), popups = document.querySelectorAll('.bus-hover-popup');
-  let previousFocus;
-  const close = () => {popups.forEach(p=>p.classList.remove('active'));if(previousFocus)previousFocus.focus();};
-  const open = card => {const p=document.getElementById(card.dataset.popup);if(!p)return;previousFocus=document.activeElement;close();p.classList.add('active');p.querySelector('.popup-close').focus();};
-  cards.forEach(card=>{
-    card.addEventListener('click',()=>open(card));
-    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(card);}});
+  const cards = Array.from(document.querySelectorAll('.bus-card'));
+  const popups = Array.from(document.querySelectorAll('.bus-hover-popup'));
+  let activePopup = null;
+  let openingCard = null;
+
+  function closePopup(restoreFocus = false) {
+    // Do nothing unless a bus information panel is actually open.
+    // Previously we refocused the last fleet tile on every page click,
+    // causing the mobile booking-form dropdown to jump down to the tiles.
+    if (!activePopup) return;
+    activePopup.classList.remove('active');
+    const card = openingCard;
+    activePopup = null;
+    openingCard = null;
+    if (restoreFocus && card) card.focus({ preventScroll: true });
+  }
+
+  function openPopup(card) {
+    const popup = document.getElementById(card.dataset.popup);
+    if (!popup) return;
+    closePopup();
+    openingCard = card;
+    activePopup = popup;
+    popup.classList.add('active');
+    popup.querySelector('.popup-close').focus({ preventScroll: true });
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => openPopup(card));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openPopup(card);
+      }
+    });
   });
-  popups.forEach(p=>{
-    const closeButton=p.querySelector('.popup-close');
-    closeButton.addEventListener('click',close);
-    closeButton.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();close();}});
+  popups.forEach(popup => {
+    const closeButton = popup.querySelector('.popup-close');
+    closeButton.addEventListener('click', () => closePopup(true));
+    closeButton.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        closePopup(true);
+      }
+    });
   });
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-  document.addEventListener('click',e=>{if(!e.target.closest('.bus-card,.bus-hover-popup'))close();});
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePopup(true);
+  });
+  document.addEventListener('click', e => {
+    // Outside taps must not steal focus from the booking form or scroll.
+    if (activePopup && !e.target.closest('.bus-card,.bus-hover-popup')) closePopup();
+  });
 });
 </script>
   <!-- DATE VALIDATION + PRETTY-PRINT SCRIPT -->
