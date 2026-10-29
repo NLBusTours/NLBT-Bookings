@@ -126,6 +126,17 @@ button:hover { background: #0097a7; }
     display:flex;align-items:center;justify-content:center;font-size:.82rem;line-height:1.45;z-index:3;
   }
 }
+/* Four authentic owner-supplied bus photos, optimized into one atlas. */
+.fleet-photo{display:block;width:100%;height:130px;background-image:url('assets/active-fleet-photos.webp');background-repeat:no-repeat;background-size:200% 200%;background-color:#d4e5eb;}
+.fleet-rt2-exterior{background-position:0% 0%;}
+.fleet-rt2-interior{background-position:100% 0%;}
+.fleet-rx2-exterior{background-position:0% 100%;}
+.fleet-rx2-interior{background-position:100% 100%;}
+.new-bus-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;}
+.new-bus-gallery figure{margin:0;min-width:0;}
+.new-bus-gallery .fleet-photo{height:185px;border-radius:10px;box-shadow:0 2px 8px #0002;}
+.new-bus-gallery figcaption{margin-top:6px;font-size:.78rem;color:#535d65;text-align:center;font-weight:600;}
+@media(max-width:500px){.new-bus-gallery .fleet-photo{height:140px;}}
 </style>
 </head>
 
@@ -176,7 +187,7 @@ button:hover { background: #0097a7; }
     <label for="bus-choice">Bus</label>
 <select id="bus-choice" name="Bus" required>
   <option value="" disabled selected>Select a Bus</option>
-  <option value="RT2">RT2</option><option value="RX2">Archie 2.0 (RX2)</option>
+  <option value="RT2">Artie 2.0 (RT2)</option><option value="RX2">Archie 2.0 (RX2)</option>
   <option value="R3">Arthree (R3)</option>
   <option value="RT" disabled>Artie (RT) – Retired</option>
   <option value="RB" disabled>Arbie (RB) – Retired</option>
@@ -201,55 +212,61 @@ button:hover { background: #0097a7; }
     <p>Explore the active fleet and remember the buses that helped build NL Bus Tours.</p>
   </div>
 
+
   <div class="bus-info">
-  <div class="bus-card" data-popup="popup-rt2" tabindex="0" role="button" data-hover-details="RT2 · Active bus. Tap for details or check the booking calendar." aria-label="View RT2 details">
-    <div class="pending-bus-photo" role="img" aria-label="RT2 photo to be added"><span>🚌</span>RT2 photo coming soon</div>
-    <h4>RT2 <br><small>Active Fleet</small></h4><p>Our newest RT bus. Tap for more information.</p><span class="fleet-status">Available to request</span>
-  </div>
-  <div class="bus-card" data-popup="popup-rx2" tabindex="0" role="button" data-hover-details="Archie 2.0 · Active bus. Tap for details or check the booking calendar." aria-label="View RX2 details">
-    <div class="pending-bus-photo rx2-photo" role="img" aria-label="RX2 photo to be added"><span>🚌</span>RX2 photo coming soon</div>
-    <h4>Archie 2.0 – RX2 <br><small>Active Fleet</small></h4><p>The latest chapter of Archie. Tap for more information.</p><span class="fleet-status">Available to request</span>
-  </div>
-    <div class="bus-card retired-bus" data-popup="popup-artie" tabindex="0" role="button">
-      <img src="RTV.png" alt="Artie">
-      <h4>🖤 Artie – RT<br><small>Retired · Lounge Bus</small></h4>
-      <p>Spacious & Chic. Perfect for Party Nights & Unforgettable Outings.</p>
+    <div class="bus-card" data-popup="popup-rt2" tabindex="0" role="button" data-hover-details="Artie 2.0 (RT2) · Black exterior and teal lounge seating. Tap for photos." aria-label="View Artie 2.0 RT2 details">
+      <div class="fleet-photo fleet-rt2-exterior" role="img" aria-label="Artie 2.0 RT2 black bus exterior"></div>
+      <h4>Artie 2.0 (RT2)<br><small>Active Fleet</small></h4>
+      <p>Black exterior, teal lounge seating. Tap to explore.</p><span class="fleet-status">Available to request</span>
     </div>
-
-    <div class="bus-card retired-bus" data-popup="popup-arbie" tabindex="0" role="button">
-      <img src="RBV.png" alt="Arbie">
-      <h4>💜 Arbie – RB<br><small>Retired · Nightlife Bus</small></h4>
-      <p>Vibrant and lively. Tailored for Large Group Pub Crawls.</p>
+    <div class="bus-card" data-popup="popup-rx2" tabindex="0" role="button" data-hover-details="Archie 2.0 (RX2) · White exterior and grey lounge seating. Tap for photos." aria-label="View Archie 2.0 RX2 details">
+      <div class="fleet-photo fleet-rx2-exterior" role="img" aria-label="Archie 2.0 RX2 white bus exterior"></div>
+      <h4>Archie 2.0 (RX2)<br><small>Active Fleet</small></h4>
+      <p>White exterior, grey lounge seating. Tap to explore.</p><span class="fleet-status">Available to request</span>
     </div>
-
     <div class="bus-card" data-popup="popup-arthree" tabindex="0" role="button">
       <img src="R3V.png" alt="R3">
       <h4>🤍 Arthree – R3<br><small>The Mini Coach</small></h4>
       <p>Sleek and simple. Ideal for weddings, airport shuttles and tours.</p><span class="fleet-status">Available to request</span>
     </div>
-
+    <div class="bus-card retired-bus" data-popup="popup-artie" tabindex="0" role="button">
+      <img src="RTV.png" alt="Original Artie">
+      <h4>❤️‍🩹🕊️ Artie – RT<br><small>Retired · Lounge Bus</small></h4>
+      <p>Spacious & Chic. Perfect for Party Nights & Unforgettable Outings.</p>
+    </div>
+    <div class="bus-card retired-bus" data-popup="popup-arbie" tabindex="0" role="button">
+      <img src="RBV.png" alt="Original Arbie">
+      <h4>❤️‍🩹🕊️ Arbie – RB<br><small>Retired · Nightlife Bus</small></h4>
+      <p>Vibrant and lively. Tailored for Large Group Pub Crawls.</p>
+    </div>
     <div class="bus-card retired-bus archie-card" data-popup="popup-archie" tabindex="0" role="button">
-      <img src="RXV.png" alt="Archie" class="archie-img">
-      <h4>❤️‍🩹 Archie – RX<br><small>Retired · Original Archie</small></h4>
+      <img src="RXV.png" alt="Original Archie" class="archie-img">
+      <h4>❤️‍🩹🕊️ Archie – RX<br><small>Retired · Original Archie</small></h4>
       <p>May he Rust in Peace 🕊️<br>2009–2025</p>
     </div>
   </div>
 
   <div class="bus-hover-popup" id="popup-rt2">
   <span class="popup-close" role="button" tabindex="0" aria-label="Close RT2 details">×</span>
-  <div class="pending-bus-photo popup-placeholder"><span>🚌</span>RT2 photo coming soon</div>
-  <div class="popup-text"><h5>RT2 · Active</h5><p>Available to request for private charters. Select RT2 to check its own calendar. Photos and precise equipment details coming soon.</p></div>
+  <div class="new-bus-gallery" aria-label="Artie 2.0 RT2 exterior and interior photos">
+    <figure><div class="fleet-photo fleet-rt2-exterior" role="img" aria-label="Black Artie 2.0 bus exterior"></div><figcaption>Black exterior</figcaption></figure>
+    <figure><div class="fleet-photo fleet-rt2-interior" role="img" aria-label="Teal lounge seats inside Artie 2.0"></div><figcaption>Teal lounge seating</figcaption></figure>
+  </div>
+  <div class="popup-text"><h5>Artie 2.0 (RT2) · Active</h5><p>Black exterior with teal lounge seating. Available for private charters. Select Artie 2.0 (RT2) to check this bus's dedicated calendar.</p></div>
 </div>
 <div class="bus-hover-popup" id="popup-rx2">
   <span class="popup-close" role="button" tabindex="0" aria-label="Close RX2 details">×</span>
-  <div class="pending-bus-photo popup-placeholder rx2-photo"><span>🚌</span>RX2 photo coming soon</div>
-  <div class="popup-text"><h5>Archie 2.0 (RX2) · Active</h5><p>Available to request for private charters. Select RX2 to check its own calendar. Photos and precise equipment details coming soon.</p></div>
+  <div class="new-bus-gallery" aria-label="Archie 2.0 RX2 exterior and interior photos">
+    <figure><div class="fleet-photo fleet-rx2-exterior" role="img" aria-label="White Archie 2.0 bus exterior"></div><figcaption>White exterior</figcaption></figure>
+    <figure><div class="fleet-photo fleet-rx2-interior" role="img" aria-label="Grey lounge seats inside Archie 2.0"></div><figcaption>Grey lounge seating</figcaption></figure>
+  </div>
+  <div class="popup-text"><h5>Archie 2.0 (RX2) · Active</h5><p>White exterior with grey lounge seating. Available for private charters. Select Archie 2.0 (RX2) to check this bus's dedicated calendar.</p></div>
 </div>
 <div class="bus-hover-popup" id="popup-artie">
     <span class="popup-close" role="button" tabindex="0" aria-label="Close bus details">×</span>
     <img src="FRT.png" alt="Artie Interior">
     <div class="popup-text">
-      <h5>Artie (RT) · Retired:</h5>
+      <h5>❤️‍🩹🕊️ Artie (RT) · Retired</h5>
       <ul>
         <li>💺 Full Lounge Seating (40+ppl)</li>
         <li>🕺 Dance Area & Cooler</li>
@@ -264,7 +281,7 @@ button:hover { background: #0097a7; }
     <span class="popup-close" role="button" tabindex="0" aria-label="Close bus details">×</span>
     <img src="FRB.png" alt="Arbie Interior">
     <div class="popup-text">
-      <h5>Arbie (RB) · Retired:</h5>
+      <h5>❤️‍🩹🕊️ Arbie (RB) · Retired</h5>
       <ul>
         <li>💺 Secure Front-Facing Seating (38+ppl)</li>
         <li>🕺 Rear Lounge Area & Cooler</li>
@@ -294,7 +311,7 @@ button:hover { background: #0097a7; }
     <span class="popup-close" role="button" tabindex="0" aria-label="Close bus details">×</span>
     <img src="FRX.png" alt="Archie Interior">
     <div class="popup-text">
-      <h5>Remembering Archie (RX) · Retired:</h5>
+      <h5>❤️‍🩹🕊️ Remembering Archie (RX) · Retired</h5>
       <ul>
         <li>💺 Our first Renovated Lounge Bus</li>
         <li>🕺 Many Danced & Partied on his Dance Floor</li>
