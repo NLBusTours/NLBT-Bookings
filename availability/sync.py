@@ -61,7 +61,7 @@ def sheets_busy(now: datetime, first_date: str, through_date: str) -> dict | Non
         raise ValueError("Sanitized Sheet feed too large")
     data = json.loads(body)
     if (data.get("version") != 1
-        or data.get("source") != "nlbt-inquiries-confirmed"
+        or data.get("source") != "nlbt-inquiries-occupied"
         or data.get("timezone") != "America/St_Johns"
         or data.get("from_date") > first_date or data.get("through_date") < through_date):
         raise ValueError("Invalid or incomplete Sheet availability feed")
