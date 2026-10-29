@@ -6,6 +6,7 @@
  * Deploy as Web App: execute as Me, access Anyone.
  * Set Script Property NLBT_SYNC_TOKEN to a long random secret.
  * Put the /exec URL and the same token in GitHub Actions secrets.
+ * Confirmed rows are booked; Pending rows are provisional holds. Declined rows are ignored.
  * This endpoint returns ONLY merged BUSY date/time intervals, never any
  * guest names, emails, driver details, booking IDs or raw sheet rows.
  */
@@ -56,17 +57,17 @@ function nlbtOccupancy_() {
   rows.forEach(row => {
     const vehicle = map[String(row[0] || '').trim()];
     const state = String(row[4] || '').trim().toLowerCase();
-    if (!vehicle || state !== 'confirmed') return;
+    if (!vehicle || (state !== 'confirmed' && state !== 'pending')) return;
     const day = nlbtDate_(String(row[2] || '').trim());
-    if (!day) throw new Error('Unparseable confirmed booking date');
+    if (!day) throw new Error('Unparseable active booking date');
     if (day < nlbtAddDay_(first, -1) || day > last) return;
     const match = String(row[3] || '').trim().match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);
-    if (!match) throw new Error('Unparseable confirmed booking time');
+    if (!match) throw new Error('Unparseable active booking time');
     const start = Number(match[1]) * 60 + Number(match[2]);
     const end = Number(match[3]) * 60 + Number(match[4]);
     if (Number(match[1]) > 23 || Number(match[3]) > 23 ||
         Number(match[2]) > 59 || Number(match[4]) > 59 || start === end) {
-      throw new Error('Invalid confirmed booking time');
+      throw new Error('Invalid active booking time');
     }
     if (end > start) {
       nlbtAddInterval_(busy[vehicle], day, start, end, first, last);
@@ -93,7 +94,7 @@ function nlbtOccupancy_() {
 
   return {
     version:1,
-    source:'nlbt-inquiries-confirmed',
+    source:'nlbt-inquiries-occupied',
     timezone:NLBT_ZONE,
     generated_at:new Date().toISOString(),
     from_date:first,
