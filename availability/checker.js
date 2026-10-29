@@ -28,7 +28,7 @@
     if (!parseDate(date)) return null;
     const start = clockMinutes(time);
     const length = Number(duration) * 60;
-    if (start === null || !Number.isInteger(length) || length < 60 || length > 720) return null;
+    if (start === null || !Number.isInteger(length) || length < 60 || length > 720 || length % 30 !== 0) return null;
     const segments = [];
     let day = date, from = start, remaining = length;
     while (remaining > 0) {
