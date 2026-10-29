@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NLBT Booking - Customer View</title>
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
@@ -94,7 +95,30 @@ button:hover { background: #0097a7; }
 .popup-text ul { list-style: none; padding-left: 0; font-size: 1em; }
 .archie-card .archie-img { content: url('RXV.png'); transition: 0.3s ease; }
 .archie-card:hover .archie-img { content: url('RIP-RX.png'); }
-  </style>
+  
+/* Active and retired fleet cards */
+.bus-info {display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px;padding:0 16px;}
+.bus-card {width:100%;cursor:pointer;border:1px solid #d9e9ef;padding-bottom:12px;}
+.bus-card:focus-visible {outline:3px solid #8e24aa;outline-offset:3px;}
+.bus-card h4 small{display:block;color:#666;font-size:.77rem;margin:5px 0;}
+.bus-card p{min-height:36px;line-height:1.45;}
+.retired-bus{filter:saturate(.7);opacity:.8;}
+.retired-bus h4 small {color:#965c77;}
+.pending-bus-photo{width:100%;height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#e6d3f1,#b8edf1);color:#50476c;font-size:.77rem;text-align:center;}
+.pending-bus-photo.rx2-photo{background:linear-gradient(135deg,#f1d6ef,#d3e9ff);}
+.pending-bus-photo span{font-size:2.5rem;}
+.popup-placeholder{max-width:350px;height:200px;flex:1;min-width:230px;border-radius:10px;}
+.fleet-status{display:inline-block;background:#e7f5ed;color:#236848;padding:6px 10px;font-size:.72rem;font-weight:bold;border-radius:20px;}
+.bus-availability{margin:15px 0 0;border-radius:12px;border:1px solid #c4d9e2;background:#f8fcff;padding:14px;}
+.bus-availability[hidden]{display:none;}
+.availability-top{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.availability-top button{width:auto;margin:0;background:#526c8a;padding:7px 10px;font-size:.8rem;}
+#bus-availability-status{font-weight:600;line-height:1.5;}
+#bus-busy-hours{font-size:.85rem;line-height:1.5;}
+.availability-disclaimer{font-size:.8rem;line-height:1.5;color:#52606d;}
+@media(max-width:768px){.bus-info{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;padding:0 10px;}.bus-hover-popup{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(88vw,600px);max-height:80vh;overflow:auto;box-sizing:border-box;box-shadow:0 0 0 100vmax #07182cbd,0 8px 25px #0005;}.bus-card p{font-size:.8rem;padding:0 6px;}.bus-card h4{font-size:.9rem;}}
+@media(max-width:450px){.bus-info{grid-template-columns:repeat(2,minmax(0,1fr));}.bus-card img,.pending-bus-photo{height:112px;}}
+</style>
 </head>
 
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet" />
@@ -126,11 +150,11 @@ button:hover { background: #0097a7; }
     <input type="hidden" id="event-date" name="Date" />
     <p id="date-error" style="color:#ff5252;font-weight:600;display:none;margin-top:6px;">Please select a future date.</p>
 
-    <label>Time</label>
-    <input type="time" name="Time" required />
+    <label for="booking-time">Time</label>
+<input type="time" id="booking-time" name="Time" required />
 
-    <label>Duration (Hours)</label>
-    <input type="number" name="Duration" min="1" max="12" step="0.5" required />
+    <label for="booking-duration">Duration (Hours)</label>
+<input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" required />
 
     <label>Pickup Location</label>
     <input type="text" name="Pickup" required />
@@ -141,13 +165,21 @@ button:hover { background: #0097a7; }
     <label>Dropoff Location</label>
     <input type="text" name="Dropoff" required />
 
-    <label>Bus</label>
-    <select name="Bus" required>
-      <option disabled selected>Select a Bus</option>
-      <option>Artie (RT)</option>
-      <option>Arbie (RB)</option>
-      <option>Arthree (R3)</option>
-    </select>
+    <label for="bus-choice">Bus</label>
+<select id="bus-choice" name="Bus" required>
+  <option value="" disabled selected>Select a Bus</option>
+  <option value="RT2">RT2</option><option value="RX2">Archie 2.0 (RX2)</option>
+  <option value="R3">Arthree (R3)</option>
+  <option value="RT" disabled>Artie (RT) – Retired</option>
+  <option value="RB" disabled>Arbie (RB) – Retired</option>
+  <option value="RX" disabled>Archie (RX) – Retired</option>
+</select>
+<section class="bus-availability" id="bus-availability" hidden aria-label="Bus availability">
+  <div class="availability-top"><strong>Calendar availability</strong><button id="bus-refresh" type="button">↻ Refresh</button></div>
+  <p id="bus-availability-status" role="status" aria-live="polite">Choose a bus, date, time and duration.</p>
+  <p id="bus-busy-hours"></p>
+  <p class="availability-disclaimer">Availability is provisional, not a reservation. Drivers, travel time and other arrangements also require confirmation.</p>
+</section>
 
     <label>Additional Notes</label>
     <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
@@ -157,41 +189,59 @@ button:hover { background: #0097a7; }
 </div>
 
   <div class="intro-highlighted-box">
-    <p><span class="headline-large">Explore our Unique Fleet - Tap each Photo for More Info!</span></p>
-    <p>Each Bus is equipped with Powerful Bluetooth Speakers, Party & Glow Lights, Coolers, and More!</p>
+    <p><span class="headline-large">Explore our Fleet – Tap a Bus for Details</span></p>
+    <p>Explore the active fleet and remember the buses that helped build NL Bus Tours.</p>
   </div>
 
   <div class="bus-info">
-    <div class="bus-card" data-popup="popup-artie">
+  <div class="bus-card" data-popup="popup-rt2" tabindex="0" role="button" aria-label="View RT2 details">
+    <div class="pending-bus-photo" role="img" aria-label="RT2 photo to be added"><span>🚌</span>RT2 photo coming soon</div>
+    <h4>RT2 <br><small>Active Fleet</small></h4><p>Our newest RT bus. Tap for more information.</p><span class="fleet-status">Available to request</span>
+  </div>
+  <div class="bus-card" data-popup="popup-rx2" tabindex="0" role="button" aria-label="View RX2 details">
+    <div class="pending-bus-photo rx2-photo" role="img" aria-label="RX2 photo to be added"><span>🚌</span>RX2 photo coming soon</div>
+    <h4>Archie 2.0 – RX2 <br><small>Active Fleet</small></h4><p>The latest chapter of Archie. Tap for more information.</p><span class="fleet-status">Available to request</span>
+  </div>
+    <div class="bus-card retired-bus" data-popup="popup-artie" tabindex="0" role="button">
       <img src="RTV.png" alt="Artie">
-      <h4>🖤 Artie – RT<br><small>The Lounge Bus</small></h4>
+      <h4>🖤 Artie – RT<br><small>Retired · Lounge Bus</small></h4>
       <p>Spacious & Chic. Perfect for Party Nights & Unforgettable Outings.</p>
     </div>
 
-    <div class="bus-card" data-popup="popup-arbie">
+    <div class="bus-card retired-bus" data-popup="popup-arbie" tabindex="0" role="button">
       <img src="RBV.png" alt="Arbie">
-      <h4>💜 Arbie – RB<br><small>The Nightlife Bus</small></h4>
+      <h4>💜 Arbie – RB<br><small>Retired · Nightlife Bus</small></h4>
       <p>Vibrant and lively. Tailored for Large Group Pub Crawls.</p>
     </div>
 
-    <div class="bus-card" data-popup="popup-arthree">
+    <div class="bus-card" data-popup="popup-arthree" tabindex="0" role="button">
       <img src="R3V.png" alt="R3">
       <h4>🤍 Arthree – R3<br><small>The Mini Coach</small></h4>
       <p>Sleek and simple. Ideal for Weddings, Airport Shuttles, and Tourist Excursions.</p>
     </div>
 
-    <div class="bus-card archie-card" data-popup="popup-archie">
+    <div class="bus-card retired-bus archie-card" data-popup="popup-archie" tabindex="0" role="button">
       <img src="RXV.png" alt="Archie" class="archie-img">
-      <h4>❤️‍🩹 Archie – RX<br><small>The Retired Bus</small></h4>
+      <h4>❤️‍🩹 Archie – RX<br><small>Retired · Original Archie</small></h4>
       <p>May he Rust in Peace 🕊️<br>2009–2025</p>
     </div>
   </div>
 
-  <div class="bus-hover-popup" id="popup-artie">
+  <div class="bus-hover-popup" id="popup-rt2">
+  <span class="popup-close" role="button" tabindex="0" aria-label="Close RT2 details">×</span>
+  <div class="pending-bus-photo popup-placeholder"><span>🚌</span>RT2 photo coming soon</div>
+  <div class="popup-text"><h5>RT2 · Active</h5><p>Available to request for private charters. Select RT2 to check its own calendar. Photos and precise equipment details coming soon.</p></div>
+</div>
+<div class="bus-hover-popup" id="popup-rx2">
+  <span class="popup-close" role="button" tabindex="0" aria-label="Close RX2 details">×</span>
+  <div class="pending-bus-photo popup-placeholder rx2-photo"><span>🚌</span>RX2 photo coming soon</div>
+  <div class="popup-text"><h5>Archie 2.0 (RX2) · Active</h5><p>Available to request for private charters. Select RX2 to check its own calendar. Photos and precise equipment details coming soon.</p></div>
+</div>
+<div class="bus-hover-popup" id="popup-artie">
     <span class="popup-close" onclick="closePopups()">×</span>
     <img src="FRT.png" alt="Artie Interior">
     <div class="popup-text">
-      <h5>Artie Highlights:</h5>
+      <h5>Artie (RT) · Retired:</h5>
       <ul>
         <li>💺 Full Lounge Seating (40+ppl)</li>
         <li>🕺 Dance Area & Cooler</li>
@@ -206,7 +256,7 @@ button:hover { background: #0097a7; }
     <span class="popup-close" onclick="closePopups()">×</span>
     <img src="FRB.png" alt="Arbie Interior">
     <div class="popup-text">
-      <h5>Arbie Highlights:</h5>
+      <h5>Arbie (RB) · Retired:</h5>
       <ul>
         <li>💺 Secure Front-Facing Seating (38+ppl)</li>
         <li>🕺 Rear Lounge Area & Cooler</li>
@@ -236,7 +286,7 @@ button:hover { background: #0097a7; }
     <span class="popup-close" onclick="closePopups()">×</span>
     <img src="FRX.png" alt="Archie Interior">
     <div class="popup-text">
-      <h5>Remembering Archie:</h5>
+      <h5>Remembering Archie (RX) · Retired:</h5>
       <ul>
         <li>💺 Our first Renovated Lounge Bus</li>
         <li>🕺 Many Danced & Partied on his Dance Floor</li>
@@ -246,50 +296,25 @@ button:hover { background: #0097a7; }
       </ul>
     </div>
   </div>
-     <!-- POPUP SCRIPTS (unchanged) -->
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const busCards = document.querySelectorAll(".bus-card");
-    const allPopups = document.querySelectorAll(".bus-hover-popup");
-
-    // Desktop hover behavior
-    if (window.innerWidth > 768) {
-      busCards.forEach(card => {
-        const popup = document.getElementById(card.getAttribute("data-popup"));
-
-        card.addEventListener("mouseenter", () => {
-          allPopups.forEach(p => p.classList.remove("active"));
-          popup.classList.add("active");
-        });
-
-        card.addEventListener("mouseleave", () => {
-          popup.classList.remove("active");
-        });
-      });
-    }
-
-    // Mobile click behavior
-    if (window.innerWidth <= 768) {
-      busCards.forEach(card => {
-        card.addEventListener("click", function (e) {
-          e.stopPropagation();
-          const targetPopup = document.getElementById(card.getAttribute("data-popup"));
-          allPopups.forEach(p => p.classList.remove("active"));
-          if (targetPopup) targetPopup.classList.add("active");
-        });
-      });
-
-      document.addEventListener("click", () => {
-        allPopups.forEach(p => p.classList.remove("active"));
-      });
-
-      allPopups.forEach(popup => {
-        popup.addEventListener("click", e => e.stopPropagation());
-      });
-    }
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.bus-card'), popups = document.querySelectorAll('.bus-hover-popup');
+  let previousFocus;
+  const close = () => {popups.forEach(p=>p.classList.remove('active'));if(previousFocus)previousFocus.focus();};
+  const open = card => {const p=document.getElementById(card.dataset.popup);if(!p)return;previousFocus=document.activeElement;close();p.classList.add('active');p.querySelector('.popup-close').focus();};
+  cards.forEach(card=>{
+    card.addEventListener('click',()=>open(card));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(card);}});
   });
-  </script>
-
+  popups.forEach(p=>{
+    const closeButton=p.querySelector('.popup-close');
+    closeButton.addEventListener('click',close);
+    closeButton.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();close();}});
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+  document.addEventListener('click',e=>{if(!e.target.closest('.bus-card,.bus-hover-popup'))close();});
+});
+</script>
   <!-- DATE VALIDATION + PRETTY-PRINT SCRIPT -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
