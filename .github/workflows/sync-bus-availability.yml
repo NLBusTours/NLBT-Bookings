@@ -36,6 +36,8 @@ jobs:
           NLBT_RT2_ICAL_URL: ${{ secrets.NLBT_RT2_ICAL_URL }}
           NLBT_RX2_ICAL_URL: ${{ secrets.NLBT_RX2_ICAL_URL }}
           NLBT_R3_ICAL_URL: ${{ secrets.NLBT_R3_ICAL_URL }}
+          NLBT_SHEETS_BRIDGE_URL: ${{ secrets.NLBT_SHEETS_BRIDGE_URL }}
+          NLBT_SHEETS_BRIDGE_TOKEN: ${{ secrets.NLBT_SHEETS_BRIDGE_TOKEN }}
         run: |
           if [ -z "$NLBT_RT2_ICAL_URL" ] || [ -z "$NLBT_RX2_ICAL_URL" ] || [ -z "$NLBT_R3_ICAL_URL" ]; then
             echo "::notice title=Bus availability not configured::Set all three private calendar secrets to activate."
