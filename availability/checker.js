@@ -6,6 +6,11 @@
   const END = 'NLBT_AVAILABILITY_JSON_END -->';
   const MAX_AGE = 2 * 60 * 60 * 1000;
   const BUS_IDS = ['RT2', 'RX2', 'R3'];
+  // Temporary safety measure. Confirmed RT2 bookings in NLBT Inquiries
+  // are not reaching Google Calendar (no Calendar Event ID).
+  // Remove ONLY after reconciling the Sheet's bus-name-to-calendar mapping
+  // and verifying confirmed RT2 entries produce calendar events.
+  const REQUIRES_MANUAL_VERIFICATION = new Set(['RT2']);
 
   function parseDate(iso) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || '')) return null;
@@ -69,7 +74,8 @@
       if (ranges === null) return 'unknown';
       if (ranges.some(([start, end]) => from < end && until > start)) return 'booked';
     }
-    return 'available';
+    // Never advertise an open RT2 slot until its calendar automation is fixed.
+    return REQUIRES_MANUAL_VERIFICATION.has(bus) ? 'unknown' : 'available';
   }
   function clockLabel(total) {
     const hour = Math.floor(total / 60) % 24;
@@ -80,7 +86,9 @@
     if (!BUS_IDS.includes(bus) || !parseDate(date)) return null;
     const ranges = rangesFor(snapshot, bus, date);
     if (ranges === null) return null;
-    if (!ranges.length) return 'No bookings or holds currently shown for this bus. Pending requests may not be entered yet.';
+    if (!ranges.length) return REQUIRES_MANUAL_VERIFICATION.has(bus)
+      ? 'RT2 calendar synchronization is being checked. Booked hours may be missing, so please inquire for manual confirmation.'
+      : 'No bookings or holds currently shown for this bus. Pending requests may not be entered yet.';
     if (ranges.length === 1 && ranges[0][0] === 0 && ranges[0][1] === 1440) return 'Already booked/held: All day.';
     return 'Already booked/held: ' + ranges.map(([a, b]) => clockLabel(a) + '–' + clockLabel(b)).join('; ') + '.';
   }
@@ -115,9 +123,11 @@
     if (result === 'booked') message.textContent = 'This bus is already booked during some or all of your requested hours. Choose another date, time or bus.';
     else if (result === 'available') message.textContent = 'No calendar conflict found for these hours. The bus is NOT confirmed: pending requests may not yet appear. Our team will verify availability.';
     else if (result === 'invalid') message.textContent = 'Choose a valid start time and duration between 1 and 12 hours (in half-hour increments).';
-    else message.textContent = state === 'loading'
-      ? 'Checking the bus calendar…'
-      : 'Calendar not verified right now. You can still send an inquiry for manual confirmation.';
+    else message.textContent = REQUIRES_MANUAL_VERIFICATION.has(bus.value)
+      ? 'RT2 calendar updates are being checked. Please submit an inquiry and our team will confirm whether the bus is available. This is not a reservation.'
+      : state === 'loading'
+        ? 'Checking the bus calendar…'
+        : 'Calendar not verified right now. You can still send an inquiry for manual confirmation.';
     if (!currentSnapshot(snapshot)) details.textContent = 'Exact booked hours are unavailable until the calendar feed is connected and up to date.';
   }
   async function load(force = false) {
