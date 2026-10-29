@@ -15,6 +15,7 @@ def body(snapshot: dict) -> str:
     allowed = {
         "version": snapshot["version"],
         "timezone": snapshot["timezone"],
+        "sheet_verified": snapshot.get("sheet_verified") is True,
         "generated_at": snapshot["generated_at"],
         "from_date": snapshot["from_date"],
         "through_date": snapshot["through_date"],

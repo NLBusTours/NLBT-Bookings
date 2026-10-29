@@ -45,3 +45,9 @@ GitHub Pages publishes the `main` branch root; the existing GoDaddy iframe URL d
 
 ## Calendar booking-entry safety
 An empty slot does **not** guarantee availability. The checker covers events actually entered on the correct Google Calendar, and pending inquiries or unrecorded holds do not appear. Therefore the customer-facing message states **No calendar conflict found — NOT confirmed**. Booking staff should record firm commitments or tentative holds as *Busy* on the correct bus calendar, and release those holds if cancelled. Updates can take time to reach the private iCal feed and scheduled sync. A previously reported RT2 booking for October 31, 2026, from 9–11 PM was absent from the connected RT calendar when checked on October 29; confirm with Emily before treating the time as open.
+
+## Use Emily's spreadsheet as the availability source (non-disruptive)
+
+The owner's preferred setup is to **preserve Emily's existing NLBT Inquiries spreadsheet and its independent Sheet → Calendar automation**. An optional, separate read-only Apps Script can now check that source without changing it. It treats **Confirmed as booked**, **Pending as a temporary hold**, **Declined as not held**, and recognizes the exact existing bus names (`Artie 2.0 (RT2)`, `Archie 2.0 (RX2)`, `Arthree (R3)`). The existing Google Calendars still contribute additional occupied time. Only combined anonymous intervals are published.
+
+Until [the one-time standalone setup](availability/CONNECT_SHEETS.md) is completed, RT2 shows *manual confirmation required* because numerous confirmed spreadsheet entries have no corresponding Google Calendar event. The web app does **not** publish the private sheet, and no spreadsheet or calendar changes are made by this repository.
