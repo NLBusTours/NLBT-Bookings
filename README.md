@@ -37,3 +37,11 @@ The workflow refreshes every ~30 minutes. GitHub Actions scheduled jobs may run 
 
 ## Hosting
 GitHub Pages publishes the `main` branch root; the existing GoDaddy iframe URL does not need to change for code-only upgrades.
+
+## New bus descriptions (owner-confirmed)
+- **Artie 2.0 (RT2):** Black exterior, teal lounge seating, two high-power Bluetooth speakers with superior sound compared with RX2, and more dynamic party lighting.
+- **Archie 2.0 (RX2):** White exterior, grey lounge seating, two high-power Bluetooth speakers and party lighting.
+- Both have short marketing copy on fleet tiles, optional desktop hover descriptions, and expanded detailed descriptions on tap. No unverified passenger capacities are advertised.
+
+## Calendar booking-entry safety
+An empty slot does **not** guarantee availability. The checker covers events actually entered on the correct Google Calendar, and pending inquiries or unrecorded holds do not appear. Therefore the customer-facing message states **No calendar conflict found — NOT confirmed**. Booking staff should record firm commitments or tentative holds as *Busy* on the correct bus calendar, and release those holds if cancelled. Updates can take time to reach the private iCal feed and scheduled sync. A previously reported RT2 booking for October 31, 2026, from 9–11 PM was absent from the connected RT calendar when checked on October 29; confirm with Emily before treating the time as open.
