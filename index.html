@@ -238,7 +238,7 @@ button:hover { background: #0097a7; }
   <div class="popup-text"><h5>Archie 2.0 (RX2) · Active</h5><p>Available to request for private charters. Select RX2 to check its own calendar. Photos and precise equipment details coming soon.</p></div>
 </div>
 <div class="bus-hover-popup" id="popup-artie">
-    <span class="popup-close" onclick="closePopups()">×</span>
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close bus details">×</span>
     <img src="FRT.png" alt="Artie Interior">
     <div class="popup-text">
       <h5>Artie (RT) · Retired:</h5>
@@ -253,7 +253,7 @@ button:hover { background: #0097a7; }
   </div>
 
   <div class="bus-hover-popup" id="popup-arbie">
-    <span class="popup-close" onclick="closePopups()">×</span>
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close bus details">×</span>
     <img src="FRB.png" alt="Arbie Interior">
     <div class="popup-text">
       <h5>Arbie (RB) · Retired:</h5>
@@ -268,7 +268,7 @@ button:hover { background: #0097a7; }
   </div>
 
   <div class="bus-hover-popup" id="popup-arthree">
-    <span class="popup-close" onclick="closePopups()">×</span>
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close bus details">×</span>
     <img src="FR3.png" alt="Arthree Interior">
     <div class="popup-text">
       <h5>Arthree Highlights:</h5>
@@ -283,7 +283,7 @@ button:hover { background: #0097a7; }
   </div>
 
   <div class="bus-hover-popup" id="popup-archie">
-    <span class="popup-close" onclick="closePopups()">×</span>
+    <span class="popup-close" role="button" tabindex="0" aria-label="Close bus details">×</span>
     <img src="FRX.png" alt="Archie Interior">
     <div class="popup-text">
       <h5>Remembering Archie (RX) · Retired:</h5>
@@ -397,7 +397,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   </script>
 
-  <footer>© 2025 NL Bus Tours</footer>
+  <script src="availability/checker.js" defer></script>
+  <footer>© NL Bus Tours</footer>
 
 </body>
 </html>
