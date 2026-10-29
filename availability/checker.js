@@ -80,7 +80,7 @@
     if (!BUS_IDS.includes(bus) || !parseDate(date)) return null;
     const ranges = rangesFor(snapshot, bus, date);
     if (ranges === null) return null;
-    if (!ranges.length) return 'No bookings or holds recorded on this date.';
+    if (!ranges.length) return 'No bookings or holds currently shown for this bus. Pending requests may not be entered yet.';
     if (ranges.length === 1 && ranges[0][0] === 0 && ranges[0][1] === 1440) return 'Already booked/held: All day.';
     return 'Already booked/held: ' + ranges.map(([a, b]) => clockLabel(a) + '–' + clockLabel(b)).join('; ') + '.';
   }
@@ -113,7 +113,7 @@
     }
     const result = status(snapshot, bus.value, date.value, time.value, duration.value);
     if (result === 'booked') message.textContent = 'This bus is already booked during some or all of your requested hours. Choose another date, time or bus.';
-    else if (result === 'available') message.textContent = 'This bus appears open to request for those hours. Our team will confirm the charter.';
+    else if (result === 'available') message.textContent = 'No calendar conflict found for these hours. The bus is NOT confirmed: pending requests may not yet appear. Our team will verify availability.';
     else if (result === 'invalid') message.textContent = 'Choose a valid start time and duration between 1 and 12 hours (in half-hour increments).';
     else message.textContent = state === 'loading'
       ? 'Checking the bus calendar…'
