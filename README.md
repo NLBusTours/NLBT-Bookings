@@ -3,12 +3,15 @@
 This is the customer booking inquiry form embedded from GitHub Pages into the NL Bus Tours GoDaddy website.
 
 ## Fleet (October 2026)
-- **RT2:** Active. Availability uses the connected Google calendar currently named **RT**, as confirmed by the owner. The original Artie (RT) remains retired and is NOT offered as an active bus.
+- **Artie 2.0 (RT2):** Active. Availability uses the connected Google calendar currently named **RT**, as confirmed by the owner. The original Artie (RT) remains retired and is NOT offered as an active bus.
 - **RX2 (Archie 2.0):** Active. Availability uses the **Archie 2.0 (RX2)** Google calendar.
 - **R3 (Arthree):** Active, 17-passenger mini coach. Availability uses the **Arthree (R3)** Google calendar.
 - **Artie (RT), Arbie (RB), Archie (RX):** Retired. Visible as memorial fleet tiles and disabled in the booking dropdown.
 
-The RT2 and RX2 photo and specification placeholders must be replaced with actual owner-approved exterior/interior photographs and accurate capacities. The retired fleet retains the owner's original photo assets.
+## Active fleet photos
+The owner supplied the four authentic vehicle photographs. They are optimized into one mobile-friendly WebP asset: `assets/active-fleet-photos.webp`. The top row shows **Artie 2.0 (RT2)** (black exterior and teal lounge seating); the bottom row shows **Archie 2.0 (RX2)** (white exterior and grey lounge seating). The active bus tiles show exterior photos; tapping opens both exterior and interior. These photos must not be swapped between buses.
+
+Fleet tile order is **Artie 2.0 (RT2), Archie 2.0 (RX2), Arthree (R3), Artie (RT), Arbie (RB), Archie (RX)**. The three original retired buses feature ❤️‍🩹🕊️ instead of coloured hearts, preserve their original images and are unbookable. The owner can supply accurate seating capacities and amenities for RT2 and RX2 separately; no unverified specifications are advertised.
 
 ## Calendar availability setup (private, one time)
 The form reads a sanitized status issue, **not** raw calendar events. Customers see only booked or held time ranges for the selected bus and date. This is not a reservation system.
