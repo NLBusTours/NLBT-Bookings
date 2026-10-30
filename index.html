@@ -179,7 +179,8 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
 #booking-form .booking-estimate .estimate-row span:last-child{text-align:right}
 #booking-form .booking-estimate .estimate-total span{font-weight:800}
 #booking-form .passenger-guidance,#booking-form #passenger-guidance,#booking-form .capacity-guidance,#booking-form #capacity-guidance{color:#c5f5f0!important}
-.fleet-rt2-exterior{background-image:url("assets/Artie%20Exterior%20Wide.jpg")!important;background-size:cover!important;background-position:center!important}.fleet-rx2-exterior{background-image:url("assets/Archie%20Exterior%20Wide.jpg")!important;background-size:cover!important;background-position:center!important}</style>
+.fleet-rt2-exterior{background-image:url("assets/Artie%20Exterior%20Wide.jpg")!important;background-size:cover!important;background-position:center!important}.fleet-rx2-exterior{background-image:url("assets/Archie%20Exterior%20Wide.jpg")!important;background-size:cover!important;background-position:center!important}.optional-label{font-size:.84em;font-weight:400;color:#9db8c7}.form-intro,.form-submission-note{color:#c3d4dc;line-height:1.5}.form-submission-note{font-size:.88rem;text-align:center;margin:12px 0}.booking-estimate p{line-height:1.5}#bookingForm input,#bookingForm select,#bookingForm textarea{box-sizing:border-box;max-width:100%}
+</style>
 <meta name="nlbt-depot" content="47.537777,-52.819862"><meta name="nlbt-depot-label" content="Bus lot beside Metro Self Storage, Kenmount Road"><style>.routing-preview{background:#fff;border:1px solid #80cbd3;border-radius:10px;padding:15px;margin:16px 0}.routing-preview p{font-size:.9rem}.routing-preview button{margin-top:8px}.routing-preview output{display:block;margin-top:10px;font-weight:600}.routing-preview small{display:block;margin-top:8px}</style></head>
 
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet" />
@@ -195,16 +196,16 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
     <input type="hidden" name="_subject" value="New NLBT Booking Request!">
     <input type="hidden" name="_next" value="https://nlbustours.github.io/NLBT-Bookings/thank-you.html">
 
-    <h3>Booking Form</h3>
+    <h3>Request Your Bus</h3><p class="form-intro">Tell us about your trip. We’ll check availability and confirm the details before anything is booked.</p>
 
-    <label>Name</label>
-    <input type="text" name="Name" placeholder="Your Name" required />
+    <label for="customer-name">Name</label>
+    <input id="customer-name" type="text" name="Name" autocomplete="name" placeholder="Your name" required />
 
-    <label>Email</label>
-    <input type="email" name="Email" placeholder="your@email.com" required />
+    <label for="customer-email">Email</label>
+    <input id="customer-email" type="email" name="Email" autocomplete="email" placeholder="your@email.com" required />
 
-    <label>Phone</label>
-    <input type="tel" name="Phone" placeholder="709-555-1234" required />
+    <label for="customer-phone">Phone</label>
+    <input id="customer-phone" type="tel" name="Phone" autocomplete="tel" inputmode="tel" placeholder="709-555-1234" required />
 
     <label for="raw-date">Date</label>
     <input type="date" id="raw-date" required />
@@ -217,14 +218,14 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
     <label for="booking-duration">Duration (Hours)</label>
 <input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" required />
 
-    <label>Pickup Location</label>
-    <input type="text" name="Pickup" required />
+    <label for="pickup-location">Pickup location</label>
+    <input id="pickup-location" type="text" name="Pickup" autocomplete="street-address" placeholder="Address or pickup area" required />
 
-    <label>Stop Location(s)</label>
-    <input type="text" name="Stops" required />
+    <label for="stop-locations">Stops <span class="optional-label">(optional)</span></label>
+    <input id="stop-locations" type="text" name="Stops" placeholder="Add any stops along the way" />
 
-    <label>Dropoff Location</label>
-    <input type="text" name="Dropoff" required />
+    <label for="dropoff-location">Drop-off location</label>
+    <input id="dropoff-location" type="text" name="Dropoff" placeholder="Address or destination" required />
 
     <label for="passenger-count">Number of Passengers</label>
     <input type="number" id="passenger-count" name="Passengers" min="1" step="1" placeholder="How many people are riding?" required />
@@ -247,11 +248,11 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
 </section>
 
 
-<section class="booking-estimate" aria-label="Hourly charter estimate"><h3>Instant Quote Calculator</h3><p>Charters are $250/hour (one-hour minimum). Your hourly estimate updates as you enter your booking duration.</p><div class="estimate-row"><span>Charter time</span><span id="estimate-hours-cost">Enter duration above</span></div><div class="estimate-row"><span>Reservation fee</span><span id="estimate-reservation">$0.00</span></div><div class="estimate-row"><span>HST (15%)</span><span id="estimate-hst">—</span></div><div class="estimate-row estimate-total"><span>Estimated total</span><span id="estimate-total">—</span></div><p>Estimate is for charter hours only. Any additional travel charges, if applicable, will be confirmed before booking.</p><input type="hidden" name="Estimated Quote" id="estimate-submission"></section>
-    <label>Additional Notes</label>
-    <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
+<section class="booking-estimate" aria-label="Hourly charter estimate"><h3>Instant Quote Calculator</h3><p>Charters are $250/hour (one-hour minimum). Your hourly estimate updates as you enter your booking duration.</p><div class="estimate-row"><span>Charter time</span><span id="estimate-hours-cost">Enter duration above</span></div><div class="estimate-row"><span>Reservation fee</span><span id="estimate-reservation">$0.00</span></div><div class="estimate-row"><span>HST (15%)</span><span id="estimate-hst">—</span></div><div class="estimate-row estimate-total"><span>Estimated total</span><span id="estimate-total">—</span></div><p>Estimate includes charter hours and any applicable reservation fee. Additional travel charges, if applicable, will be confirmed before booking.</p><input type="hidden" name="Estimated Quote" id="estimate-submission"></section>
+    <label for="booking-notes">Anything else? <span class="optional-label">(optional)</span></label>
+    <textarea id="booking-notes" name="Notes" rows="3" placeholder="Trip details, special requests, or questions"></textarea>
 
-    <button type="submit">Submit Request</button>
+    <button type="submit">Send Booking Request</button><p class="form-submission-note">Submitting this form does not confirm a booking or require payment.</p>
   </form>
 </div>
 
