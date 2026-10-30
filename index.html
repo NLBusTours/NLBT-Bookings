@@ -276,8 +276,21 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
     <label for="booking-duration">Duration (Hours)</label>
 <input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" inputmode="decimal" required />
 
-    <label for="pickup-location">Pickup location</label>
+    <label for="pickup-location" id="pickup-label">Pickup location</label>
     <input id="pickup-location" type="text" name="Pickup" autocomplete="street-address" placeholder="Address or pickup area" required />
+    <div id="wedding-extra-pickups" hidden>
+      <label style="font-weight:400;display:flex;align-items:center;gap:9px;margin-top:12px;">
+        <input type="checkbox" id="multiple-wedding-pickups" style="width:auto;margin:0;">
+        We need more than one pickup location
+      </label>
+      <div id="additional-pickup-fields" hidden>
+        <label for="second-pickup">Second pickup location <span class="optional-label">(optional)</span></label>
+        <input id="second-pickup" name="Second Pickup" type="text" placeholder="e.g. Groom's pickup address">
+        <label for="third-pickup">Third pickup location <span class="optional-label">(optional)</span></label>
+        <input id="third-pickup" name="Third Pickup" type="text" placeholder="If needed">
+        <p style="font-size:.9rem;margin:7px 0 12px;">Include the pickup order and times in your wedding transportation schedule above.</p>
+      </div>
+    </div>
 
     <label for="stop-locations">Stops <span class="optional-label">(optional)</span></label>
     <input id="stop-locations" type="text" name="Stops" placeholder="Add any stops along the way" />
@@ -544,6 +557,20 @@ document.addEventListener('DOMContentLoaded', () => {
       checks.forEach(el => { el.disabled = !wedding; });
       error.hidden = true;
     }
+    const extraPickups = document.getElementById('wedding-extra-pickups');
+    const multiple = document.getElementById('multiple-wedding-pickups');
+    const pickupFields = document.getElementById('additional-pickup-fields');
+    const pickupLabel = document.getElementById('pickup-label');
+    function updatePickups() {
+      const wedding = type.value === 'Wedding';
+      extraPickups.hidden = !wedding;
+      pickupLabel.textContent = wedding ? 'First pickup location' : 'Pickup location';
+      pickupFields.hidden = !wedding || !multiple.checked;
+      pickupFields.querySelectorAll('input').forEach(el => el.disabled = pickupFields.hidden);
+    }
+    type.addEventListener('change', updatePickups);
+    multiple.addEventListener('change', updatePickups);
+    updatePickups();
     type.addEventListener('change', updateWedding);
     checks.forEach(el => el.addEventListener('change', () => { error.hidden = true; }));
     updateWedding();
