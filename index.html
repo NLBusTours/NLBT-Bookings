@@ -234,6 +234,37 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
     <label for="customer-phone">Phone</label>
     <input id="customer-phone" type="tel" name="Phone" autocomplete="tel" inputmode="tel" placeholder="709-555-1234" required />
 
+    <label for="event-type">What are you booking for?</label>
+    <select id="event-type" name="Event Type" required>
+      <option value="" selected disabled>Select an occasion</option>
+      <option value="Wedding">Wedding</option>
+      <option value="Birthday or celebration">Birthday or celebration</option>
+      <option value="Pub crawl or night out">Pub crawl or night out</option>
+      <option value="Corporate or group outing">Corporate or group outing</option>
+      <option value="Shuttle or transportation">Shuttle or transportation</option>
+      <option value="Other">Other</option>
+    </select>
+    <fieldset id="wedding-details" hidden style="margin:18px 0;padding:16px;border:1px solid #777;border-radius:10px;">
+      <legend style="font-weight:700;">Wedding transportation details</legend>
+      <p style="margin-top:4px;">Every wedding is different. Select only the transportation you need.</p>
+      <div id="wedding-services">
+        <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Photos" value="Yes"> Transportation for wedding photos</label>
+        <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - To Ceremony" value="Yes"> Transportation to the ceremony</label>
+        <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Ceremony to Reception" value="Yes"> Transportation from the ceremony to the reception</label>
+        <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Guest Shuttle" value="Yes"> Guest shuttle service</label>
+        <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Other" value="Yes"> Something else</label>
+      </div>
+      <p id="wedding-service-error" role="alert" hidden style="color:#a00025;font-weight:700;">Please choose at least one wedding transportation service.</p>
+      <label for="wedding-ceremony">Ceremony venue or location <span class="optional-label">(if applicable)</span></label>
+      <input id="wedding-ceremony" name="Ceremony Location" type="text" placeholder="Only if ceremony transportation is needed">
+      <label for="wedding-reception">Reception venue or location <span class="optional-label">(if applicable)</span></label>
+      <input id="wedding-reception" name="Reception Location" type="text" placeholder="Only if reception transportation is needed">
+      <label for="wedding-photo">Photo locations <span class="optional-label">(if known)</span></label>
+      <input id="wedding-photo" name="Wedding Photo Locations" type="text" placeholder="Where would you like to take photos?">
+      <label for="wedding-timeline">Wedding schedule or multiple pickup times <span class="optional-label">(optional)</span></label>
+      <textarea id="wedding-timeline" name="Wedding Transportation Schedule" rows="3" placeholder="Tell us which trips you need and approximate times"></textarea>
+    </fieldset>
+
     <label for="raw-date">Date</label>
     <input type="date" id="raw-date" required />
     <input type="hidden" id="event-date" name="Date" />
@@ -500,6 +531,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   </script>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const type = document.getElementById('event-type');
+    const details = document.getElementById('wedding-details');
+    const error = document.getElementById('wedding-service-error');
+    const checks = [...document.querySelectorAll('#wedding-services input[type="checkbox"]')];
+    function updateWedding() {
+      const wedding = type.value === 'Wedding';
+      details.hidden = !wedding;
+      details.querySelectorAll('input:not([type="checkbox"]),textarea').forEach(el => el.disabled = !wedding);
+      checks.forEach(el => { el.disabled = !wedding; });
+      error.hidden = true;
+    }
+    type.addEventListener('change', updateWedding);
+    checks.forEach(el => el.addEventListener('change', () => { error.hidden = true; }));
+    updateWedding();
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      if (type.value === 'Wedding' && !checks.some(el => el.checked)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        error.hidden = false;
+        details.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    }, true);
+  });
+  </script>
   <!-- WEB3FORMS SUBMISSION SCRIPT -->
   <script>
   document.getElementById('bookingForm').addEventListener('submit', async function (e) {
