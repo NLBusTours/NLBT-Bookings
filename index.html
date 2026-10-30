@@ -193,6 +193,14 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
 #bookingForm textarea{min-height:100px}
 #bus-availability{overflow-wrap:anywhere}
 @media(max-width:700px){#bus-availability{padding:20px 16px}#bus-availability .availability-top{gap:12px;flex-wrap:wrap}#bus-refresh{min-height:46px}#bookingForm button[type=submit]{min-height:50px;width:100%}}
+
+/* Fleet detail popup: solid background and readable text on mobile */
+.bus-hover-popup,.bus-hover-popup.active{background:#ffffff!important;color:#183344!important;box-sizing:border-box;}
+.bus-hover-popup .popup-text,.bus-hover-popup .popup-text p,.bus-hover-popup .popup-text li,.bus-hover-popup .popup-text ul,.bus-hover-popup .popup-text small{color:#183344!important;opacity:1!important;text-shadow:none!important;}
+.bus-hover-popup .popup-text h5{color:#42206b!important;opacity:1!important;}
+.bus-hover-popup .popup-close{color:#183344!important;background:#e8f1f5;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;line-height:1;}
+.bus-hover-popup .popup-close:focus-visible{outline:3px solid #147d88;outline-offset:3px;}
+@media(max-width:768px){.bus-hover-popup{position:fixed!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;width:calc(100vw - 28px)!important;max-width:640px!important;max-height:calc(100dvh - 36px)!important;overflow-y:auto!important;margin:0!important;padding:58px 20px 24px!important;align-items:stretch!important;gap:14px!important;}.bus-hover-popup .popup-text{min-width:0!important;padding-top:0!important;text-align:left!important}.bus-hover-popup .new-bus-gallery{max-width:100%;}.bus-hover-popup .popup-close{top:10px;right:10px}}
 </style>
 <meta name="nlbt-depot" content="47.537777,-52.819862"><meta name="nlbt-depot-label" content="Bus lot beside Metro Self Storage, Kenmount Road"><style>.routing-preview{background:#fff;border:1px solid #80cbd3;border-radius:10px;padding:15px;margin:16px 0}.routing-preview p{font-size:.9rem}.routing-preview button{margin-top:8px}.routing-preview output{display:block;margin-top:10px;font-weight:600}.routing-preview small{display:block;margin-top:8px}</style></head>
 
