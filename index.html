@@ -271,7 +271,7 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
       <legend style="font-weight:700;">Wedding transportation details</legend>
       <p style="margin-top:4px;">Every wedding is different. Select only the transportation you need.</p>
       <div id="wedding-services">
-        <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Photos" value="Yes"> Transportation for wedding photos</label>
+        <label style="font-weight:400;"><input id="wedding-photo-selected" type="checkbox" name="Wedding Transport - Photos" value="Yes"> Photo transportation</label>
         <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - To Ceremony" value="Yes"> Transportation to the ceremony</label>
         <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Ceremony to Reception" value="Yes"> Transportation from the ceremony to the reception</label>
         <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Guest Shuttle" value="Yes"> Guest shuttle service</label>
@@ -282,8 +282,26 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
       <input id="wedding-ceremony" name="Ceremony Location" type="text" placeholder="Only if ceremony transportation is needed">
       <label for="wedding-reception">Reception venue or location <span class="optional-label">(if applicable)</span></label>
       <input id="wedding-reception" name="Reception Location" type="text" placeholder="Only if reception transportation is needed">
-      <label for="wedding-photo">Photo locations <span class="optional-label">(if known)</span></label>
-      <input id="wedding-photo" name="Wedding Photo Locations" type="text" placeholder="Where would you like to take photos?">
+      <div id="wedding-photo-fields" hidden>
+        <label for="wedding-photo">Photo locations <span class="optional-label">(if known)</span></label>
+        <input id="wedding-photo" name="Wedding Photo Locations" type="text" placeholder="Where would you like to take photos?" disabled>
+      </div>
+    <label for="wedding-first-pickup">First pickup location</label>
+    <input id="wedding-first-pickup" type="text" name="Wedding First Pickup" placeholder="Bride, groom or group pickup address" disabled required />
+    <div id="wedding-extra-pickups">
+      <label style="font-weight:400;display:flex;align-items:center;gap:9px;margin-top:12px;">
+        <input type="checkbox" id="multiple-wedding-pickups" style="width:auto;margin:0;">
+        We need more than one pickup location
+      </label>
+      <div id="additional-pickup-fields" hidden>
+        <label for="second-pickup">Second pickup location <span class="optional-label">(optional)</span></label>
+        <input id="second-pickup" name="Second Pickup" type="text" placeholder="e.g. Groom's pickup address">
+        <label for="third-pickup">Third pickup location <span class="optional-label">(optional)</span></label>
+        <input id="third-pickup" name="Third Pickup" type="text" placeholder="If needed">
+        <p style="font-size:.9rem;margin:7px 0 12px;">Include the pickup order and times in your wedding transportation schedule above.</p>
+      </div>
+    </div>
+
       <label for="wedding-timeline">Wedding schedule or multiple pickup times <span class="optional-label">(optional)</span></label>
       <textarea id="wedding-timeline" name="Wedding Transportation Schedule" rows="3" placeholder="Tell us which trips you need and approximate times"></textarea>
     </fieldset>
@@ -299,20 +317,9 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
     <label for="booking-duration">Duration (Hours)</label>
 <input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" inputmode="decimal" required />
 
-    <label for="pickup-location" id="pickup-label">Pickup location</label>
-    <input id="pickup-location" type="text" name="Pickup" autocomplete="street-address" placeholder="Address or pickup area" required />
-    <div id="wedding-extra-pickups" hidden>
-      <label style="font-weight:400;display:flex;align-items:center;gap:9px;margin-top:12px;">
-        <input type="checkbox" id="multiple-wedding-pickups" style="width:auto;margin:0;">
-        We need more than one pickup location
-      </label>
-      <div id="additional-pickup-fields" hidden>
-        <label for="second-pickup">Second pickup location <span class="optional-label">(optional)</span></label>
-        <input id="second-pickup" name="Second Pickup" type="text" placeholder="e.g. Groom's pickup address">
-        <label for="third-pickup">Third pickup location <span class="optional-label">(optional)</span></label>
-        <input id="third-pickup" name="Third Pickup" type="text" placeholder="If needed">
-        <p style="font-size:.9rem;margin:7px 0 12px;">Include the pickup order and times in your wedding transportation schedule above.</p>
-      </div>
+    <div id="general-pickup-fields">
+      <label for="pickup-location" id="pickup-label">Pickup location</label>
+      <input id="pickup-location" type="text" name="Pickup" autocomplete="street-address" placeholder="Address or pickup area" required />
     </div>
 
     <label for="stop-locations">Stops <span class="optional-label">(optional)</span></label>
@@ -576,18 +583,32 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateWedding() {
       const wedding = type.value === 'Wedding';
       details.hidden = !wedding;
-      details.querySelectorAll('input:not([type="checkbox"]),textarea').forEach(el => el.disabled = !wedding);
+      details.querySelectorAll('input:not([type="checkbox"]),textarea').forEach(el => { if (!wedding) el.disabled = true; });
       checks.forEach(el => { el.disabled = !wedding; });
       error.hidden = true;
     }
     const extraPickups = document.getElementById('wedding-extra-pickups');
     const multiple = document.getElementById('multiple-wedding-pickups');
     const pickupFields = document.getElementById('additional-pickup-fields');
-    const pickupLabel = document.getElementById('pickup-label');
+    const regularPickup = document.getElementById('general-pickup-fields');
+    const weddingFirst = document.getElementById('wedding-first-pickup');
+    const photoSelected = document.getElementById('wedding-photo-selected');
+    const photoFields = document.getElementById('wedding-photo-fields');
+    const photoInput = document.getElementById('wedding-photo');
+    function updatePhotos() {
+      const visible = type.value === 'Wedding' && photoSelected.checked;
+      photoFields.hidden = !visible;
+      photoInput.disabled = !visible;
+    }
+    photoSelected.addEventListener('change', updatePhotos);
+    type.addEventListener('change', updatePhotos);
+    updatePhotos();
     function updatePickups() {
       const wedding = type.value === 'Wedding';
       extraPickups.hidden = !wedding;
-      pickupLabel.textContent = wedding ? 'First pickup location' : 'Pickup location';
+      regularPickup.hidden = wedding;
+      regularPickup.querySelector('input').disabled = wedding;
+      weddingFirst.disabled = !wedding;
       pickupFields.hidden = !wedding || !multiple.checked;
       pickupFields.querySelectorAll('input').forEach(el => el.disabled = pickupFields.hidden);
     }
