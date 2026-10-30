@@ -108,7 +108,7 @@
     if (snapshot && BUS_IDS.includes(bus.value) && parseDate(date.value)) {
       const ranges = rangesFor(snapshot, bus.value, date.value);
       if (ranges) {
-        details.textContent = ranges.length ? 'Last recorded bookings/holds (not live): ' + ranges.map(([a,b]) => clockLabel(a) + '–' + clockLabel(b)).join('; ') + '.' : 'No bookings shown in the last saved snapshot. This does not confirm availability.';
+        details.textContent = ranges.length ? (currentSnapshot(snapshot) ? 'Calendar bookings/holds: ' : 'Last recorded bookings/holds (not live): ') + ranges.map(([a,b]) => clockLabel(a) + '–' + clockLabel(b)).join('; ') + '.' : (currentSnapshot(snapshot) ? 'No bookings or holds shown for this bus on this date. Pending requests may not appear.' : 'No bookings shown in the last saved snapshot. This does not confirm availability.');
       } else details.textContent = 'The requested date is outside the saved calendar range.';
     }
     if (!time.value || !duration.value) {
