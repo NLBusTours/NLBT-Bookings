@@ -105,8 +105,11 @@
     if (panel.hidden) return;
     details.textContent = '';
     if (!date.value) {message.textContent = 'Choose a date to see this bus’s busy hours.';return;}
-    if (currentSnapshot(snapshot)) {
-      details.textContent = busyText(snapshot, bus.value, date.value) || 'The requested date is outside the verified calendar range.';
+    if (snapshot && BUS_IDS.includes(bus.value) && parseDate(date.value)) {
+      const ranges = rangesFor(snapshot, bus.value, date.value);
+      if (ranges) {
+        details.textContent = ranges.length ? 'Last recorded bookings/holds (not live): ' + ranges.map(([a,b]) => clockLabel(a) + '–' + clockLabel(b)).join('; ') + '.' : 'No bookings shown in the last saved snapshot. This does not confirm availability.';
+      } else details.textContent = 'The requested date is outside the saved calendar range.';
     }
     if (!time.value || !duration.value) {
       message.textContent = 'Select a start time and duration to check the requested hours.';
@@ -118,8 +121,8 @@
     else if (result === 'invalid') message.textContent = 'Choose a valid start time and duration between 1 and 12 hours (in half-hour increments).';
     else message.textContent = state === 'loading'
       ? 'Checking the bus calendar…'
-      : 'Calendar not verified right now. You can still send an inquiry for manual confirmation.';
-    if (!currentSnapshot(snapshot)) details.textContent = 'Exact booked hours are unavailable until the calendar feed is connected and up to date.';
+      : 'Live availability cannot be confirmed right now. You can still send an inquiry for manual confirmation.';
+    if (!snapshot) details.textContent = 'Booked hours are temporarily unavailable. Our team will verify your requested time.';
   }
   async function load(force = false) {
     if (!force && Date.now() - lastLoad < 60000) return;
@@ -134,8 +137,8 @@
       const from = issue.body.indexOf(START), to = issue.body.indexOf(END, from + START.length);
       if (from < 0 || to < 0) throw new Error('Snapshot missing');
       const data = JSON.parse(issue.body.slice(from + START.length, to).trim());
-      if (!currentSnapshot(data)) throw new Error('Snapshot stale or invalid');
-      snapshot = data;state = 'ready';
+      if (data.version !== 1 || data.timezone !== 'America/St_Johns' || !parseDate(data.from_date) || !parseDate(data.through_date) || !data.buses || !BUS_IDS.every(id => data.buses[id] && data.buses[id].busy)) throw new Error('Invalid snapshot');
+      snapshot = data;state = currentSnapshot(data) ? 'ready' : 'stale';
     } catch (_) {snapshot = null; state = 'unknown';}
     render();
   }
