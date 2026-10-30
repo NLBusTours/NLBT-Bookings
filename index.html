@@ -260,13 +260,14 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
     <label for="event-type">What are you booking for?</label>
     <select id="event-type" name="Event Type" required>
       <option value="" selected disabled>Select an occasion</option>
+      <option value="Bus Crawl">Bus Crawl</option>
       <option value="Wedding">Wedding</option>
-      <option value="Birthday or celebration">Birthday or celebration</option>
-      <option value="Pub crawl or night out">Pub crawl or night out</option>
-      <option value="Corporate or group outing">Corporate or group outing</option>
-      <option value="Shuttle or transportation">Shuttle or transportation</option>
       <option value="Other">Other</option>
     </select>
+    <div id="other-event-details" hidden>
+      <label for="other-event-description">What type of transportation are you looking for?</label>
+      <input id="other-event-description" name="Other Event Description" type="text" placeholder="e.g. corporate outing, airport transfer, birthday shuttle" disabled>
+    </div>
     <label for="raw-date">Date</label>
     <input type="date" id="raw-date" required />
     <input type="hidden" id="event-date" name="Date" />
@@ -583,6 +584,16 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('DOMContentLoaded', function () {
     const type = document.getElementById('event-type');
     const details = document.getElementById('wedding-details');
+    const otherDetails = document.getElementById('other-event-details');
+    const otherDescription = document.getElementById('other-event-description');
+    function updateOther() {
+      const isOther = type.value === 'Other';
+      otherDetails.hidden = !isOther;
+      otherDescription.disabled = !isOther;
+      otherDescription.required = isOther;
+    }
+    type.addEventListener('change', updateOther);
+    updateOther();
     const error = document.getElementById('wedding-service-error');
     const checks = [...document.querySelectorAll('#wedding-services input[type="checkbox"]')];
     function updateWedding() {
