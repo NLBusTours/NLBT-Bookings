@@ -122,7 +122,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
       <p class="tagline" id="bus-tagline">Bring the energy. We'll bring the ride.</p>
       <p class="description" id="bus-description">With upgraded sound, dynamic party lighting, and teal lounge seating, Artie 2.0 is built for big nights and bigger memories.</p>
       <div class="features" id="bus-features"><span>🔊 High-power Bluetooth sound</span><span>🪩 Dynamic party lighting</span><span>💺 Teal lounge seating</span><span>🖤 Black exterior</span></div>
-      <a class="cta" id="booking-link" href="https://nlbustours.github.io/NLBT-Bookings/#booking-form" target="_blank" rel="noopener noreferrer">Request Artie 2.0 <span aria-hidden="true">↗</span></a>
+      <a class="cta" id="booking-link" href="https://nlbustours.github.io/NLBT-Bookings/?bus=RT2#booking-form" target="_blank" rel="noopener noreferrer">Request Artie 2.0 <span aria-hidden="true">↗</span></a>
       <p class="fineprint" id="booking-note">Choose Artie 2.0 (RT2) in the booking form. Requests are subject to confirmation.</p>
     </div>
     <div class="gallery">
@@ -139,7 +139,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
   </section>
   <aside class="lower">
     <div><strong>Need a ride worth remembering?</strong><p>Celebrations, weddings, tours, and everything in between. See our live calendar information and send a charter request.</p></div>
-    <a href="https://nlbustours.github.io/NLBT-Bookings/#booking-form" target="_blank" rel="noopener noreferrer">Check availability ↗</a>
+    <a id="availability-link" href="https://nlbustours.github.io/NLBT-Bookings/?bus=RT2#booking-form" target="_blank" rel="noopener noreferrer">Check availability ↗</a>
   </aside>
   <section class="secondlife" aria-labelledby="secondlife-heading">
     <div class="chapter-icon" aria-hidden="true">♻️</div>
@@ -184,6 +184,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
     d.features.forEach(function(f){var s=document.createElement("span");s.textContent=f;holder.appendChild(s);});
     document.getElementById("booking-link").firstChild.nodeValue="Request "+d.label+" ";
     document.getElementById("booking-link").href="https://nlbustours.github.io/NLBT-Bookings/?bus="+encodeURIComponent(d.code)+"#booking-form";
+    document.getElementById("availability-link").href="https://nlbustours.github.io/NLBT-Bookings/?bus="+encodeURIComponent(d.code)+"#booking-form";
     document.getElementById("booking-note").textContent="Choose "+d.label+" ("+d.code+") in the booking form. Requests are subject to confirmation.";
     document.getElementById("photo-tag").textContent=d.code;
     document.getElementById("photo-label").textContent=(photo==="inside"?"Step inside ":"Meet ")+d.label;
