@@ -143,6 +143,28 @@ button:hover { background: #0097a7; }
 
 /* Quick navigation enhancements */
 .nlbt-mobile-book{display:none}@media(max-width:700px){.nlbt-mobile-book{display:block;position:fixed;bottom:calc(14px + env(safe-area-inset-bottom));right:14px;z-index:9999;background:#4a148c;color:white!important;padding:13px 18px;border-radius:40px;font-weight:700;text-decoration:none;box-shadow:0 5px 18px #0005}.nlbt-mobile-book:focus-visible{outline:3px solid #26c6da;outline-offset:3px}body{padding-bottom:72px}}
+
+/* Match the redesigned NL Bus Tours homepage, without changing form functionality */
+:root{--nl-bg:#071925;--nl-panel:#102c3b;--nl-teal:#69e4db;--nl-text:#f5fbff;--nl-muted:#c3d4dc}
+html{scroll-behavior:smooth}
+body{background:var(--nl-bg);color:var(--nl-text);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+header,footer{background:linear-gradient(140deg,#061622,#0e3040 72%,#123344);color:var(--nl-text)}
+header{padding:34px 18px}
+header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
+#booking-form{background:linear-gradient(155deg,#153a4a,#0c2634);color:var(--nl-text);border:1px solid #ffffff24;border-radius:22px;box-shadow:0 18px 45px #0005;max-width:760px}
+#booking-form label{color:var(--nl-teal);font-weight:700}
+#booking-form input:not([type=checkbox]):not([type=radio]):not([type=hidden]),#booking-form select,#booking-form textarea{background:#f7fcff;color:#102b38;border:1px solid #91b4c0;border-radius:10px;padding:12px;min-height:44px}
+#booking-form input:focus-visible,#booking-form select:focus-visible,#booking-form textarea:focus-visible{outline:3px solid var(--nl-teal);outline-offset:2px}
+#booking-form button{background:var(--nl-teal);color:#07232d;border-radius:12px;font-weight:800;min-height:46px}
+#booking-form button:hover{background:#9df2eb}
+.below-bus-text,.intro-highlighted-box{background:#102c3b;color:var(--nl-text);border:1px solid #ffffff24;border-radius:20px;box-shadow:none}
+.below-bus-text{font-size:clamp(17px,2.3vw,23px);margin:26px auto;padding:18px}
+.bus-card{background:#14323f;color:var(--nl-text);border:1px solid #ffffff24;border-radius:18px;overflow:hidden}
+.bus-card h4,.bus-card p{color:var(--nl-text)}
+#calendar{color:#102b38}
+.nlbt-mobile-book{background:var(--nl-teal)!important;color:#07232d!important}
+.nlbt-contact-links{background:#0a202b;color:var(--nl-text)}
+@media(max-width:800px){#booking-form{margin:18px 12px;padding:20px 16px}.below-bus-text{margin:18px 12px}.bus-info{padding:0 12px}}
 </style>
 <meta name="nlbt-depot" content="47.537777,-52.819862"><meta name="nlbt-depot-label" content="Bus lot beside Metro Self Storage, Kenmount Road"><style>.routing-preview{background:#fff;border:1px solid #80cbd3;border-radius:10px;padding:15px;margin:16px 0}.routing-preview p{font-size:.9rem}.routing-preview button{margin-top:8px}.routing-preview output{display:block;margin-top:10px;font-weight:600}.routing-preview small{display:block;margin-top:8px}</style></head>
 
