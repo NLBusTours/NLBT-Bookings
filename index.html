@@ -278,14 +278,6 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
         <label style="font-weight:400;"><input type="checkbox" name="Wedding Transport - Other" value="Yes"> Something else</label>
       </div>
       <p id="wedding-service-error" role="alert" hidden style="color:#a00025;font-weight:700;">Please choose at least one wedding transportation service.</p>
-      <label for="wedding-ceremony">Ceremony venue or location <span class="optional-label">(if applicable)</span></label>
-      <input id="wedding-ceremony" name="Ceremony Location" type="text" placeholder="Only if ceremony transportation is needed">
-      <label for="wedding-reception">Reception venue or location <span class="optional-label">(if applicable)</span></label>
-      <input id="wedding-reception" name="Reception Location" type="text" placeholder="Only if reception transportation is needed">
-      <div id="wedding-photo-fields" hidden>
-        <label for="wedding-photo">Photo locations <span class="optional-label">(if known)</span></label>
-        <input id="wedding-photo" name="Wedding Photo Locations" type="text" placeholder="Where would you like to take photos?" disabled>
-      </div>
     <label for="wedding-first-pickup">First pickup location</label>
     <input id="wedding-first-pickup" type="text" name="Wedding First Pickup" placeholder="Bride, groom or group pickup address" disabled required />
     <div id="wedding-extra-pickups">
@@ -302,6 +294,14 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
       </div>
     </div>
 
+      <label for="wedding-ceremony">Ceremony venue or location <span class="optional-label">(if applicable)</span></label>
+      <input id="wedding-ceremony" name="Ceremony Location" type="text" placeholder="Only if ceremony transportation is needed">
+      <label for="wedding-reception">Reception venue or location <span class="optional-label">(if applicable)</span></label>
+      <input id="wedding-reception" name="Reception Location" type="text" placeholder="Only if reception transportation is needed">
+      <div id="wedding-photo-fields" hidden>
+        <label for="wedding-photo">Photo locations <span class="optional-label">(if known)</span></label>
+        <input id="wedding-photo" name="Wedding Photo Locations" type="text" placeholder="Where would you like to take photos?" disabled>
+      </div>
       <label for="wedding-timeline">Wedding schedule or multiple pickup times <span class="optional-label">(optional)</span></label>
       <textarea id="wedding-timeline" name="Wedding Transportation Schedule" rows="3" placeholder="Tell us which trips you need and approximate times"></textarea>
     </fieldset>
