@@ -186,6 +186,13 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
 #bus-availability .availability-top,#bus-availability .availability-top strong,#bus-availability #bus-availability-status,#bus-availability #bus-busy-hours{color:#173447!important;opacity:1!important;}
 #bus-availability .availability-disclaimer{color:#405766!important;opacity:1!important;}
 #bus-availability #bus-refresh{background:#69e4db;color:#071925;font-weight:800;}
+
+/* Final mobile and keyboard accessibility polish */
+#bookingForm :is(input,select,textarea,button):focus-visible,#bus-refresh:focus-visible{outline:3px solid #69e4db;outline-offset:3px}
+#bookingForm :is(input,select,textarea){font-size:16px;min-height:46px}
+#bookingForm textarea{min-height:100px}
+#bus-availability{overflow-wrap:anywhere}
+@media(max-width:700px){#bus-availability{padding:20px 16px}#bus-availability .availability-top{gap:12px;flex-wrap:wrap}#bus-refresh{min-height:46px}#bookingForm button[type=submit]{min-height:50px;width:100%}}
 </style>
 <meta name="nlbt-depot" content="47.537777,-52.819862"><meta name="nlbt-depot-label" content="Bus lot beside Metro Self Storage, Kenmount Road"><style>.routing-preview{background:#fff;border:1px solid #80cbd3;border-radius:10px;padding:15px;margin:16px 0}.routing-preview p{font-size:.9rem}.routing-preview button{margin-top:8px}.routing-preview output{display:block;margin-top:10px;font-weight:600}.routing-preview small{display:block;margin-top:8px}</style></head>
 
@@ -222,7 +229,7 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
 <input type="time" id="booking-time" name="Time" required />
 
     <label for="booking-duration">Duration (Hours)</label>
-<input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" required />
+<input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" inputmode="decimal" required />
 
     <label for="pickup-location">Pickup location</label>
     <input id="pickup-location" type="text" name="Pickup" autocomplete="street-address" placeholder="Address or pickup area" required />
@@ -234,8 +241,8 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
     <input id="dropoff-location" type="text" name="Dropoff" placeholder="Address or destination" required />
 
     <label for="passenger-count">Number of Passengers</label>
-    <input type="number" id="passenger-count" name="Passengers" min="1" step="1" placeholder="How many people are riding?" required />
-    <p id="passenger-guidance" role="status" aria-live="polite" style="font-size:.9rem;margin:6px 0 12px;color:#4a148c;">Enter your group size to see bus capacity guidance.</p>
+    <input type="number" id="passenger-count" name="Passengers" min="1" step="1" inputmode="numeric" placeholder="How many people are riding?" required />
+    <p id="passenger-guidance" role="status" aria-live="polite" style="font-size:.9rem;margin:6px 0 12px;color:#d2e7ee;">Enter your group size to see bus capacity guidance.</p>
 
     <label for="bus-choice">Bus</label>
 <select id="bus-choice" name="Bus" required>
