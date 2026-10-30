@@ -467,6 +467,22 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 
   <script src="availability/checker.js" defer></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const requested = new URLSearchParams(window.location.search).get("bus");
+    if (!requested) return;
+    const choice = document.getElementById("bus-choice");
+    if (!choice) return;
+    const code = requested.toUpperCase();
+    const option = Array.from(choice.options).find(function (item) {
+      return item.value === code && !item.disabled;
+    });
+    if (option) {
+      choice.value = code;
+      choice.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  });
+  </script>
   <footer>© NL Bus Tours</footer>
 
 </body>
