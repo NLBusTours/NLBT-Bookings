@@ -7,7 +7,9 @@ on:
       - "availability/**"
       - ".github/workflows/sync-bus-availability.yml"
   schedule:
-    - cron: "11,41 * * * *"
+    # Quarter-hour refreshes give extra chances if GitHub delays a scheduled run.
+    # Offset from the top of the hour to reduce peak scheduling congestion.
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
 
 permissions:
