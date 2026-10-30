@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#091928">
+<title>Meet the Fleet | NL Bus Tours</title>
+<style>
+:root{--ink:#effaff;--muted:#a9bdca;--aqua:#70e3dc;--coral:#ffa4a3;--line:rgba(206,240,245,.14);--panel:#102537;--shadow:0 28px 80px rgba(0,0,0,.22)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:transparent;color:var(--ink);font-family:"Trebuchet MS",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,a{-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+.shell{position:relative;overflow:hidden;isolation:isolate;max-width:1280px;margin:0 auto;padding:clamp(22px,4vw,56px);background:radial-gradient(ellipse 68% 38% at 84% 4%,rgba(62,167,194,.22),transparent 70%),radial-gradient(ellipse 50% 40% at 0% 55%,rgba(114,65,149,.18),transparent 70%),#091723;border:1px solid #21404e;border-radius:26px}
+.shell:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.16;background-image:linear-gradient(rgba(181,230,233,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(181,230,233,.18) 1px,transparent 1px);background-size:50px 50px;mask-image:linear-gradient(to bottom,#000,transparent 75%);pointer-events:none}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:#c9e6ec;font-weight:800}
+.logo{display:inline-flex;align-items:center;gap:10px;letter-spacing:.14em}
+.logo-mark{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--aqua),#8fb6ff);color:#0b2536;font-size:22px}
+.new-era{padding:8px 12px;border:1px solid rgba(112,227,220,.35);border-radius:50px;color:var(--aqua);font-size:.65rem}
+.hero{padding:36px 0 22px}
+.eyebrow{color:var(--aqua);font-weight:800;text-transform:uppercase;letter-spacing:.23em;font-size:.74rem;margin:0 0 15px}
+.hero h1{font-size:clamp(2.45rem,6vw,5.8rem);font-weight:950;letter-spacing:-.065em;line-height:.95;margin:0;max-width:930px}
+.hero h1 em{font-style:normal;background:linear-gradient(95deg,var(--aqua),#cfc0ff 70%,var(--coral));background-clip:text;-webkit-background-clip:text;color:transparent}
+.hero p{max-width:670px;line-height:1.65;color:#c0d2dd;font-size:clamp(.94rem,1.6vw,1.12rem);margin:20px 0 0}
+.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:22px 0 14px}
+.section-heading h2{margin:0;font-size:.9rem;text-transform:uppercase;letter-spacing:.15em}
+.section-heading span{color:#8ca8b8;font-size:.8rem}
+.selectors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.bus-select{display:flex;align-items:center;gap:13px;text-align:left;padding:10px;border:1px solid var(--line);background:rgba(20,42,56,.8);border-radius:16px;color:var(--ink);min-width:0;transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}
+.bus-select:hover{transform:translateY(-3px);border-color:rgba(112,227,220,.5)}
+.bus-select[aria-selected="true"]{border-color:var(--aqua);background:rgba(28,66,75,.86);box-shadow:inset 0 0 0 1px rgba(112,227,220,.28)}
+.thumb{height:72px;width:100px;flex:0 0 100px;border-radius:10px;background:#2b4657 center/cover no-repeat;overflow:hidden}
+.thumb.rt2{background-image:url('assets/active-fleet-photos.webp');background-size:200% 200%;background-position:0% 0%}
+.thumb.rx2{background-image:url('assets/active-fleet-photos.webp');background-size:200% 200%;background-position:0% 100%}
+.thumb.r3{background-image:url('R3V.png')}
+.bus-select b{display:block;font-size:1rem;line-height:1.1}
+.bus-select small{display:block;color:#9bb9c9;font-size:.76rem;margin-top:7px}
+.bus-select[aria-selected="true"] small{color:#b5eae8}
+.spotlight{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);min-height:485px;margin-top:20px;border:1px solid rgba(168,226,228,.21);border-radius:23px;overflow:hidden;background:linear-gradient(140deg,#152d3f,#0c202e);box-shadow:var(--shadow)}
+.info{display:flex;flex-direction:column;justify-content:center;padding:clamp(23px,4vw,47px);min-width:0}
+.nudge{font-size:.7rem;letter-spacing:.17em;text-transform:uppercase;font-weight:900;color:var(--aqua)}
+.info h3{font-size:clamp(2rem,3.7vw,3.9rem);letter-spacing:-.055em;line-height:1.02;margin:13px 0}
+.info h3 span{color:var(--aqua)}
+.info .tagline{font-size:1.06rem;font-weight:700;color:#e0f0f4;margin:0 0 10px}
+.description{color:#b7cbd6;line-height:1.7;font-size:.95rem;margin:0 0 22px}
+.features{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.features span{font-size:.78rem;line-height:1.4;background:rgba(157,210,219,.1);border:1px solid var(--line);padding:9px 11px;border-radius:10px}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:14px 17px;border-radius:12px;background:var(--aqua);color:#082631;text-decoration:none;font-weight:900;font-size:.91rem;transition:transform .2s,background .2s;align-self:flex-start}
+.cta:hover{background:#b1fff4;transform:translateY(-2px)}
+.fineprint{font-size:.73rem;color:#9db2c0;margin:13px 0 0;line-height:1.5}
+.gallery{position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#244351;min-height:430px}
+.photo{position:absolute;inset:0;background-color:#284956;background-repeat:no-repeat;background-position:center;background-size:cover;transition:filter .25s,transform .55s}
+.gallery:hover .photo{transform:scale(1.03)}
+.photo.rt2-outside{background-image:url('assets/active-fleet-photos.webp');background-size:200% 200%;background-position:0 0}
+.photo.rt2-inside{background-image:url('assets/active-fleet-photos.webp');background-size:200% 200%;background-position:100% 0}
+.photo.rx2-outside{background-image:url('assets/active-fleet-photos.webp');background-size:200% 200%;background-position:0 100%}
+.photo.rx2-inside{background-image:url('assets/active-fleet-photos.webp');background-size:200% 200%;background-position:100% 100%}
+.photo.r3-outside{background-image:url('R3V.png')}
+.photo.r3-inside{background-image:url('FR3.png')}
+.gallery:after{content:"";pointer-events:none;position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(4,17,28,.85))}
+.photo-top{position:absolute;top:18px;left:18px;z-index:1;display:flex;gap:7px;flex-wrap:wrap}
+.photo-top span{padding:7px 11px;background:rgba(8,24,35,.78);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(9px);font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:20px}
+.photo-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:end;gap:12px;padding:22px}
+.photo-caption{color:#f3ffff;font-size:.9rem;font-weight:800;text-shadow:0 2px 9px rgba(0,0,0,.8)}
+.photo-caption small{display:block;font-size:.72rem;margin-top:6px;font-weight:500;color:#c7e0e6}
+.photo-switch{display:flex;align-items:center;gap:5px;background:rgba(6,22,31,.83);border-radius:50px;padding:5px;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px)}
+.photo-switch button{border:0;background:none;color:#d7f0f0;font-weight:800;font-size:.76rem;padding:10px 13px;border-radius:50px}
+.photo-switch button[aria-pressed="true"]{background:var(--aqua);color:#092b36}
+.lower{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin:24px 0 0;padding:18px 22px;border-radius:16px;border:1px solid rgba(112,227,220,.22);background:rgba(112,227,220,.07)}
+.lower strong{font-size:1.1rem;display:block;margin-bottom:4px}
+.lower p{font-size:.85rem;color:#afc6d2;line-height:1.5;margin:0}
+.lower a{white-space:nowrap;text-decoration:none;color:var(--aqua);font-size:.88rem;font-weight:900;border-bottom:1px solid rgba(112,227,220,.45);padding:6px 0}
+.legacy{margin-top:23px;border-top:1px solid var(--line);padding-top:17px}
+.legacy summary{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:pointer;gap:15px;padding:11px 0;font-weight:900;font-size:1rem}
+.legacy summary::-webkit-details-marker{display:none}
+.legacy summary span{color:#b4cbd2;font-size:.78rem;font-weight:500}
+.legacy summary:after{content:"+";color:var(--aqua);font-size:1.6rem;font-weight:300}
+.legacy[open] summary:after{content:"−"}
+.legacy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:11px 0 3px}
+.legacy-card{background:rgba(29,48,65,.85);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.legacy-card img{display:block;width:100%;height:130px;object-fit:cover;background:#294352}
+.legacy-card div{padding:13px}
+.legacy-card strong{font-size:.9rem;display:block}
+.legacy-card p{font-size:.77rem;color:#b0c6d0;line-height:1.5;margin:6px 0 0}
+.footerline{margin:25px 0 0;text-align:center;color:#89a9b8;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+@media(max-width:960px){.thumb{width:70px;flex-basis:70px;height:62px}.bus-select{gap:8px}.bus-select b{font-size:.9rem}.spotlight{grid-template-columns:minmax(0,.93fr) minmax(0,1.07fr)}}
+@media(max-width:700px){.shell{border-radius:18px;padding:18px}.topline{font-size:.63rem}.new-era{font-size:.55rem}.hero{padding:31px 0 12px}.hero p{font-size:.94rem}.section-heading span{display:none}.selectors{gap:7px}.bus-select{display:flex;flex-direction:column;align-items:stretch;padding:6px;text-align:center;gap:7px;border-radius:12px}.thumb{width:100%;height:70px;flex:initial;border-radius:8px}.bus-select b{font-size:.82rem}.bus-select small{font-size:.65rem;margin-top:4px}.spotlight{display:flex;flex-direction:column-reverse;margin-top:12px}.gallery{min-height:315px}.info{padding:24px}.info h3{font-size:2.55rem}.description{font-size:.91rem}.photo-bottom{padding:13px}.photo-switch button{padding:9px 11px}.lower{grid-template-columns:1fr;gap:9px}.legacy-grid{gap:8px}.legacy-card img{height:80px}.legacy-card div{padding:9px}.legacy-card strong{font-size:.8rem}.legacy-card p{font-size:.68rem}}
+@media(max-width:380px){.shell{padding:12px}.thumb{height:57px}.bus-select b{font-size:.72rem}.bus-select small{font-size:.59rem}.gallery{min-height:270px}.photo-caption small{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="shell" id="nlbt-fleet">
+  <div class="topline"><div class="logo"><span class="logo-mark" aria-hidden="true">✦</span> NL BUS TOURS</div><span class="new-era">A new chapter on the road</span></div>
+  <header class="hero">
+    <p class="eyebrow">Meet your ride</p>
+    <h1>Not just a bus.<br><em>Your kind of adventure.</em></h1>
+    <p>Every bus has a name, a personality, and a story. Choose your vibe, take a look inside, and find your perfect ride in Newfoundland.</p>
+  </header>
+
+  <div class="section-heading"><h2>Choose a bus</h2><span>Tap a ride to explore it</span></div>
+  <nav class="selectors" role="tablist" aria-label="Choose an active bus">
+    <button type="button" class="bus-select" role="tab" aria-controls="fleet-details" aria-selected="true" tabindex="0" data-bus="rt2"><span class="thumb rt2" role="img" aria-label="Artie 2.0, black bus"></span><span><b>Artie 2.0</b><small>THE PARTY POWERHOUSE</small></span></button>
+    <button type="button" class="bus-select" role="tab" aria-controls="fleet-details" aria-selected="false" tabindex="-1" data-bus="rx2"><span class="thumb rx2" role="img" aria-label="Archie 2.0, white bus"></span><span><b>Archie 2.0</b><small>THE LOUNGE EXPERIENCE</small></span></button>
+    <button type="button" class="bus-select" role="tab" aria-controls="fleet-details" aria-selected="false" tabindex="-1" data-bus="r3"><span class="thumb r3" role="img" aria-label="Arthree mini coach"></span><span><b>Arthree</b><small>THE MINI COACH</small></span></button>
+  </nav>
+
+  <section class="spotlight" id="fleet-details" role="tabpanel" aria-label="Selected bus details">
+    <div class="info">
+      <span class="nudge" id="bus-category">RT2 • PARTY BUS</span>
+      <h3 id="bus-title">Artie <span>2.0</span></h3>
+      <p class="tagline" id="bus-tagline">Bring the energy. We'll bring the ride.</p>
+      <p class="description" id="bus-description">With upgraded sound, dynamic party lighting, and teal lounge seating, Artie 2.0 is built for big nights and bigger memories.</p>
+      <div class="features" id="bus-features"><span>🔊 High-power Bluetooth sound</span><span>🪩 Dynamic party lighting</span><span>💺 Teal lounge seating</span><span>🖤 Black exterior</span></div>
+      <a class="cta" id="booking-link" href="https://nlbustours.github.io/NLBT-Bookings/#booking-form" target="_blank" rel="noopener noreferrer">Request Artie 2.0 <span aria-hidden="true">↗</span></a>
+      <p class="fineprint" id="booking-note">Choose Artie 2.0 (RT2) in the booking form. Requests are subject to confirmation.</p>
+    </div>
+    <div class="gallery">
+      <div id="bus-photo" class="photo rt2-outside" role="img" aria-label="Artie 2.0 black exterior photo"></div>
+      <div class="photo-top"><span>Real fleet photos</span><span id="photo-tag">RT2</span></div>
+      <div class="photo-bottom">
+        <div class="photo-caption"><span id="photo-label">Meet Artie 2.0</span><small>Tap Inside to take a peek</small></div>
+        <div class="photo-switch" role="group" aria-label="Switch bus photos">
+          <button id="photo-outside" type="button" aria-pressed="true">Outside</button>
+          <button id="photo-inside" type="button" aria-pressed="false">Inside</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <aside class="lower">
+    <div><strong>Need a ride worth remembering?</strong><p>Celebrations, weddings, tours, and everything in between. See our live calendar information and send a charter request.</p></div>
+    <a href="https://nlbustours.github.io/NLBT-Bookings/#booking-form" target="_blank" rel="noopener noreferrer">Check availability ↗</a>
+  </aside>
+  <details class="legacy" id="retired-fleet">
+    <summary>❤️‍🩹🕊️ The buses that started it all <span>Meet our retired fleet</span></summary>
+    <div class="legacy-grid">
+      <article class="legacy-card"><img src="RTV.png" alt="Original Artie RT party bus" loading="lazy"><div><strong>Artie · RT</strong><p>The original party bus. Where our full-lounge adventures began.</p></div></article>
+      <article class="legacy-card"><img src="RBV.png" alt="Original Arbie RB bus" loading="lazy"><div><strong>Arbie · RB</strong><p>Our original forward-facing bus. So many group outings and great nights.</p></div></article>
+      <article class="legacy-card"><img src="RXV.png" alt="Original Archie RX party bus" loading="lazy"><div><strong>Archie · RX</strong><p>A much-loved lounge bus. May he rust in peace. 🕊️</p></div></article>
+    </div>
+  </details>
+  <p class="footerline">Made for memories • Newfoundland & Labrador</p>
+</main>
+<script>
+(function(){
+  "use strict";
+  var rides={
+    rt2:{category:"RT2 • PARTY BUS",title:"Artie",suffix:"2.0",tagline:"Bring the energy. We'll bring the ride.",description:"With upgraded sound, dynamic party lighting, and teal lounge seating, Artie 2.0 is built for big nights and bigger memories.",features:["🔊 High-power Bluetooth sound","🪩 Dynamic party lighting","💺 Teal lounge seating","🖤 Black exterior"],label:"Artie 2.0",code:"RT2"},
+    rx2:{category:"RX2 • PARTY BUS",title:"Archie",suffix:"2.0",tagline:"Your celebration, elevated.",description:"A sleek white exterior opens to grey lounge seating, powerful Bluetooth sound, and vibrant lighting. Settle in, turn up the music, and enjoy the ride.",features:["🔊 Bluetooth party speakers","✨ Party lighting","💺 Grey lounge seating","🤍 White exterior"],label:"Archie 2.0",code:"RX2"},
+    r3:{category:"R3 • MINI COACH",title:"Arthree",suffix:"",tagline:"Small group. Big adventure.",description:"Our 17-passenger mini coach is a comfortable choice for wedding parties, airport transfers, group tours, and private outings.",features:["🚐 17 passenger seats","🔒 Individual seatbelts","💍 Wedding transportation","🌊 Tours & transfers"],label:"Arthree",code:"R3"}
+  };
+  var selected="rt2",photo="outside";
+  var photoEl=document.getElementById("bus-photo");
+  var tabs=Array.prototype.slice.call(document.querySelectorAll("[data-bus]"));
+  function change(bus,kind){
+    if(!rides[bus])return;
+    selected=bus;photo=kind||"outside";
+    var d=rides[bus];
+    document.getElementById("bus-category").textContent=d.category;
+    var title=document.getElementById("bus-title");
+    title.textContent=d.title+" ";
+    if(d.suffix){var span=document.createElement("span");span.textContent=d.suffix;title.appendChild(span);}
+    document.getElementById("bus-tagline").textContent=d.tagline;
+    document.getElementById("bus-description").textContent=d.description;
+    var holder=document.getElementById("bus-features");holder.replaceChildren();
+    d.features.forEach(function(f){var s=document.createElement("span");s.textContent=f;holder.appendChild(s);});
+    document.getElementById("booking-link").firstChild.nodeValue="Request "+d.label+" ";
+    document.getElementById("booking-note").textContent="Choose "+d.label+" ("+d.code+") in the booking form. Requests are subject to confirmation.";
+    document.getElementById("photo-tag").textContent=d.code;
+    document.getElementById("photo-label").textContent=(photo==="inside"?"Step inside ":"Meet ")+d.label;
+    photoEl.className="photo "+bus+"-"+photo;
+    photoEl.setAttribute("aria-label",d.label+" "+(photo==="inside"?"interior":"exterior")+" photo");
+    ["outside","inside"].forEach(function(side){document.getElementById("photo-"+side).setAttribute("aria-pressed",String(side===photo));});
+    tabs.forEach(function(t){var on=t.getAttribute("data-bus")===bus;t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;});
+    resizeHost();
+  }
+  tabs.forEach(function(t){
+    t.addEventListener("click",function(){change(t.getAttribute("data-bus"),"outside");});
+    t.addEventListener("keydown",function(e){
+      if(["ArrowRight","ArrowLeft","Home","End"].indexOf(e.key)<0)return;
+      e.preventDefault();var i=tabs.indexOf(t),n=tabs.length;
+      var j=e.key==="Home"?0:e.key==="End"?n-1:e.key==="ArrowRight"?(i+1)%n:(i+n-1)%n;
+      tabs[j].focus();change(tabs[j].getAttribute("data-bus"),"outside");
+    });
+  });
+  ["outside","inside"].forEach(function(side){document.getElementById("photo-"+side).addEventListener("click",function(){change(selected,side);});});
+  function resizeHost(){
+    if(window.parent===window)return;
+    var height=Math.ceil(document.documentElement.scrollHeight);
+    window.parent.postMessage({type:"nlbt-fleet-height",height:height},"*");
+  }
+  document.getElementById("retired-fleet").addEventListener("toggle",resizeHost);
+  window.addEventListener("load",resizeHost);
+  window.addEventListener("resize",resizeHost);
+  if(typeof ResizeObserver!=="undefined"){new ResizeObserver(resizeHost).observe(document.querySelector(".shell"));}
+  resizeHost();
+})();
+</script>
+</body>
+</html>
