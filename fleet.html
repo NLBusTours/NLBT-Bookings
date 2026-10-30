@@ -183,6 +183,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
     var holder=document.getElementById("bus-features");holder.replaceChildren();
     d.features.forEach(function(f){var s=document.createElement("span");s.textContent=f;holder.appendChild(s);});
     document.getElementById("booking-link").firstChild.nodeValue="Request "+d.label+" ";
+    document.getElementById("booking-link").href="https://nlbustours.github.io/NLBT-Bookings/?bus="+encodeURIComponent(d.code)+"#booking-form";
     document.getElementById("booking-note").textContent="Choose "+d.label+" ("+d.code+") in the booking form. Requests are subject to confirmation.";
     document.getElementById("photo-tag").textContent=d.code;
     document.getElementById("photo-label").textContent=(photo==="inside"?"Step inside ":"Meet ")+d.label;
@@ -211,6 +212,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
   window.addEventListener("load",resizeHost);
   window.addEventListener("resize",resizeHost);
   if(typeof ResizeObserver!=="undefined"){new ResizeObserver(resizeHost).observe(document.querySelector(".shell"));}
+  change(selected,"outside");
   resizeHost();
 })();
 </script>
