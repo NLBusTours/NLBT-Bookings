@@ -275,6 +275,22 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
     <label for="booking-time">Time</label>
 <input type="time" id="booking-time" name="Time" required />
 
+    <label for="booking-duration">Duration (Hours)</label>
+<input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" inputmode="decimal" required />
+
+    <label for="passenger-count">Number of Passengers</label>
+    <input type="number" id="passenger-count" name="Passengers" min="1" step="1" inputmode="numeric" placeholder="How many people are riding?" required />
+    <p id="passenger-guidance" role="status" aria-live="polite" style="font-size:.9rem;margin:6px 0 12px;color:#d2e7ee;">Enter your group size to see bus capacity guidance.</p>
+
+    <div class="bus-select-heading"><label for="bus-choice">Bus</label><a class="fleet-jump-link" href="#fleet-options">View Fleet ↓</a></div>
+<select id="bus-choice" name="Bus" required>
+  <option value="" disabled selected>Select a Bus</option>
+  <option value="RT2">Artie 2.0 (RT2) · $250/hr + $100 reservation fee</option><option value="RX2">Archie 2.0 (RX2) · $250/hr + $75 reservation fee</option>
+  <option value="R3">Arthree (R3) · $250/hr, no reservation fee</option>
+  <option value="RT" disabled>Artie (RT) – Retired</option>
+  <option value="RB" disabled>Arbie (RB) – Retired</option>
+  <option value="RX" disabled>Archie (RX) – Retired</option>
+</select>
     <fieldset id="wedding-details" hidden style="margin:18px 0;padding:16px;border:1px solid #777;border-radius:10px;">
       <legend style="font-weight:700;">Wedding transportation details</legend>
       <p style="margin-top:4px;">Every wedding is different. Select only the transportation you need.</p>
@@ -310,15 +326,12 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
         <label for="wedding-photo">Photo locations <span class="optional-label">(if known)</span></label>
         <input id="wedding-photo" name="Wedding Photo Locations" type="text" placeholder="Where would you like to take photos?" disabled>
       </div>
-      <label for="wedding-timeline">Wedding schedule or multiple pickup times <span class="optional-label">(optional)</span></label>
-      <textarea id="wedding-timeline" name="Wedding Transportation Schedule" rows="3" placeholder="Tell us which trips you need and approximate times"></textarea>
     <label for="dropoff-location">Drop-off location</label>
     <input id="dropoff-location" type="text" name="Wedding Final Dropoff" disabled placeholder="Address or destination" required />
 
+      <label for="wedding-timeline">Wedding schedule or multiple pickup times <span class="optional-label">(optional)</span></label>
+      <textarea id="wedding-timeline" name="Wedding Transportation Schedule" rows="3" placeholder="Tell us which trips you need and approximate times"></textarea>
     </fieldset>
-
-    <label for="booking-duration">Duration (Hours)</label>
-<input type="number" id="booking-duration" name="Duration" min="1" max="12" step="0.5" inputmode="decimal" required />
 
     <div id="general-pickup-fields">
       <label for="pickup-location" id="pickup-label">Pickup location</label>
@@ -333,19 +346,6 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
     <input id="general-dropoff-location" type="text" name="Dropoff" placeholder="Address or destination" required />
     </div>
 
-    <label for="passenger-count">Number of Passengers</label>
-    <input type="number" id="passenger-count" name="Passengers" min="1" step="1" inputmode="numeric" placeholder="How many people are riding?" required />
-    <p id="passenger-guidance" role="status" aria-live="polite" style="font-size:.9rem;margin:6px 0 12px;color:#d2e7ee;">Enter your group size to see bus capacity guidance.</p>
-
-    <div class="bus-select-heading"><label for="bus-choice">Bus</label><a class="fleet-jump-link" href="#fleet-options">View Fleet ↓</a></div>
-<select id="bus-choice" name="Bus" required>
-  <option value="" disabled selected>Select a Bus</option>
-  <option value="RT2">Artie 2.0 (RT2) · $250/hr + $100 reservation fee</option><option value="RX2">Archie 2.0 (RX2) · $250/hr + $75 reservation fee</option>
-  <option value="R3">Arthree (R3) · $250/hr, no reservation fee</option>
-  <option value="RT" disabled>Artie (RT) – Retired</option>
-  <option value="RB" disabled>Arbie (RB) – Retired</option>
-  <option value="RX" disabled>Archie (RX) – Retired</option>
-</select>
 <section class="bus-availability" id="bus-availability" hidden aria-label="Bus availability">
   <div class="availability-top"><strong>Calendar availability</strong><button id="bus-refresh" type="button">↻ Refresh</button></div>
   <p id="bus-availability-status" role="status" aria-live="polite">Choose a bus, date, time and duration.</p>
