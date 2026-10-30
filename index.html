@@ -203,6 +203,8 @@ header h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.04em;font-weight:900}
 @media(max-width:768px){.bus-hover-popup{position:fixed!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;width:calc(100vw - 28px)!important;max-width:640px!important;max-height:calc(100dvh - 36px)!important;overflow-y:auto!important;margin:0!important;padding:58px 20px 24px!important;align-items:stretch!important;gap:14px!important;}.bus-hover-popup .popup-text{min-width:0!important;padding-top:0!important;text-align:left!important}.bus-hover-popup .new-bus-gallery{max-width:100%;}.bus-hover-popup .popup-close{top:10px;right:10px}}
 
 html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wrap{text-align:center;padding:22px 12px 10px}.fleet-jump-link{display:inline-block;background:#69e4db;color:#071925!important;text-decoration:none;font-weight:800;border-radius:14px;padding:15px 26px;min-height:48px;box-sizing:border-box}.fleet-jump-link:hover{background:#a5f5ee}.fleet-jump-link:focus-visible{outline:3px solid #fff;outline-offset:4px}.fleet-jump-wrap p{color:#d2e7ee;font-size:.93rem;margin:12px auto 0;line-height:1.5}
+
+.bus-select-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;margin-bottom:8px}.bus-select-heading label{margin:0}.bus-select-heading .fleet-jump-link{font-size:.82rem;padding:7px 12px;min-height:34px;border-radius:9px;white-space:nowrap;line-height:20px}
 </style>
 <meta name="nlbt-depot" content="47.537777,-52.819862"><meta name="nlbt-depot-label" content="Bus lot beside Metro Self Storage, Kenmount Road"><style>.routing-preview{background:#fff;border:1px solid #80cbd3;border-radius:10px;padding:15px;margin:16px 0}.routing-preview p{font-size:.9rem}.routing-preview button{margin-top:8px}.routing-preview output{display:block;margin-top:10px;font-weight:600}.routing-preview small{display:block;margin-top:8px}</style></head>
 
@@ -254,7 +256,7 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
     <input type="number" id="passenger-count" name="Passengers" min="1" step="1" inputmode="numeric" placeholder="How many people are riding?" required />
     <p id="passenger-guidance" role="status" aria-live="polite" style="font-size:.9rem;margin:6px 0 12px;color:#d2e7ee;">Enter your group size to see bus capacity guidance.</p>
 
-    <label for="bus-choice">Bus</label>
+    <div class="bus-select-heading"><label for="bus-choice">Bus</label><a class="fleet-jump-link" href="#fleet-options">View Fleet ↓</a></div>
 <select id="bus-choice" name="Bus" required>
   <option value="" disabled selected>Select a Bus</option>
   <option value="RT2">Artie 2.0 (RT2) · $250/hr + $100 reservation fee</option><option value="RX2">Archie 2.0 (RX2) · $250/hr + $75 reservation fee</option>
@@ -277,7 +279,6 @@ html{scroll-behavior:smooth}#fleet-options{scroll-margin-top:20px}.fleet-jump-wr
 
     <button type="submit">Send Booking Request</button><p class="form-submission-note">Submitting this form does not confirm a booking or require payment.</p>
   </form>
-  <div class="fleet-jump-wrap"><a class="fleet-jump-link" href="#fleet-options">Explore Our Fleet ↓</a><p>Not sure which bus to choose? See photos and details below.</p></div>
 </div>
 
   <div class="intro-highlighted-box" id="fleet-options">
