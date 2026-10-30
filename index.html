@@ -137,6 +137,9 @@ button:hover { background: #0097a7; }
 .new-bus-gallery .fleet-photo{height:185px;border-radius:10px;box-shadow:0 2px 8px #0002;}
 .new-bus-gallery figcaption{margin-top:6px;font-size:.78rem;color:#535d65;text-align:center;font-weight:600;}
 @media(max-width:500px){.new-bus-gallery .fleet-photo{height:140px;}}
+
+/* Live charter estimate */
+.booking-estimate{margin:22px 0;padding:20px;border-radius:12px;background:#fff;border:2px solid #26c6da;box-shadow:0 3px 12px #0001}.booking-estimate h3{margin:0 0 8px;color:#4a148c}.booking-estimate p{font-size:.9rem}.booking-estimate .estimate-row{display:flex;justify-content:space-between;gap:12px;margin:9px 0}.booking-estimate .estimate-total{border-top:1px solid #ddd;padding-top:12px;font-weight:800;font-size:1.2rem;color:#4a148c}.booking-estimate label{margin-top:12px}.booking-estimate [hidden]{display:none!important}
 </style>
 </head>
 
@@ -200,6 +203,8 @@ button:hover { background: #0097a7; }
   <p class="availability-disclaimer">This checker only shows bookings and holds already entered in the bus calendar. Pending inquiries may not appear. Availability is not confirmed until our team reviews your request, driver schedules and travel time.</p>
 </section>
 
+
+<section class="booking-estimate" aria-label="Instant price estimate"><h3>Instant Quote Calculator</h3><p>Charters are $250/hour (one-hour minimum). Estimate updates as you fill in your booking details.</p><label for="estimate-area">Travel area</label><select id="estimate-area"><option value="metro">Within Greater Metro Area</option><option value="outside">Outside Greater Metro Area</option></select><div id="estimate-distance-wrap" hidden><label for="estimate-distance">Round-trip kilometres outside Greater Metro</label><input id="estimate-distance" type="number" min="0" step="1" value="0" inputmode="decimal"><p>Include the bus's return journey. Only count kilometres outside Greater Metro ($2.50/km).</p></div><div class="estimate-row"><span>Charter time</span><span id="estimate-hours-cost">Enter duration above</span></div><div class="estimate-row"><span>Outside-Metro mileage</span><span id="estimate-km-cost">$0.00</span></div><div class="estimate-row"><span>HST (15%)</span><span id="estimate-hst">—</span></div><div class="estimate-row estimate-total"><span>Estimated total</span><span id="estimate-total">—</span></div><p>Estimate only. Distance, itinerary, availability, and final pricing are subject to confirmation.</p><input type="hidden" name="Estimated Quote" id="estimate-submission"></section>
     <label>Additional Notes</label>
     <textarea name="Notes" placeholder="Let us know anything special..."></textarea>
 
@@ -483,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   </script>
+<script>(function(){function ready(){const by=id=>document.getElementById(id),duration=by('booking-duration'),area=by('estimate-area'),km=by('estimate-distance');if(!duration||!area||!km)return;const money=n=>new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(n);function update(){const outside=area.value==='outside';by('estimate-distance-wrap').hidden=!outside;const hours=Number(duration.value);const valid=duration.value!==''&&Number.isFinite(hours)&&hours>=1&&hours<=12;const mileage=outside?Math.max(0,Number(km.value)||0)*2.5:0;by('estimate-km-cost').textContent=money(mileage);if(!valid){by('estimate-hours-cost').textContent='Enter duration above';by('estimate-hst').textContent='—';by('estimate-total').textContent='—';by('estimate-submission').value='Not calculated';return;}const base=hours*250,tax=(base+mileage)*.15,total=base+mileage+tax;by('estimate-hours-cost').textContent=money(base);by('estimate-hst').textContent=money(tax);by('estimate-total').textContent=money(total);by('estimate-submission').value='Charter: '+money(base)+'; Outside-Metro distance: '+(outside?Math.max(0,Number(km.value)||0):0)+' km round trip; Mileage: '+money(mileage)+'; HST: '+money(tax)+'; Estimated total: '+money(total);}for(const el of [duration,area,km])el.addEventListener('input',update);update();}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();})();</script>
   <footer>© NL Bus Tours</footer>
 
 </body>
