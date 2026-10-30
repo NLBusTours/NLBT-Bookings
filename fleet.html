@@ -79,11 +79,11 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
 .secondlife h2{font-size:clamp(1.3rem,2.5vw,1.85rem);letter-spacing:-.025em;line-height:1.14;margin:0 0 9px}
 .secondlife p{color:#c1d3dc;line-height:1.65;font-size:.9rem;margin:0;max-width:730px}
 .legacy{margin-top:23px;border-top:1px solid var(--line);padding-top:17px}
-.legacy summary{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:pointer;gap:15px;padding:11px 0;font-weight:900;font-size:1rem}
-.legacy summary::-webkit-details-marker{display:none}
-.legacy summary span{color:#b4cbd2;font-size:.78rem;font-weight:500}
-.legacy summary:after{content:"+";color:var(--aqua);font-size:1.6rem;font-weight:300}
-.legacy[open] summary:after{content:"−"}
+.legacy .legacy-heading{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:pointer;gap:15px;padding:11px 0;font-weight:900;font-size:1rem}
+
+.legacy .legacy-heading span{color:#b4cbd2;font-size:.78rem;font-weight:500}
+
+
 .legacy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:11px 0 3px}
 .legacy-card{background:rgba(29,48,65,.85);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .legacy-card img{display:block;width:100%;height:130px;object-fit:cover;background:#294352}
@@ -127,7 +127,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
     </div>
     <div class="gallery">
       <div id="bus-photo" class="photo rt2-outside" role="img" aria-label="Artie 2.0 black exterior photo"></div>
-      <div class="photo-top"><span>Real fleet photos</span><span id="photo-tag">RT2</span></div>
+      <div class="photo-top"><span>Fleet photos</span><span id="photo-tag">RT2</span></div>
       <div class="photo-bottom">
         <div class="photo-caption"><span id="photo-label">Meet Artie 2.0</span><small>Tap Inside to take a peek</small></div>
         <div class="photo-switch" role="group" aria-label="Switch bus photos">
@@ -149,15 +149,15 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
       <p>We buy buses that have already put in years of hard work, give them a whole new purpose, and put them back on the road for more years of music, laughter, and memories. And when it's finally time for them to retire from NL Bus Tours, we celebrate the stories they helped us make. A bus can have more than one great chapter. 🤍</p>
     </div>
   </section>
-  <details class="legacy" id="retired-fleet">
-    <summary>❤️‍🩹🕊️ The buses that started it all <span>Meet our retired fleet</span></summary>
+  <section class="legacy" id="retired-fleet">
+    <div class="legacy-heading">❤️‍🩹🕊️ The buses that started it all <span>Meet our retired fleet</span></div>
     <div class="legacy-grid">
       <article class="legacy-card"><img src="RTV.png" alt="Original Artie RT party bus" loading="lazy"><div><strong>Artie · RT</strong><span class="model-year">2006 model</span><p>The original party bus. Where our full-lounge adventures began.</p></div></article>
       <article class="legacy-card"><img src="RXV.png" alt="Original Archie RX party bus" loading="lazy"><div><strong>Archie · RX</strong><span class="model-year">2009 model</span><p>A much-loved lounge bus. May he rust in peace. 🕊️</p></div></article>
       <article class="legacy-card"><img src="RBV.png" alt="Original Arbie RB bus" loading="lazy"><div><strong>Arbie · RB</strong><span class="model-year">2013 model</span><p>Our original forward-facing bus. Gone too soon. 💔</p></div></article>
     </div>
-  </details>
-  <p class="footerline">Made for memories • Newfoundland & Labrador</p>
+  </section>
+  <p class="footerline">Made for memories • NL Bus Tours</p>
 </main>
 <script>
 (function(){
@@ -209,7 +209,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
     var height=Math.ceil(document.documentElement.scrollHeight);
     window.parent.postMessage({type:"nlbt-fleet-height",height:height},"*");
   }
-  document.getElementById("retired-fleet").addEventListener("toggle",resizeHost);
+  
   window.addEventListener("load",resizeHost);
   window.addEventListener("resize",resizeHost);
   if(typeof ResizeObserver!=="undefined"){new ResizeObserver(resizeHost).observe(document.querySelector(".shell"));}
